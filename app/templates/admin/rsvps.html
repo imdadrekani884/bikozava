@@ -1,0 +1,79 @@
+{% extends "admin/base.html" %}
+{% block title %}RSVPs — /{{ invitation.slug }}{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+  <div class="dashboard-hero">
+    <div>
+      <span class="eyebrow-tag">GUEST ATTENDANCE</span>
+      <h1>RSVPs for {{ invitation.groom_name_en or invitation.groom_name_ku }} &amp; {{ invitation.bride_name_en or invitation.bride_name_ku }}</h1>
+      <p class="text-muted">Public URL: <code>/{{ invitation.slug }}</code></p>
+    </div>
+    <div style="display:flex; gap:10px;">
+      <a href="{{ url_for('admin.edit_invitation', id=invitation.id) }}" class="btn btn-outline">← Back to Studio</a>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <span class="stat-label">Total Submissions</span>
+      <strong class="stat-value">{{ summary.total_responses }}</strong>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Confirmed Guests (Yes)</span>
+      <strong class="stat-value text-success">{{ summary.attending_yes }}</strong>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Tentative Guests (Maybe)</span>
+      <strong class="stat-value text-warning">{{ summary.attending_maybe }}</strong>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Declined (No)</span>
+      <strong class="stat-value">{{ summary.attending_no }}</strong>
+    </div>
+  </div>
+
+  <div class="panel-card">
+    {% if rsvps %}
+    <div class="table-responsive">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Guest Name</th>
+            <th>Phone</th>
+            <th>Status</th>
+            <th>Guests</th>
+            <th>Language</th>
+            <th>Message / Wishes</th>
+            <th>Submitted At</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in rsvps %}
+          <tr>
+            <td><strong>{{ r.guest_name }}</strong></td>
+            <td>{{ r.guest_phone or '—' }}</td>
+            <td>
+              {% if r.attending == 'yes' %}
+              <span class="status-pill status-published">Attending</span>
+              {% elif r.attending == 'maybe' %}
+              <span class="status-pill status-draft">Maybe</span>
+              {% else %}
+              <span class="disabled-pill">Declined</span>
+              {% endif %}
+            </td>
+            <td>{{ r.guests_count }}</td>
+            <td><code>{{ r.language }}</code></td>
+            <td>{{ r.message or '—' }}</td>
+            <td><small>{{ r.created_at }}</small></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="text-muted" style="padding: 24px 0; text-align:center;">No guest RSVP responses recorded yet.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+# =============================================================================
+# Bikozava — Production Dependencies (Windows, macOS & Linux Compatible)
+# =============================================================================
+# Core Web Framework
+Flask==3.0.3
+Werkzeug==3.0.4
+Jinja2==3.1.4
+MarkupSafe==2.1.5
+itsdangerous==2.2.0
+click==8.1.7
+
+# Production WSGI Servers (Waitress for Windows/Cross-Platform, Gunicorn for Linux)
+waitress==3.0.0
+gunicorn==23.0.0; sys_platform != 'win32'
+
+# Database (PostgreSQL / Supabase + Connection Pooling)
+psycopg2-binary==2.9.9
+
+# Security & Cryptography (Argon2id + bcrypt + CSRF + Rate Limiting)
+argon2-cffi==23.1.0
+bcrypt==4.2.0
+cryptography==43.0.1
+
+# Configuration & Environment
+python-dotenv==1.0.1
+
+# Image Processing & MIME Validation
+Pillow==10.4.0
+python-magic-bin==0.4.14; sys_platform == 'win32'
+python-magic==0.4.27; sys_platform != 'win32'
+
+# Testing
+pytest==8.3.3

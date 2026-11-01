@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>{% block title %}Admin Studio{% endblock %} — Bikozava</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="admin-body">
+  {% if current_admin %}
+  <header class="admin-topbar">
+    <div class="admin-topbar-inner">
+      <a href="{{ url_for('admin.dashboard') }}" class="admin-brand">
+        <span class="brand-emblem">✦</span>
+        <span class="brand-text">
+          <strong>Bikozava</strong>
+          <small>Wedding Studio</small>
+        </span>
+      </a>
+
+      <nav class="admin-nav">
+        <a href="{{ url_for('admin.dashboard') }}" class="admin-nav-link {% if request.path.startswith('/admin/dashboard') or request.path.startswith('/admin/invitations') %}active{% endif %}">
+          Invitations
+        </a>
+        <a href="{{ url_for('admin.templates_gallery') }}" class="admin-nav-link {% if request.path.startswith('/admin/templates') %}active{% endif %}">
+          Templates (24)
+        </a>
+        <a href="{{ url_for('admin.security_settings') }}" class="admin-nav-link {% if request.path.startswith('/admin/settings') %}active{% endif %}">
+          Security &amp; Password
+        </a>
+        <a href="{{ url_for('public.view_invitation', slug='ismail_shrin') }}" target="_blank" rel="noopener" class="admin-nav-link">
+          Live Demo ↗
+        </a>
+      </nav>
+
+      <div class="admin-user-actions">
+        <span class="admin-user-pill">{{ current_admin.username }}</span>
+        <form action="{{ url_for('admin.logout') }}" method="POST" style="display:inline;">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="btn btn-ghost btn-sm">Sign Out</button>
+        </form>
+      </div>
+    </div>
+  </header>
+  {% endif %}
+
+  <main class="admin-main">
+    {% set flashes = get_flashed_messages(with_categories=True) %}
+    {% if flashes %}
+    <div class="flash-container">
+      {% for category, msg in flashes %}
+      <div class="flash-banner flash-{{ category }}">
+        <span>{{ msg }}</span>
+        <button type="button" class="flash-close" onclick="this.parentElement.remove()">×</button>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <div id="toast-notification" class="admin-toast" aria-live="polite"></div>
+
+  <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

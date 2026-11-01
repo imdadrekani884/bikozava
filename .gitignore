@@ -1,0 +1,56 @@
+# =============================================================================
+# Bikozava — .gitignore
+# =============================================================================
+
+# Environment & Secrets (NEVER commit .env!)
+.env
+.env.local
+.env.production
+*.pem
+*.key
+
+# Python Bytecode & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+env/
+ENV/
+build/
+dist/
+*.egg-info/
+
+# Local SQLite Database & Instance Folder
+instance/
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+
+# User Uploaded Media (keep directory structure via .gitkeep, ignore uploaded files)
+app/static/uploads/avatars/*
+!app/static/uploads/avatars/.gitkeep
+app/static/uploads/gallery/*
+!app/static/uploads/gallery/.gitkeep
+app/static/uploads/music/*
+!app/static/uploads/music/.gitkeep
+app/static/uploads/video/*
+!app/static/uploads/video/.gitkeep
+app/static/uploads/thumbs/*
+!app/static/uploads/thumbs/.gitkeep
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# OS & Editor Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo

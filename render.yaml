@@ -1,0 +1,44 @@
+# =============================================================================
+# BIKOZAVA — RENDER.COM BLUEPRINT (`render.yaml`)
+# =============================================================================
+# Fast 1-Click Deployment on Render.com:
+#   1. Push this project to your GitHub repository (use `push_to_github.bat`).
+#   2. In Render Dashboard -> New -> Blueprint (or New -> Web Service),
+#      connect your GitHub repository.
+#   3. Set your `ADMIN_INITIAL_PASSWORD` (and optional `DATABASE_URL` from
+#      free Supabase PostgreSQL) in Render Environment Variables.
+# =============================================================================
+
+services:
+  - type: web
+    name: bikozava-wedding-platform
+    runtime: python
+    plan: free
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: gunicorn -c gunicorn.conf.py wsgi:app
+    healthCheckPath: /healthz
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+      - key: FLASK_ENV
+        value: "production"
+      - key: FLASK_DEBUG
+        value: "0"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: PUBLIC_BASE_URL
+        value: "https://bikozava.com"
+      - key: SESSION_COOKIE_HTTPONLY
+        value: "1"
+      - key: SESSION_COOKIE_SECURE
+        value: "1"
+      - key: SESSION_COOKIE_SAMESITE
+        value: "Lax"
+      - key: TRUST_PROXY_HEADERS
+        value: "1"
+      - key: ADMIN_INITIAL_USERNAME
+        value: "admin"
+      - key: ADMIN_INITIAL_EMAIL
+        value: "admin@bikozava.com"
+      - key: ADMIN_INITIAL_PASSWORD
+        sync: false
