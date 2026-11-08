@@ -1,6 +1,7 @@
 -- =============================================================================
 -- BIKOZAVA WEDDING INVITATION PLATFORM — POSTGRESQL / SUPABASE SCHEMA
 -- Migration: 001_initial_schema.sql
+-- Project Ref: rgshkpvhttjdbkycuesv
 -- Compatible with Supabase PostgreSQL 15+ and standard PostgreSQL
 -- =============================================================================
 
@@ -18,7 +19,6 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 -- 2. INVITATION TEMPLATES TABLE
--- Category: 'minimal' | 'luxury'
 CREATE TABLE IF NOT EXISTS templates (
     id SERIAL PRIMARY KEY,
     code VARCHAR(64) NOT NULL UNIQUE,
@@ -89,12 +89,7 @@ CREATE TABLE IF NOT EXISTS invitations (
 CREATE INDEX IF NOT EXISTS idx_invitations_slug ON invitations(slug);
 CREATE INDEX IF NOT EXISTS idx_invitations_published ON invitations(is_published);
 
--- 4. INVITATION SECTIONS TABLE (Flexible Section Builder)
--- Supported section_type values:
---   opening_card, couple, countdown, wedding_details, schedule, venue,
---   google_maps, gallery, rsvp, calendar, closing,
---   invitation_message, wedding_date, love_story, family, video,
---   custom_text, contact, music
+-- 4. INVITATION SECTIONS TABLE
 CREATE TABLE IF NOT EXISTS invitation_sections (
     id SERIAL PRIMARY KEY,
     invitation_id INTEGER NOT NULL REFERENCES invitations(id) ON DELETE CASCADE,
@@ -122,7 +117,7 @@ CREATE INDEX IF NOT EXISTS idx_sections_invitation_order
 CREATE TABLE IF NOT EXISTS media_uploads (
     id SERIAL PRIMARY KEY,
     invitation_id INTEGER REFERENCES invitations(id) ON DELETE CASCADE,
-    media_role VARCHAR(32) NOT NULL CHECK (media_role IN ('bride', 'groom', 'couple', 'gallery', 'music', 'video', 'background')),
+    media_role VARCHAR(32) NOT NULL CHECK (media_role IN ('bride', 'groom', 'couple', 'gallery', 'music', 'video', 'background', 'logo')),
     original_filename VARCHAR(255) NOT NULL,
     stored_filename VARCHAR(255) NOT NULL,
     file_path VARCHAR(512) NOT NULL,
@@ -155,6 +150,7 @@ CREATE TABLE IF NOT EXISTS rsvp_responses (
 );
 
 CREATE INDEX IF NOT EXISTS idx_rsvp_invitation ON rsvp_responses(invitation_id, created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_rsvp_dedup ON rsvp_responses(invitation_id, ip_hash, guest_name);
 
 -- 7. PLATFORM SETTINGS TABLE
 CREATE TABLE IF NOT EXISTS settings (
@@ -174,3 +170,20 @@ CREATE TABLE IF NOT EXISTS login_attempts (
 
 CREATE INDEX IF NOT EXISTS idx_login_attempts_ip_time
     ON login_attempts(ip_address, attempted_at DESC);
+
+-- 9. ADMIN SECURITY AUDIT LOGS TABLE
+CREATE TABLE IF NOT EXISTS admin_audit_logs (
+    id SERIAL PRIMARY KEY,
+    admin_user_id INTEGER REFERENCES users(id) ON DELETE SET NULL,
+    admin_username VARCHAR(120) NOT NULL DEFAULT '',
+    action VARCHAR(120) NOT NULL,
+    target_type VARCHAR(80) NOT NULL DEFAULT '',
+    target_id VARCHAR(120) NOT NULL DEFAULT '',
+    ip_address VARCHAR(64) NOT NULL DEFAULT '',
+    user_agent TEXT NOT NULL DEFAULT '',
+    details_json JSONB NOT NULL DEFAULT '{}'::jsonb,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_audit_logs_created
+    ON admin_audit_logs(created_at DESC);

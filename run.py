@@ -22,10 +22,11 @@ if __name__ == "__main__":
 
     print("=" * 72)
     print(f" * Bikozava Wedding Platform running on http://localhost:{port}")
+    print(f" * Luxury Editorial Homepage: http://localhost:{port}/")
+    print(f" * Templates Gallery:         http://localhost:{port}/templates")
     print(f" * Demo Invitation (Badini):  http://localhost:{port}/ismail_shrin")
-    print(f" * Demo Invitation (Arabic):  http://localhost:{port}/ismail_shrin?lang=ar")
-    print(f" * Demo Invitation (English): http://localhost:{port}/ismail_shrin?lang=en")
     print(f" * Admin Studio Login:        http://localhost:{port}/admin/login")
+    print(f" * Homepage & Examples Admin: http://localhost:{port}/admin/homepage")
     print("=" * 72)
 
     if not debug:

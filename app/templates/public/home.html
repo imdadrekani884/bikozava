@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+<html lang="{{ lang_meta.lang_attr }}" dir="{{ lang_meta.dir }}" class="scroll-smooth antialiased">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Bikozava — {% if lang == 'ku' %}چیرۆکا ئەڤینا هەوە، ب جوانترین داخوازناما شاهانە{% elif lang == 'ar' %}قصة حبكم، بدعوة زفاف ملكية لا تُنسى{% else %}Your Love Story, Beautifully Invited{% endif %}</title>
+  <meta name="description" content="Your Love Story, Beautifully Invited — Bikozava Digital Wedding Invitations in Kurdish Badini, Arabic, and English.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=Lalezar&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-silk: #FAF6F0;
+      --bg-almond: #F3ECE1;
+      --bg-velvet: #15110E;
+      --ink-deep: #1E1814;
+      --ink-warm: #5A4D41;
+      --ink-muted: #8C7D6E;
+      --gold-leaf: #C5A059;
+      --gold-bright: #DFC282;
+      --gold-deep: #947132;
+      --rose-mist: rgba(216, 180, 176, 0.24);
+      --lavender-mist: rgba(169, 149, 214, 0.18);
+      --glass-surface: rgba(255, 252, 247, 0.75);
+      --glass-border: rgba(197, 160, 89, 0.28);
+      --font-editorial: 'Cormorant Garamond', 'Playfair Display', 'Amiri', Georgia, serif;
+      --font-display: 'Playfair Display', 'Cormorant Garamond', 'Amiri', serif;
+      --font-cinzel: 'Cinzel', serif;
+      --font-script: 'Alex Brush', cursive;
+      --font-sans: 'Vazirmatn', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-kurdish: 'Vazirmatn', 'Amiri', 'Noto Naskh Arabic', serif;
+    }
+
+    body.is-dark-mode {
+      --bg-silk: #0F0C0A;
+      --bg-almond: #171310;
+      --ink-deep: #FAF5EC;
+      --ink-warm: #D5C8B8;
+      --ink-muted: #9E8F7C;
+      --glass-surface: rgba(26, 21, 18, 0.78);
+      --glass-border: rgba(223, 194, 130, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background-color: var(--bg-silk);
+      color: var(--ink-deep);
+      font-family: var(--font-sans);
+      overflow-x: hidden;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    .editorial-atmosphere {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 18% 16%, rgba(223, 194, 130, 0.18) 0%, transparent 46%),
+        radial-gradient(circle at 84% 22%, var(--rose-mist) 0%, transparent 48%),
+        radial-gradient(circle at 72% 78%, var(--lavender-mist) 0%, transparent 50%),
+        radial-gradient(circle at 22% 85%, rgba(197, 160, 89, 0.14) 0%, transparent 45%);
+    }
+
+    #home-ambient-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Floating Editorial Navigation Bar */
+    .editorial-nav {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 28px);
+      max-width: 1220px;
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: var(--glass-surface);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 14px 40px rgba(24, 18, 12, 0.07);
+      transition: all 0.35s ease;
+    }
+
+    .nav-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--ink-deep);
+    }
+
+    .nav-brand-logo {
+      height: 36px;
+      width: auto;
+      max-width: 140px;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .nav-brand-crest {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--gold-leaf);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-leaf);
+      font-size: 14px;
+      background: rgba(197, 160, 89, 0.08);
+    }
+
+    .nav-brand-title {
+      font-family: var(--font-cinzel);
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .nav-center-links {
+      display: none;
+      align-items: center;
+      gap: 28px;
+    }
+
+    @media (min-width: 860px) {
+      .nav-center-links {
+        display: flex;
+      }
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--ink-warm);
+      font-size: 0.86rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      transition: color 0.25s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--gold-deep);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lang-mini-pill {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(197, 160, 89, 0.1);
+      border: 1px solid rgba(197, 160, 89, 0.25);
+      border-radius: 999px;
+      padding: 2px;
+    }
+
+    .lang-mini-pill a {
+      text-decoration: none;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--ink-warm);
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-family: var(--font-kurdish);
+      transition: all 0.2s ease;
+    }
+
+    .lang-mini-pill a.active {
+      background: var(--ink-deep);
+      color: var(--bg-silk);
+    }
+
+    .theme-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--glass-border);
+      background: transparent;
+      color: var(--ink-deep);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.88rem;
+      transition: transform 0.25s ease;
+    }
+
+    .theme-btn:hover {
+      transform: scale(1.08);
+    }
+
+    .nav-cta-pill {
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 9px 18px;
+      border-radius: 999px;
+      background: var(--ink-deep);
+      color: var(--bg-silk);
+      border: 1px solid var(--gold-leaf);
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .nav-cta-pill:hover {
+      background: var(--gold-leaf);
+      color: #14100C;
+      transform: translateY(-1px);
+    }
+
+    /* =====================================================================
+       SECTION 1: CINEMATIC HERO
+       ===================================================================== */
+    .hero-section {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      padding: 112px 20px 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-container {
+      width: 100%;
+      max-width: 1220px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    @media (min-width: 960px) {
+      .hero-section {
+        padding: 128px 40px 88px;
+      }
+      .hero-container {
+        grid-template-columns: 1.08fr 0.92fr;
+        gap: 64px;
+      }
+    }
+
+    .hero-editorial-copy {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    @media (min-width: 960px) {
+      html[dir="ltr"] .hero-editorial-copy {
+        align-items: flex-start;
+        text-align: left;
+      }
+      html[dir="rtl"] .hero-editorial-copy {
+        align-items: flex-start;
+        text-align: right;
+      }
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: rgba(197, 160, 89, 0.12);
+      border: 1px solid rgba(197, 160, 89, 0.32);
+      color: var(--gold-deep);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 22px;
+    }
+
+    body.is-dark-mode .hero-eyebrow {
+      color: var(--gold-bright);
+    }
+
+    .hero-headline {
+      font-family: var(--font-editorial);
+      font-size: clamp(2.45rem, 5.4vw, 4.5rem);
+      font-weight: 600;
+      line-height: 1.16;
+      color: var(--ink-deep);
+      margin-bottom: 14px;
+    }
+
+    html[dir="ltr"] .hero-headline {
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      font-weight: 600;
+      background: linear-gradient(135deg, #B88928 0%, #D4AF37 48%, #8F6518 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      padding: 0 4px;
+    }
+
+    body.is-dark-mode .hero-headline em {
+      background: linear-gradient(135deg, #F5E1A4 0%, #D4AF37 55%, #C59B38 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub-motto {
+      font-family: var(--font-editorial);
+      font-style: italic;
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--gold-deep);
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
+    }
+
+    body.is-dark-mode .hero-sub-motto {
+      color: var(--gold-bright);
+    }
+
+    .hero-supporting-text {
+      font-size: clamp(1rem, 1.35vw, 1.15rem);
+      line-height: 1.85;
+      color: var(--ink-warm);
+      max-width: 540px;
+      font-weight: 400;
+      margin-bottom: 34px;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    @media (min-width: 960px) {
+      .hero-cta-group {
+        justify-content: flex-start;
+      }
+    }
+
+    .btn-primary-editorial {
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 32px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #1E1814 0%, #332820 100%);
+      color: #FAF6F0;
+      border: 1px solid var(--gold-leaf);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      box-shadow: 0 20px 44px rgba(30, 24, 20, 0.22), 0 0 0 1px rgba(197, 160, 89, 0.25);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    body.is-dark-mode .btn-primary-editorial {
+      background: linear-gradient(135deg, #DFC282 0%, #B88E3B 100%);
+      color: #14100C;
+    }
+
+    .btn-primary-editorial:hover {
+      transform: translateY(-3px) scale(1.015);
+      box-shadow: 0 26px 54px rgba(184, 137, 40, 0.32);
+    }
+
+    .btn-secondary-editorial {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 28px;
+      border-radius: 999px;
+      background: var(--glass-surface);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      color: var(--ink-deep);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      transition: all 0.35s ease;
+    }
+
+    .btn-secondary-editorial:hover {
+      border-color: var(--gold-leaf);
+      transform: translateY(-2px);
+    }
+
+    /* Integrated Smartphone Stage in Atmospheric Floral Scene */
+    .hero-visual-stage {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1400px;
+      padding: 18px 0;
+    }
+
+    .scene-arch-halo {
+      position: absolute;
+      width: 350px;
+      height: 470px;
+      border-radius: 190px 190px 28px 28px;
+      background: linear-gradient(180deg, rgba(223, 194, 130, 0.26) 0%, rgba(255, 250, 242, 0.55) 55%, rgba(169, 149, 214, 0.16) 100%);
+      border: 1px solid rgba(197, 160, 89, 0.36);
+      box-shadow: 0 40px 90px rgba(148, 113, 50, 0.16);
+      transform: rotate(-3deg);
+      z-index: 1;
+    }
+
+    body.is-dark-mode .scene-arch-halo {
+      background: linear-gradient(180deg, rgba(197, 160, 89, 0.2) 0%, rgba(26, 20, 16, 0.7) 60%, rgba(120, 105, 160, 0.16) 100%);
+    }
+
+    .scene-floral-branch {
+      position: absolute;
+      pointer-events: none;
+      z-index: 6;
+      filter: drop-shadow(0 16px 28px rgba(30, 22, 15, 0.16));
+      animation: floatBotanical 7s ease-in-out infinite;
+    }
+
+    .scene-floral-top-left {
+      top: -18px;
+      left: max(0px, calc(50% - 215px));
+      width: 175px;
+      height: 175px;
+    }
+
+    .scene-floral-bottom-right {
+      bottom: -22px;
+      right: max(0px, calc(50% - 215px));
+      width: 185px;
+      height: 185px;
+      animation-delay: -3.2s;
+    }
+
+    @keyframes floatBotanical {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-9px) rotate(2.5deg); }
+    }
+
+    .integrated-phone-rig {
+      position: relative;
+      z-index: 4;
+      width: 308px;
+      height: 618px;
+      border-radius: 48px;
+      padding: 11px;
+      background: linear-gradient(145deg, #E8D5B0 0%, #C5A059 35%, #8F6B29 70%, #DFC282 100%);
+      box-shadow:
+        -24px 36px 68px rgba(24, 16, 10, 0.34),
+        0 10px 28px rgba(197, 160, 89, 0.25),
+        inset 0 2px 3px rgba(255, 255, 255, 0.75);
+      transform: rotateY(-8deg) rotateX(4deg) rotateZ(-1.2deg);
+      transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.65s ease;
+      animation: phoneGentleLevitate 6.5s ease-in-out infinite;
+    }
+
+    .integrated-phone-rig:hover {
+      transform: rotateY(-2deg) rotateX(1deg) rotateZ(0deg) scale(1.015);
+    }
+
+    @keyframes phoneGentleLevitate {
+      0%, 100% { transform: rotateY(-8deg) rotateX(4deg) rotateZ(-1.2deg) translateY(0px); }
+      50% { transform: rotateY(-6deg) rotateX(2.5deg) rotateZ(-0.5deg) translateY(-10px); }
+    }
+
+    .phone-inner-bezel {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 39px;
+      background: #14100D;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 2px solid #1C1612;
+    }
+
+    .phone-dynamic-island {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 86px;
+      height: 22px;
+      border-radius: 999px;
+      background: #090706;
+      z-index: 35;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 8px;
+    }
+
+    .phone-island-lens {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #38587a 0%, #0d131a 70%);
+    }
+
+    .phone-invitation-screen {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #1B120C;
+      overflow: hidden;
+      color: #FFFDF9;
+      user-select: none;
+    }
+
+    .phone-couple-backdrop {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center 28%;
+      transform: scale(1.08);
+      transition: transform 2.4s cubic-bezier(0.16, 1, 0.3, 1), filter 1.2s ease;
+    }
+
+    .phone-invitation-screen.is-opened .phone-couple-backdrop {
+      transform: scale(1);
+    }
+
+    .phone-backdrop-vignette {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(20, 14, 10, 0.65) 0%, rgba(20, 14, 10, 0.18) 42%, rgba(16, 11, 8, 0.88) 100%);
+    }
+
+    .phone-revealed-content {
+      position: relative;
+      z-index: 10;
+      height: 100%;
+      padding: 46px 20px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
+    }
+
+    .phone-top-calligraphy {
+      font-family: var(--font-kurdish);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #F5E1A4;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.65);
+    }
+
+    .phone-date-pill {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.38);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(223, 194, 130, 0.4);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #FFF6E0;
+    }
+
+    .phone-couple-names-box {
+      margin: auto 0;
+      padding: 14px 10px;
+    }
+
+    .phone-couple-latin {
+      font-family: var(--font-editorial);
+      font-size: 2.35rem;
+      font-weight: 600;
+      line-height: 1.05;
+      color: #FFFFFF;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    }
+
+    .phone-couple-amp {
+      font-family: var(--font-script);
+      font-size: 1.9rem;
+      color: #DFC282;
+      display: block;
+      margin: 2px 0;
+    }
+
+    .phone-couple-kurdish {
+      font-family: var(--font-kurdish);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #F5E1A4;
+      margin-top: 6px;
+    }
+
+    .phone-mini-countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .phone-cd-cell {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(223, 194, 130, 0.35);
+      border-radius: 12px;
+      padding: 6px 4px;
+    }
+
+    .phone-cd-cell strong {
+      display: block;
+      font-family: var(--font-editorial);
+      font-size: 1.05rem;
+      color: #FFF;
+    }
+
+    .phone-cd-cell span {
+      font-size: 0.62rem;
+      color: #E8D5B0;
+    }
+
+    .phone-bottom-bar {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(20, 15, 11, 0.78);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(223, 194, 130, 0.35);
+    }
+
+    .phone-open-live-link {
+      text-decoration: none;
+      color: #F5E1A4;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .phone-replay-btn {
+      background: rgba(223, 194, 130, 0.2);
+      border: 1px solid rgba(223, 194, 130, 0.45);
+      color: #FFF;
+      font-size: 0.68rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .phone-envelope-doors {
+      position: absolute;
+      inset: 0;
+      z-index: 25;
+      pointer-events: auto;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: visibility 1.2s ease, opacity 1.1s ease;
+    }
+
+    .phone-door-left,
+    .phone-door-right {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50.5%;
+      background: linear-gradient(165deg, #FDFBF7 0%, #F4ECE0 100%);
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
+      transition: transform 1.35s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    .phone-door-left {
+      left: 0;
+      border-right: 1px solid rgba(197, 160, 89, 0.55);
+    }
+
+    .phone-door-right {
+      right: 0;
+      border-left: 1px solid rgba(197, 160, 89, 0.55);
+    }
+
+    .phone-wax-seal-badge {
+      position: relative;
+      z-index: 30;
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 32% 28%, #FFF6D6 0%, #DFC282 48%, #B88928 85%, #7E5912 100%);
+      border: 2px solid #FFF8E7;
+      box-shadow: 0 12px 30px rgba(30, 20, 8, 0.35), 0 0 0 8px rgba(197, 160, 89, 0.18);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #2B1D08;
+      padding: 8px;
+      transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.8s ease;
+    }
+
+    .phone-wax-seal-badge strong {
+      font-family: var(--font-editorial);
+      font-size: 1.25rem;
+      letter-spacing: 0.08em;
+    }
+
+    .phone-wax-seal-badge small {
+      font-family: var(--font-kurdish);
+      font-size: 0.62rem;
+      font-weight: 700;
+      margin-top: 3px;
+    }
+
+    .phone-invitation-screen.is-opened .phone-door-left {
+      transform: translateX(-104%);
+    }
+
+    .phone-invitation-screen.is-opened .phone-door-right {
+      transform: translateX(104%);
+    }
+
+    .phone-invitation-screen.is-opened .phone-wax-seal-badge {
+      transform: scale(1.32);
+      opacity: 0;
+    }
+
+    .phone-invitation-screen.is-opened .phone-envelope-doors {
+      pointer-events: none;
+    }
+
+    .scene-whisper-card {
+      position: absolute;
+      z-index: 8;
+      padding: 10px 16px;
+      border-radius: 18px;
+      background: var(--glass-surface);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 16px 36px rgba(24, 18, 12, 0.12);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--ink-deep);
+    }
+
+    .whisper-top-right {
+      top: 42px;
+      right: max(0px, calc(50% - 230px));
+      animation: floatBotanical 6s ease-in-out infinite;
+    }
+
+    .whisper-bottom-left {
+      bottom: 54px;
+      left: max(0px, calc(50% - 235px));
+      animation: floatBotanical 6.8s ease-in-out -2s infinite;
+    }
+
+    /* =====================================================================
+       SECTION 2: THE EXPERIENCE (CHOOSE → CUSTOMIZE → SHARE)
+       ===================================================================== */
+    .experience-section {
+      position: relative;
+      z-index: 10;
+      padding: 110px 20px;
+      border-top: 1px solid rgba(197, 160, 89, 0.2);
+    }
+
+    .experience-container {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .editorial-section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 76px;
+    }
+
+    .editorial-section-tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold-deep);
+      margin-bottom: 14px;
+    }
+
+    body.is-dark-mode .editorial-section-tag {
+      color: var(--gold-bright);
+    }
+
+    .editorial-section-title {
+      font-family: var(--font-editorial);
+      font-size: clamp(2.15rem, 4.2vw, 3.5rem);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--ink-deep);
+      margin-bottom: 16px;
+    }
+
+    .editorial-section-lead {
+      font-size: 1.04rem;
+      line-height: 1.8;
+      color: var(--ink-warm);
+    }
+
+    .story-journey-flow {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+    }
+
+    .story-stage-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      align-items: center;
+      padding: 36px 26px;
+      border-radius: 32px;
+      background: var(--glass-surface);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 24px 60px rgba(28, 20, 14, 0.06);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+    }
+
+    .story-stage-row:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold-leaf);
+    }
+
+    @media (min-width: 880px) {
+      .story-stage-row {
+        grid-template-columns: 1fr 1fr;
+        padding: 52px 56px;
+        gap: 56px;
+      }
+      .story-stage-row:nth-child(even) .story-stage-text {
+        order: 2;
+      }
+      .story-stage-row:nth-child(even) .story-stage-visual {
+        order: 1;
+      }
+    }
+
+    .story-step-word {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .story-step-num {
+      font-family: var(--font-editorial);
+      font-size: clamp(3rem, 5vw, 4.4rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1;
+      color: var(--gold-leaf);
+      opacity: 0.85;
+    }
+
+    .story-step-verb {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    .story-stage-heading {
+      font-family: var(--font-editorial);
+      font-size: clamp(1.85rem, 3vw, 2.55rem);
+      font-weight: 600;
+      line-height: 1.25;
+      color: var(--ink-deep);
+      margin-bottom: 14px;
+    }
+
+    .story-stage-prose {
+      font-size: 1.02rem;
+      line-height: 1.85;
+      color: var(--ink-warm);
+      max-width: 460px;
+    }
+
+    .story-stage-visual {
+      position: relative;
+      min-height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .fanned-editions-deck {
+      position: relative;
+      width: 280px;
+      height: 230px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .edition-mini-card {
+      position: absolute;
+      width: 156px;
+      height: 208px;
+      border-radius: 18px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
+      box-shadow: 0 18px 38px rgba(24, 16, 10, 0.18);
+      transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .edition-card-lavender {
+      background: linear-gradient(160deg, #F6F2FC 0%, #E5DCF8 100%);
+      border: 1px solid #9E85D1;
+      color: #533D82;
+      transform: translateX(-58px) rotate(-11deg);
+      z-index: 1;
+    }
+
+    .edition-card-champagne {
+      background: linear-gradient(160deg, #FFFDF9 0%, #F5EBDC 100%);
+      border: 1.5px solid #C5A059;
+      color: #2A211B;
+      transform: translateY(-8px) rotate(0deg);
+      z-index: 3;
+    }
+
+    .edition-card-obsidian {
+      background: linear-gradient(160deg, #1F1916 0%, #120E0C 100%);
+      border: 1px solid #D4AF37;
+      color: #FAF5EC;
+      transform: translateX(58px) rotate(11deg);
+      z-index: 2;
+    }
+
+    .story-stage-row:hover .edition-card-lavender {
+      transform: translateX(-74px) rotate(-15deg) translateY(-4px);
+    }
+    .story-stage-row:hover .edition-card-champagne {
+      transform: translateY(-16px) scale(1.04);
+    }
+    .story-stage-row:hover .edition-card-obsidian {
+      transform: translateX(74px) rotate(15deg) translateY(-4px);
+    }
+
+    .customize-atelier-collage {
+      position: relative;
+      width: 100%;
+      max-width: 340px;
+      padding: 22px;
+      border-radius: 24px;
+      background: linear-gradient(145deg, rgba(255, 253, 249, 0.92), rgba(244, 235, 222, 0.85));
+      border: 1px solid rgba(197, 160, 89, 0.4);
+      box-shadow: 0 20px 44px rgba(30, 22, 14, 0.12);
+      color: #241C15;
+    }
+
+    .atelier-row-pill {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: #FFFFFF;
+      border: 1px solid rgba(197, 160, 89, 0.28);
+      margin-bottom: 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .share-link-showcase {
+      width: 100%;
+      max-width: 350px;
+      padding: 24px;
+      border-radius: 24px;
+      background: linear-gradient(145deg, #1B1511 0%, #2B211A 100%);
+      border: 1px solid var(--gold-leaf);
+      color: #FAF6F0;
+      box-shadow: 0 22px 48px rgba(20, 14, 10, 0.24);
+      text-align: center;
+    }
+
+    .share-url-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(223, 194, 130, 0.45);
+      font-family: var(--font-sans);
+      font-size: 0.86rem;
+      color: #F5E1A4;
+      margin: 14px 0;
+    }
+
+    /* =====================================================================
+       SECTION 3: ADMIN-CURATED SIGNATURE EDITIONS & EXAMPLE COUPLES
+       ===================================================================== */
+    .curated-showcase-section {
+      position: relative;
+      z-index: 10;
+      padding: 96px 20px 110px;
+      border-top: 1px solid rgba(197, 160, 89, 0.2);
+    }
+
+    .curated-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .curated-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 28px;
+      margin-bottom: 52px;
+    }
+
+    .curated-couple-card {
+      position: relative;
+      border-radius: 26px;
+      overflow: hidden;
+      background: var(--glass-surface);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 20px 48px rgba(24, 18, 12, 0.08);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease, border-color 0.35s ease;
+    }
+
+    .curated-couple-card:hover {
+      transform: translateY(-7px);
+      border-color: var(--gold-leaf);
+      box-shadow: 0 28px 60px rgba(148, 113, 50, 0.18);
+    }
+
+    .curated-stage-preview {
+      position: relative;
+      height: 245px;
+      padding: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .curated-mini-invitation {
+      width: 100%;
+      max-width: 225px;
+      height: 195px;
+      border-radius: 18px;
+      padding: 18px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16);
+      transition: transform 0.45s ease;
+    }
+
+    .curated-couple-card:hover .curated-mini-invitation {
+      transform: scale(1.04);
+    }
+
+    .curated-badge-pill {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(197, 160, 89, 0.15);
+    }
+
+    .curated-example-names-en {
+      font-family: var(--font-editorial);
+      font-size: 1.55rem;
+      font-weight: 600;
+      line-height: 1.15;
+    }
+
+    .curated-example-names-ku {
+      font-family: var(--font-kurdish);
+      font-size: 0.92rem;
+      font-weight: 700;
+      opacity: 0.9;
+    }
+
+    .curated-card-footer {
+      padding: 20px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    .curated-template-title {
+      font-family: var(--font-editorial);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--ink-deep);
+    }
+
+    .curated-template-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      padding-top: 10px;
+      border-top: 1px solid rgba(197, 160, 89, 0.18);
+    }
+
+    .curated-open-cta {
+      font-weight: 700;
+      color: var(--gold-deep);
+      font-size: 0.78rem;
+    }
+
+    body.is-dark-mode .curated-open-cta {
+      color: var(--gold-bright);
+    }
+
+    .finale-editorial-banner {
+      position: relative;
+      z-index: 10;
+      max-width: 1080px;
+      margin: 0 auto 90px;
+      padding: 64px 28px;
+      border-radius: 36px;
+      background: linear-gradient(145deg, #1B1511 0%, #2A2019 55%, #16110E 100%);
+      border: 1px solid var(--gold-leaf);
+      color: #FAF6F0;
+      text-align: center;
+      box-shadow: 0 32px 80px rgba(20, 14, 10, 0.28);
+      overflow: hidden;
+    }
+
+    .finale-title {
+      font-family: var(--font-editorial);
+      font-size: clamp(2.1rem, 4.2vw, 3.4rem);
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      color: #FFFDF9;
+    }
+
+    .finale-subtitle {
+      font-size: 1.02rem;
+      color: #D8CBB8;
+      max-width: 540px;
+      margin: 0 auto 32px;
+      line-height: 1.8;
+    }
+
+    .editorial-footer {
+      position: relative;
+      z-index: 10;
+      padding: 36px 20px 48px;
+      text-align: center;
+      border-top: 1px solid rgba(197, 160, 89, 0.2);
+      color: var(--ink-muted);
+      font-size: 0.84rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .reveal-editorial {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-editorial.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="editorial-atmosphere" aria-hidden="true"></div>
+  <canvas id="home-ambient-canvas" aria-hidden="true"></canvas>
+
+  <!-- =====================================================================
+       FLOATING VIEWER-ONLY EDITORIAL NAVIGATION (WITH ADMIN BRAND LOGO)
+       ===================================================================== -->
+  <header class="editorial-nav">
+    <a href="{{ url_for('public.home', lang=lang) }}" class="nav-brand">
+      {% if site_logo_url %}
+      <img src="{{ site_logo_url }}" alt="Bikozava" class="nav-brand-logo">
+      {% else %}
+      <span class="nav-brand-crest">✦</span>
+      {% endif %}
+      <span class="nav-brand-title">Bikozava</span>
+    </a>
+
+    <nav class="nav-center-links" aria-label="Primary Navigation">
+      <a href="#the-experience" class="nav-link">
+        {% if lang == 'ku' %}چەوانیا کارکرنێ{% elif lang == 'ar' %}كيف تعمل{% else %}The Experience{% endif %}
+      </a>
+      <a href="#signature-editions" class="nav-link">
+        {% if lang == 'ku' %}دیزاینێن هەلبژارتی{% elif lang == 'ar' %}تصاميم مختارة{% else %}Curated Invitations{% endif %}
+      </a>
+
+    </nav>
+
+    <div class="nav-actions">
+      <!-- 3-Language Switcher: Kurdish Badini Main First, then Arabic, then English -->
+      <div class="lang-mini-pill" role="navigation" aria-label="Language">
+        <a href="{{ url_for('public.home', lang='ku') }}" class="{% if lang == 'ku' %}active{% endif %}">بادینی</a>
+        <a href="{{ url_for('public.home', lang='ar') }}" class="{% if lang == 'ar' %}active{% endif %}">عربي</a>
+        <a href="{{ url_for('public.home', lang='en') }}" class="{% if lang == 'en' %}active{% endif %}">EN</a>
+      </div>
+
+      <button type="button" class="theme-btn" onclick="toggleHomeAtmosphere()" aria-label="Toggle Dark / Light Atmosphere" title="Toggle Atmosphere">
+        <span id="home-theme-icon">🌙</span>
+      </button>
+
+      <a href="#signature-editions" class="nav-cta-pill">
+        {% if lang == 'ku' %}دیتنا داخوازنامان{% elif lang == 'ar' %}استكشف الدعوات{% else %}Explore Invitations{% endif %}
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===================================================================
+         1. CINEMATIC HERO
+         =================================================================== -->
+    <section class="hero-section">
+      <div class="hero-container">
+
+        <!-- Hero Editorial Copy (Kurdish Badini Main, Arabic, & English) -->
+        <div class="hero-editorial-copy">
+          <span class="hero-eyebrow">
+            <span>✦</span>
+            <span>
+              {% if lang == 'ku' %}داخوازنامێن شەهیانێ یێن دیجیتاڵی و شاهانە{% elif lang == 'ar' %}دعوات زفاف رقمية ملكية فاخرة{% else %}Bespoke Digital Wedding Stationery{% endif %}
+            </span>
+          </span>
+
+          {% if lang == 'ku' %}
+          <h1 class="hero-headline">
+            چیرۆکا ئەڤینا هەوە، <em>ب جوانترین شێوە هاتیە داخوازکرن.</em>
+          </h1>
+          <p class="hero-sub-motto" dir="ltr">Your Love Story, Beautifully Invited.</p>
+          <p class="hero-supporting-text">
+            داخوازنامەکا شەهیانێ یا دیجیتاڵی و سەرنجراکێش دروست بکە کو وەکی کاغەزا شاهانە ڤەدبیت، ب رووناهی و موزیکا تایبەت دجوولێت، و ب ئێک لینک دگەهیتە هەمی مێهڤانێن هەوە.
+          </p>
+          {% elif lang == 'ar' %}
+          <h1 class="hero-headline">
+            قصة حبكم، <em>بدعوة زفاف ملكية لا تُنسى.</em>
+          </h1>
+          <p class="hero-sub-motto" dir="ltr">Your Love Story, Beautifully Invited.</p>
+          <p class="hero-supporting-text">
+            صمّموا دعوة زفاف رقمية ساحرة تُفتح كالورق الملكي الفاخر، وتنبض بالضوء والموسيقى المختارة، وشاركوها فوراً مع ضيوفكم بلمسة واحدة.
+          </p>
+          {% else %}
+          <h1 class="hero-headline">
+            Your Love Story, <em>Beautifully Invited.</em>
+          </h1>
+          <p class="hero-sub-motto" dir="rtl">چیرۆکا ئەڤینا هەوە، ب جوانترین داخوازناما شاهانە</p>
+          <p class="hero-supporting-text">
+            Create an unforgettable digital wedding invitation that unfolds like couture paper, moves with living light and curated music, and shares effortlessly with every guest in a single tap.
+          </p>
+          {% endif %}
+
+          <div class="hero-cta-group">
+            <a href="#signature-editions" class="btn-primary-editorial">
+              <span>{% if lang == 'ku' %}دیتنا داخوازنامان (Explore Invitations){% elif lang == 'ar' %}استكشف الدعوات (Explore Invitations){% else %}Explore Invitations{% endif %}</span>
+              <span aria-hidden="true">{% if lang in ('ku', 'ar') %}←{% else %}→{% endif %}</span>
+            </a>
+
+            <a href="#the-experience" class="btn-secondary-editorial">
+              <span>{% if lang == 'ku' %}چەوانیا کارکرنێ ببینە{% elif lang == 'ar' %}كيف تعمل المنصة{% else %}See How It Works{% endif %}</span>
+              <span aria-hidden="true">↓</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Smartphone Integrated into Romantic Floral & Candlelight Scene -->
+        <div class="hero-visual-stage" id="hero-parallax-stage" dir="ltr">
+          <div class="scene-arch-halo" aria-hidden="true"></div>
+
+          <!-- Top-Left Watercolor Botanical Branch Overlapping the Scene -->
+          <svg class="scene-floral-branch scene-floral-top-left" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+            <path d="M180 25 Q110 65 40 140" stroke="#8C7A5B" stroke-width="2" stroke-linecap="round"/>
+            <ellipse cx="120" cy="58" rx="12" ry="24" transform="rotate(-38 120 58)" fill="#E5D8FA" opacity="0.88"/>
+            <ellipse cx="92" cy="88" rx="14" ry="26" transform="rotate(-25 92 88)" fill="#CDB9F0" opacity="0.85"/>
+            <ellipse cx="68" cy="115" rx="10" ry="20" transform="rotate(22 68 115)" fill="#A8B89F" opacity="0.82"/>
+            <circle cx="105" cy="72" r="18" fill="#F3D999" opacity="0.75"/>
+            <circle cx="105" cy="72" r="9" fill="#C5A059"/>
+          </svg>
+
+          <!-- Bottom-Right Botanical Branch -->
+          <svg class="scene-floral-branch scene-floral-bottom-right" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+            <path d="M20 175 Q95 125 160 45" stroke="#8C7A5B" stroke-width="2" stroke-linecap="round"/>
+            <ellipse cx="85" cy="130" rx="14" ry="26" transform="rotate(32 85 130)" fill="#F5E1A4" opacity="0.85"/>
+            <ellipse cx="118" cy="95" rx="12" ry="22" transform="rotate(18 118 95)" fill="#E5D8FA" opacity="0.85"/>
+            <ellipse cx="140" cy="68" rx="10" ry="20" transform="rotate(-25 140 68)" fill="#A8B89F" opacity="0.82"/>
+            <circle cx="100" cy="112" r="16" fill="#DFC282" opacity="0.8"/>
+          </svg>
+
+          <!-- Floating Glassmorphic Whispers -->
+          <div class="scene-whisper-card whisper-top-right">
+            <span>🦋</span>
+            <span>{% if lang == 'ku' %}مۆرا شاهانە و ڤەبوونا 3D{% elif lang == 'ar' %}ختم ملكي وفتح ثلاثي الأبعاد{% else %}Interactive Seal &amp; 3D Reveal{% endif %}</span>
+          </div>
+
+          <div class="scene-whisper-card whisper-bottom-left">
+            <span>🎵</span>
+            <span>{% if lang == 'ku' %}موزیکا تایبەت و بەرسڤا مێهڤانان{% elif lang == 'ar' %}موسيقى مخصصة وتأكيد الحضور{% else %}Custom Music &amp; Instant RSVP{% endif %}</span>
+          </div>
+
+          <!-- Integrated Smartphone Displaying the Live Opening Wedding Invitation -->
+          <div class="integrated-phone-rig" id="hero-phone-rig">
+            <div class="phone-inner-bezel">
+              <div class="phone-dynamic-island" aria-hidden="true">
+                <span class="phone-island-lens"></span>
+              </div>
+
+              <div id="hero-phone-screen" class="phone-invitation-screen is-opened">
+                <div
+                  class="phone-couple-backdrop"
+                  style="background-image: url('{{ demo_inv.couple_image or '/static/img/demo/couple_ismail_shrin.webp' }}');"
+                ></div>
+                <div class="phone-backdrop-vignette"></div>
+
+                <!-- Gatefold Wax-Sealed Doors Inside Phone -->
+                <div class="phone-envelope-doors" onclick="openHeroPhoneInvitation()" title="Tap to Open Invitation">
+                  <div class="phone-door-left"></div>
+                  <div class="phone-door-right"></div>
+                  <div class="phone-wax-seal-badge">
+                    <strong>{{ (homepage_cfg.hero_groom_en or 'I')[:1] }} &amp; {{ (homepage_cfg.hero_bride_en or 'S')[:1] }}</strong>
+                    <small dir="rtl">کلیل بکە بو ڤەکرنێ</small>
+                  </div>
+                </div>
+
+                <!-- Revealed Wedding Invitation Inside Phone -->
+                <div class="phone-revealed-content">
+                  <div>
+                    <p class="phone-top-calligraphy" dir="rtl">داخوازناما شەهیانێ</p>
+                    <span class="phone-date-pill">{{ homepage_cfg.hero_date }}</span>
+                  </div>
+
+                  <div class="phone-couple-names-box">
+                    <div class="phone-couple-latin">{{ homepage_cfg.hero_groom_en }}</div>
+                    <span class="phone-couple-amp">&amp;</span>
+                    <div class="phone-couple-latin">{{ homepage_cfg.hero_bride_en }}</div>
+                    <p class="phone-couple-kurdish" dir="rtl">
+                      {{ homepage_cfg.hero_groom_ku }} • {{ homepage_cfg.hero_bride_ku }}
+                    </p>
+                  </div>
+
+                  <div style="width: 100%;">
+                    <div class="phone-mini-countdown">
+                      <div class="phone-cd-cell"><strong>142</strong><span>{% if lang == 'ku' %}رۆژ{% elif lang == 'ar' %}يوم{% else %}Days{% endif %}</span></div>
+                      <div class="phone-cd-cell"><strong>08</strong><span>{% if lang == 'ku' %}دەمژمێر{% elif lang == 'ar' %}ساعة{% else %}Hrs{% endif %}</span></div>
+                      <div class="phone-cd-cell"><strong>34</strong><span>{% if lang == 'ku' %}خولەک{% elif lang == 'ar' %}دقيقة{% else %}Min{% endif %}</span></div>
+                      <div class="phone-cd-cell"><strong id="hero-phone-sec">52</strong><span>{% if lang == 'ku' %}چرکە{% elif lang == 'ar' %}ثانية{% else %}Sec{% endif %}</span></div>
+                    </div>
+
+                    <div class="phone-bottom-bar">
+                      <a
+                        href="{{ url_for('public.view_invitation', slug=demo_slug, template=homepage_cfg.hero_template_code, showcase='hero', lang=lang) }}"
+                        class="phone-open-live-link"
+                      >
+                        {% if lang == 'ku' %}ڤەکرنا نموونێ ↗{% elif lang == 'ar' %}فتح النموذج ↗{% else %}Open Full Demo ↗{% endif %}
+                      </a>
+                      <button type="button" class="phone-replay-btn" onclick="replayHeroPhoneEnvelope(event)">
+                        {% if lang == 'ku' %}دووبارە ↺{% elif lang == 'ar' %}إعادة ↺{% else %}Replay ↺{% endif %}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         2. THE EXPERIENCE (VISUAL STORYTELLING: CHOOSE → CUSTOMIZE → SHARE)
+         =================================================================== -->
+    <section id="the-experience" class="experience-section">
+      <div class="experience-container">
+        <div class="editorial-section-header reveal-editorial is-visible">
+          <span class="editorial-section-tag">
+            {% if lang == 'ku' %}ئەزموونا بیکو زاڤا • The Experience{% elif lang == 'ar' %}تجربة بيكو زافا • The Experience{% else %}The Experience{% endif %}
+          </span>
+          <h2 class="editorial-section-title">
+            {% if lang == 'ku' %}ژ هەلبژارتنا دیزاینێ هەتا گەهشتنا مێهڤانان.{% elif lang == 'ar' %}من اختيار التصميم حتى وصول الدعوة لضيوفكم.{% else %}From First Whisper to Unforgettable Arrival.{% endif %}
+          </h2>
+          <p class="editorial-section-lead">
+            {% if lang == 'ku' %}سێ پێنگاڤێن هونەری بو گوهۆڕینا هویرکاریێن شەڤا شەهیانا هەوە بو بیرەوەریەکا هەتا هەتایی:{% elif lang == 'ar' %}ثلاث خطوات أنيقة تحوّل تفاصيل ليلة زفافكم إلى ذكرى خالدة:{% else %}Three effortless moments that transform your wedding details into a living keepsake:{% endif %}
+          </p>
+        </div>
+
+        <div class="story-journey-flow">
+
+          <!-- ACT 01: CHOOSE -->
+          <article class="story-stage-row reveal-editorial is-visible">
+            <div class="story-stage-text">
+              <div class="story-step-word">
+                <span class="story-step-num">01</span>
+                <span class="story-step-verb">{% if lang == 'ku' %}هەلبژێرە • Choose{% elif lang == 'ar' %}اختر • Choose{% else %}Choose{% endif %}</span>
+              </div>
+              <h3 class="story-stage-heading">
+                {% if lang == 'ku' %}ستایل و کەشوهەوایێ شەهیانا خۆ هەلبژێرە.{% elif lang == 'ar' %}اختر التصميم الذي يشبه قصة حبكم.{% else %}Select Your Signature Atmosphere.{% endif %}
+              </h3>
+              <p class="story-stage-prose">
+                {% if lang == 'ku' %}ژ گوڵێن لاڤێندەر یێن ئاڤی و زەرفێن شامپانی هەتا مۆرا شاهانە، پەپوولەیا 3D و دەریاچەیا بەر هەیڤێ — دیزاینا خەونێن خۆ هەلبژێرە.{% elif lang == 'ar' %}من زهور اللافندر المائية والظرف المذهب إلى الختم الملكي والفراشة ثلاثية الأبعاد — تصاميم تلامس القلوب على كل هاتف.{% else %}Explore minimal watercolor florals, champagne-gold foil envelopes, royal wax seals, and cinematic 3D worlds—each crafted to open with emotion on every guest's phone.{% endif %}
+              </p>
+            </div>
+
+            <div class="story-stage-visual" dir="ltr">
+              <div class="fanned-editions-deck">
+                <div class="edition-mini-card edition-card-lavender">
+                  <span style="font-size:0.65rem; font-weight:700; letter-spacing:0.1em;">💜 LAVENDER</span>
+                  <strong style="font-family:var(--font-editorial); font-size:1.25rem;">Ahmed &amp; Sara</strong>
+                  <small style="font-size:0.68rem;">Watercolor Floral</small>
+                </div>
+                <div class="edition-mini-card edition-card-champagne">
+                  <span style="font-size:0.65rem; font-weight:700; letter-spacing:0.1em; color:#947132;">✦ WAX SEAL</span>
+                  <strong style="font-family:var(--font-editorial); font-size:1.35rem;">{{ homepage_cfg.hero_groom_en }} &amp; {{ homepage_cfg.hero_bride_en }}</strong>
+                  <small style="font-size:0.68rem; color:#7A6855;">{{ homepage_cfg.hero_date }}</small>
+                </div>
+                <div class="edition-mini-card edition-card-obsidian">
+                  <span style="font-size:0.65rem; font-weight:700; letter-spacing:0.1em; color:#DFC282;">🌙 MIDNIGHT</span>
+                  <strong style="font-family:var(--font-editorial); font-size:1.25rem;">Diyar &amp; Naz</strong>
+                  <small style="font-size:0.68rem; color:#C5B8A5;">24k Gold Foil</small>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ACT 02: CUSTOMIZE -->
+          <article class="story-stage-row reveal-editorial">
+            <div class="story-stage-text">
+              <div class="story-step-word">
+                <span class="story-step-num">02</span>
+                <span class="story-step-verb">{% if lang == 'ku' %}تایبەت بکە • Customize{% elif lang == 'ar' %}خصّص • Customize{% else %}Customize{% endif %}</span>
+              </div>
+              <h3 class="story-stage-heading">
+                {% if lang == 'ku' %}هەمی هویرکاریان ب ناڤ و وێنەیێن خۆ بخەملینە.{% elif lang == 'ar' %}اجعلوا كل تفصيل يحمل بصمتكم الخاصة.{% else %}Make Every Detail Yours.{% endif %}
+              </h3>
+              <p class="story-stage-prose">
+                {% if lang == 'ku' %}ناڤێن خۆ ب کوردی بادینی، عەرەبی و ئینگلیزی بنڤیسن، وێنەیێن بیک و زاڤای و ئەلبوما وێنەیان دگەل موزیکا خۆ یا تایبەت و بەرنامێ شەڤێ زێدە بکەن.{% elif lang == 'ar' %}أضيفوا أسماء العروسين بالكردية البادينية والعربية والإنجليزية، وصوركم الفوتوغرافية، وموسيقى الزفاف المفضلة، وبرنامج الأمسية وموقع القاعة.{% else %}Personalize your names in Badini Kurdish, Arabic, and English. Add your couple portraits, your favorite wedding song, and your evening timeline.{% endif %}
+              </p>
+            </div>
+
+            <div class="story-stage-visual">
+              <div class="customize-atelier-collage">
+                <div class="atelier-row-pill">
+                  <span>📸 {% if lang == 'ku' %}وێنەیێن بیک و زاڤای و ئەلبوم{% elif lang == 'ar' %}صور العروسين ومعرض الصور{% else %}Couple &amp; Gallery Portraits{% endif %}</span>
+                  <span style="color:#947132;">✦</span>
+                </div>
+                <div class="atelier-row-pill">
+                  <span>🎵 {% if lang == 'ku' %}موزیکا تایبەت ل دەمێ ڤەکرنێ{% elif lang == 'ar' %}موسيقى الزفاف عند فتح البطاقة{% else %}Custom Wedding Melody{% endif %}</span>
+                  <span style="color:#947132;">✦</span>
+                </div>
+                <div class="atelier-row-pill" style="margin-bottom:0;">
+                  <span>🕰 {% if lang == 'ku' %}بەرنامێ شەڤێ ب ٣ زمانان{% elif lang == 'ar' %}برنامج الأمسية بـ 3 لغات{% else %}Badini • Arabic • English{% endif %}</span>
+                  <span style="color:#947132;">✦</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ACT 03: SHARE -->
+          <article class="story-stage-row reveal-editorial">
+            <div class="story-stage-text">
+              <div class="story-step-word">
+                <span class="story-step-num">03</span>
+                <span class="story-step-verb">{% if lang == 'ku' %}بەلاڤ بکە • Share{% elif lang == 'ar' %}شارك • Share{% else %}Share{% endif %}</span>
+              </div>
+              <h3 class="story-stage-heading">
+                {% if lang == 'ku' %}ب ئێک لینکا تایبەت بو هەمی مێهڤانان بهنێرە.{% elif lang == 'ar' %}شاركوا فرحتكم فوراً عبر رابط خاص بكم.{% else %}Share Instantly with One Private Link.{% endif %}
+              </h3>
+              <p class="story-stage-prose">
+                {% if lang == 'ku' %}لینکا تایبەت یا شەهیانا خۆ وەربگرە و ب رێکا واتسئاپ یان ئینستاگرامی بو خۆشتڤیێن خۆ بهنێرە، دگەل نەخشێ هۆلێ و پشتراستکرنا ئامادەبوونێ.{% elif lang == 'ar' %}احصلوا على رابط زفافكم الخاص وأرسلوه عبر واتساب أو الرسائل، ليتمكن الضيوف من فتح البطاقة، معرفة موقع القاعة، وتأكيد حضورهم بلمسة واحدة.{% else %}Receive your custom wedding URL and send it via WhatsApp, iMessage, or Instagram. Guests tap to open your card, navigate via Google Maps, and confirm their RSVP in seconds.{% endif %}
+              </p>
+            </div>
+
+            <div class="story-stage-visual" dir="ltr">
+              <div class="share-link-showcase">
+                <span style="font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase; color:#DFC282;">Private Wedding URL</span>
+                <div class="share-url-bar">
+                  <span>✦</span>
+                  <strong>bikozava.com/{{ (homepage_cfg.hero_groom_en or 'ismail')|lower }}_{{ (homepage_cfg.hero_bride_en or 'shrin')|lower }}</strong>
+                </div>
+                <p style="font-size:0.78rem; color:#D5C8B8;">Instant Mobile RSVP • Google Maps • Save to Calendar</p>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         3. CURATED SIGNATURE SHOWCASE (COMPLEMENTS EXISTING TEMPLATES PAGE)
+         =================================================================== -->
+    <section id="signature-editions" class="curated-showcase-section">
+      <div class="curated-container">
+        <div class="editorial-section-header reveal-editorial">
+          <span class="editorial-section-tag">
+            {% if lang == 'ku' %}دیزاینێن هەلبژارتی{% elif lang == 'ar' %}تصاميم مختارة{% else %}Curated Signatures{% endif %}
+          </span>
+          <h2 class="editorial-section-title">
+            {% if lang == 'ku' %}نموونەیێن داخوازنامێن شەهیانێ{% elif lang == 'ar' %}نماذج دعوات الزفاف الملكية{% else %}Featured Wedding Invitations{% endif %}
+          </h2>
+          <p class="editorial-section-lead">
+            {% if lang == 'ku' %}کلیل ل سەر هەر نموونەیەکا خوارێ بکە دا داخوازنامێ ب شێوەیەکێ زیندی ببینی و تاقی بکەی.{% elif lang == 'ar' %}اضغط على أي نموذج أدناه لتجربة دعوة الزفاف بشكل حي ومباشر.{% else %}Tap any featured invitation below to experience the live interactive design.{% endif %}
+          </p>
+        </div>
+
+        <div class="curated-grid">
+          {% for item in featured_showcase %}
+          {% set t = item.template %}
+          <a
+            href="{{ url_for('public.view_invitation', slug=demo_slug, template=item.template_code, showcase='1', lang=lang) }}"
+            class="curated-couple-card reveal-editorial"
+          >
+            <div class="curated-stage-preview" style="background: {{ t.preview_style.get('bg', '#FAF6EE') }};" dir="ltr">
+              <div
+                class="curated-mini-invitation"
+                style="background: {{ t.preview_style.get('card', '#FFFFFF') }}; border: 1.5px solid {{ t.preview_style.get('accent', '#C8A253') }}; color: {{ t.preview_style.get('text', '#241C15') }};"
+              >
+                <span class="curated-badge-pill" style="color: {{ t.preview_style.get('accent', '#C8A253') }};">
+                  {{ t.preview_style.get('badge', 'Signature') }}
+                </span>
+
+                <div>
+                  <div class="curated-example-names-en">{{ item.groom_en }} &amp; {{ item.bride_en }}</div>
+                  <div class="curated-example-names-ku" dir="rtl">{{ item.groom_ku }} و {{ item.bride_ku }}</div>
+                </div>
+
+                <small style="font-size:0.7rem; opacity:0.8;">{{ item.example_date }} • {{ item.example_venue }}</small>
+              </div>
+            </div>
+
+            <div class="curated-card-footer">
+              <div>
+                <h3 class="curated-template-title">
+                  {% if lang == 'ku' %}{{ t.name_ku }}{% elif lang == 'ar' %}{{ t.name_ar }}{% else %}{{ t.name_en }}{% endif %}
+                </h3>
+                <p style="font-size:0.86rem; color:var(--ink-warm); margin-top:4px; line-height:1.6;">
+                  {% if lang == 'ku' %}{{ t.description_ku }}{% elif lang == 'ar' %}{{ t.description_ar }}{% else %}{{ t.description_en }}{% endif %}
+                </p>
+              </div>
+
+              <div class="curated-template-meta">
+                <span>
+                  {% if lang == 'ku' %}{{ item.groom_ku }} و {{ item.bride_ku }} ({{ item.groom_en }} &amp; {{ item.bride_en }}){% elif lang == 'ar' %}{{ item.groom_ku }} و {{ item.bride_ku }} ({{ item.groom_en }} &amp; {{ item.bride_en }}){% else %}Example: <strong>{{ item.groom_en }} &amp; {{ item.bride_en }}</strong>{% endif %}
+                </span>
+                <span class="curated-open-cta">
+                  {% if lang == 'ku' %}دیتنا زیندی ←{% elif lang == 'ar' %}معاينة حية ←{% else %}Live Preview →{% endif %}
+                </span>
+              </div>
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+
+
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         4. CLOSING VIEWER-ONLY EDITORIAL FINALE CTA
+         =================================================================== -->
+    <section style="padding: 0 20px;">
+      <div class="finale-editorial-banner reveal-editorial">
+        <span style="font-size:0.78rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:#DFC282; display:block; margin-bottom:14px;">
+          ✦ BIKOZAVA
+        </span>
+        <h2 class="finale-title">
+          {% if lang == 'ku' %}ئامادەنە بو داخوازکرنا خۆشتڤیێن خۆ؟{% elif lang == 'ar' %}هل أنتم مستعدون لدعوة أحبائكم بأجمل صورة؟{% else %}Ready to Invite the Ones You Love?{% endif %}
+        </h2>
+        <p class="finale-subtitle">
+          {% if lang == 'ku' %}پێشانگەها مە یا تەمام ژ داخوازنامێن شاهانە و سادە ببینە و جوانترین ستایل بو شەڤا شەهیانا خۆ هەلبژێرە.{% elif lang == 'ar' %}تصفّحوا مجموعتنا الكاملة من دعوات الزفاف الرقمية الملكية والناعمة واكتشفوا التصميم المثالي لليلة العمر.{% else %}Browse our complete collection of handcrafted digital wedding invitations and discover the perfect setting for your celebration.{% endif %}
+        </p>
+        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:16px;">
+          <a href="#signature-editions" class="btn-primary-editorial" style="background:linear-gradient(135deg, #DFC282 0%, #B88E3B 100%); color:#14100C;">
+            <span>{% if lang == 'ku' %}دیتنا داخوازنامان (Explore Invitations){% elif lang == 'ar' %}استكشف الدعوات (Explore Invitations){% else %}Explore Invitations{% endif %}</span>
+            <span aria-hidden="true">{% if lang in ('ku', 'ar') %}←{% else %}→{% endif %}</span>
+          </a>
+          <a href="{{ url_for('public.view_invitation', slug=demo_slug, lang=lang) }}" class="btn-secondary-editorial" style="background:rgba(255,255,255,0.08); color:#FAF6F0; border-color:rgba(223,194,130,0.4);">
+            <span>{% if lang == 'ku' %}نموونا زیندی ببینە{% elif lang == 'ar' %}مشاهدة النموذج الحي{% else %}Experience Live Demo{% endif %}</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="editorial-footer">
+    {% if site_logo_url %}
+    <img src="{{ site_logo_url }}" alt="Bikozava" style="height:32px; width:auto; object-fit:contain; border-radius:6px;">
+    {% endif %}
+    <p>✦ <strong>Bikozava</strong> — {% if lang == 'ku' %}پلاتفۆرما داخوازنامێن شەهیانێ یێن دیجیتاڵی • کوردی بادینی، عەرەبی و ئینگلیزی{% elif lang == 'ar' %}منصة دعوات الزفاف الرقمية الفاخرة • الكردية البادينية والعربية والإنجليزية{% else %}Bespoke Digital Wedding Invitations • Kurdish Badini, Arabic &amp; English{% endif %}</p>
+  </footer>
+
+  <script>
+    // 1. Dark / Light Atmosphere Toggle
+    const HOME_THEME_KEY = "bikozava_theme_mode";
+    function applyHomeTheme() {
+      const saved = sessionStorage.getItem(HOME_THEME_KEY);
+      const icon = document.getElementById("home-theme-icon");
+      if (saved === "dark") {
+        document.body.classList.add("is-dark-mode");
+        if (icon) icon.textContent = "☀️";
+      } else if (saved === "light") {
+        document.body.classList.remove("is-dark-mode");
+        if (icon) icon.textContent = "🌙";
+      }
+    }
+    window.toggleHomeAtmosphere = function () {
+      const isDark = document.body.classList.toggle("is-dark-mode");
+      sessionStorage.setItem(HOME_THEME_KEY, isDark ? "dark" : "light");
+      const icon = document.getElementById("home-theme-icon");
+      if (icon) icon.textContent = isDark ? "☀️" : "🌙";
+    };
+
+    // 2. Hero Phone Invitation Opening Choreography & Live Second Tick
+    window.openHeroPhoneInvitation = function () {
+      const screen = document.getElementById("hero-phone-screen");
+      if (screen) screen.classList.add("is-opened");
+    };
+    window.replayHeroPhoneEnvelope = function (ev) {
+      if (ev) ev.stopPropagation();
+      const screen = document.getElementById("hero-phone-screen");
+      if (!screen) return;
+      screen.classList.remove("is-opened");
+      setTimeout(() => {
+        screen.classList.add("is-opened");
+      }, 1500);
+    };
+
+    window.addEventListener("DOMContentLoaded", () => {
+      applyHomeTheme();
+      const screen = document.getElementById("hero-phone-screen");
+      if (screen) {
+        screen.classList.remove("is-opened");
+        setTimeout(() => {
+          screen.classList.add("is-opened");
+        }, 950);
+      }
+
+      const secEl = document.getElementById("hero-phone-sec");
+      let secVal = 52;
+      setInterval(() => {
+        secVal = (secVal - 1 + 60) % 60;
+        if (secEl) secEl.textContent = String(secVal).padStart(2, "0");
+      }, 1000);
+
+      // Scroll Reveal Observer
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add("is-visible");
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll(".reveal-editorial").forEach(el => obs.observe(el));
+
+      // Subtle Ambient Floating Petals & Gold Dust Canvas
+      const canvas = document.getElementById("home-ambient-canvas");
+      if (!canvas) return;
+      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const ctx = canvas.getContext("2d");
+      let w = (canvas.width = window.innerWidth);
+      let h = (canvas.height = window.innerHeight);
+      window.addEventListener("resize", () => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      });
+
+      const particles = Array.from({ length: 26 }, (_, i) => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: 2 + Math.random() * 4.5,
+        vx: (Math.random() - 0.5) * 0.28,
+        vy: 0.2 + Math.random() * 0.35,
+        rot: Math.random() * Math.PI * 2,
+        vRot: (Math.random() - 0.5) * 0.012,
+        sway: Math.random() * Math.PI * 2,
+        isPetal: i % 2 === 0,
+        alpha: 0.16 + Math.random() * 0.28
+      }));
+
+      function animateCanvas() {
+        ctx.clearRect(0, 0, w, h);
+        particles.forEach(p => {
+          p.sway += 0.018;
+          p.x += p.vx + Math.sin(p.sway) * 0.3;
+          p.y += p.vy;
+          p.rot += p.vRot;
+          if (p.y > h + 20) { p.y = -20; p.x = Math.random() * w; }
+          if (p.x > w + 20) p.x = -20;
+          if (p.x < -20) p.x = w + 20;
+
+          ctx.save();
+          ctx.globalAlpha = p.alpha;
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rot);
+          if (p.isPetal) {
+            ctx.fillStyle = "#D8C4E8";
+            ctx.beginPath();
+            ctx.ellipse(0, 0, p.r * 0.7, p.r * 1.25, 0, 0, Math.PI * 2);
+            ctx.fill();
+          } else {
+            ctx.fillStyle = "#C5A059";
+            ctx.beginPath();
+            ctx.arc(0, 0, p.r * 0.45, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        });
+        requestAnimationFrame(animateCanvas);
+      }
+      requestAnimationFrame(animateCanvas);
+    });
+  </script>
+</body>
+</html>

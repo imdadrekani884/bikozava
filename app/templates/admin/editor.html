@@ -1,0 +1,672 @@
+{% extends "admin/base.html" %}
+{% block title %}Edit /{{ invitation.slug }}{% endblock %}
+
+{% block content %}
+<div class="editor-shell">
+  <!-- Sticky Studio Action Bar -->
+  <div class="editor-actionbar">
+    <div class="editor-actionbar-left">
+      <a href="{{ url_for('admin.dashboard') }}" class="btn btn-ghost btn-sm">← All Invitations</a>
+      <div class="editor-title-block">
+        <h1>{{ invitation.groom_name_en or invitation.groom_name_ku }} &amp; {{ invitation.bride_name_en or invitation.bride_name_ku }}</h1>
+        <div class="editor-slug-chip">
+          <span>/{{ invitation.slug }}</span>
+          {% if invitation.is_published %}
+          <span class="status-pill status-published">● Published</span>
+          {% else %}
+          <span class="status-pill status-draft">○ Draft (Unpublished)</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="editor-actionbar-right">
+      <button
+        type="button"
+        class="btn btn-outline btn-sm"
+        onclick="copyPublicUrl('{{ url_for('public.view_invitation', slug=invitation.slug) }}')"
+      >
+        Copy Public URL
+      </button>
+
+      <a
+        href="{{ url_for('public.view_invitation', slug=invitation.slug, preview_token=invitation.preview_token) }}"
+        target="_blank"
+        rel="noopener"
+        class="btn btn-outline btn-sm"
+      >
+        Preview Invitation ↗
+      </a>
+
+      <a href="{{ url_for('admin.view_rsvps', id=invitation.id) }}" class="btn btn-ghost btn-sm">
+        RSVPs ({{ rsvp_count }})
+      </a>
+
+      <form action="{{ url_for('admin.toggle_publish', id=invitation.id) }}" method="POST" style="display:inline;">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        {% if invitation.is_published %}
+        <input type="hidden" name="publish" value="0">
+        <button type="submit" class="btn btn-warning btn-sm">Unpublish</button>
+        {% else %}
+        <input type="hidden" name="publish" value="1">
+        <button type="submit" class="btn btn-success btn-sm">Publish Live</button>
+        {% endif %}
+      </form>
+
+      <button type="submit" form="main-invitation-form" name="save_action" value="save" class="btn btn-gold btn-sm">
+        Save Changes
+      </button>
+    </div>
+  </div>
+
+  <!-- Two-Column Workspace: Left Controls + Right Live Device Preview -->
+  <div class="editor-workspace">
+    <!-- LEFT COLUMN: Editor Tabs (Core Details, Section Builder, Templates & Theme, Media & Music) -->
+    <div class="editor-pane-left">
+      <div class="studio-tabs">
+        <button type="button" class="studio-tab active" onclick="switchStudioTab('tab-details', this)">1. Couple &amp; Venue</button>
+        <button type="button" class="studio-tab" onclick="switchStudioTab('tab-sections', this)">2. Section Builder ({{ sections|length }})</button>
+        <button type="button" class="studio-tab" onclick="switchStudioTab('tab-templates', this)">3. Template &amp; Fonts ({{ (luxury_templates|length) + (minimal_templates|length) }})</button>
+        <button type="button" class="studio-tab" onclick="switchStudioTab('tab-media', this)">4. Photos, 9:16 Video &amp; Music</button>
+      </div>
+
+      <!-- MAIN INVITATION SETTINGS FORM (Covers Tab 1 & Tab 3) -->
+      <form id="main-invitation-form" action="{{ url_for('admin.edit_invitation', id=invitation.id) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <!-- TAB 1: COUPLE, SLUG, DATE, VENUE & 3-LANGUAGE NAMES -->
+        <section id="tab-details" class="studio-panel active">
+          <div class="panel-card">
+            <h3>Public Invitation URL &amp; Default Language</h3>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label>Custom URL Slug</label>
+                <div class="slug-input-group">
+                  <span class="slug-prefix">bikozava.com/</span>
+                  <input type="text" name="slug" id="edit_slug" value="{{ invitation.slug }}" required class="form-control">
+                  <button type="button" class="btn btn-ghost btn-sm" onclick="generateSlugFromNames()">Auto-Slug</button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Default Opening Language</label>
+                <select name="default_language" class="form-control">
+                  <option value="ku" {% if invitation.default_language == 'ku' %}selected{% endif %}>کوردی بادینی (Kurdish Badini — RTL)</option>
+                  <option value="ar" {% if invitation.default_language == 'ar' %}selected{% endif %}>العربية (Arabic — RTL)</option>
+                  <option value="en" {% if invitation.default_language == 'en' %}selected{% endif %}>English (LTR)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <h3>Bride &amp; Groom Names (3 Languages)</h3>
+            <div class="form-row-3">
+              <div class="form-group">
+                <label>Groom Name (Badini Kurdish)</label>
+                <input type="text" name="groom_name_ku" id="edit_groom_ku" value="{{ invitation.groom_name_ku }}" required class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Groom Name (Arabic)</label>
+                <input type="text" name="groom_name_ar" value="{{ invitation.groom_name_ar }}" dir="rtl" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Groom Name (English)</label>
+                <input type="text" name="groom_name_en" id="edit_groom_en" value="{{ invitation.groom_name_en }}" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-row-3">
+              <div class="form-group">
+                <label>Bride Name (Badini Kurdish)</label>
+                <input type="text" name="bride_name_ku" id="edit_bride_ku" value="{{ invitation.bride_name_ku }}" required class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Bride Name (Arabic)</label>
+                <input type="text" name="bride_name_ar" value="{{ invitation.bride_name_ar }}" dir="rtl" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Bride Name (English)</label>
+                <input type="text" name="bride_name_en" id="edit_bride_en" value="{{ invitation.bride_name_en }}" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <h3>Wedding Date, Time &amp; Venue</h3>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label>Wedding Date</label>
+                <input type="date" name="wedding_date" value="{{ invitation.wedding_date[:10] }}" required class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Evening Start Time (24h)</label>
+                <input type="text" name="wedding_time" value="{{ invitation.wedding_time }}" placeholder="19:00" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-row-3">
+              <div class="form-group">
+                <label>Venue Name (Badini)</label>
+                <input type="text" name="venue_name_ku" value="{{ invitation.venue_name_ku }}" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Venue Name (Arabic)</label>
+                <input type="text" name="venue_name_ar" value="{{ invitation.venue_name_ar }}" dir="rtl" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Venue Name (English)</label>
+                <input type="text" name="venue_name_en" value="{{ invitation.venue_name_en }}" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-row-3">
+              <div class="form-group">
+                <label>Venue Address (Badini)</label>
+                <input type="text" name="venue_address_ku" value="{{ invitation.venue_address_ku }}" dir="rtl" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Venue Address (Arabic)</label>
+                <input type="text" name="venue_address_ar" value="{{ invitation.venue_address_ar }}" dir="rtl" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Venue Address (English)</label>
+                <input type="text" name="venue_address_en" value="{{ invitation.venue_address_en }}" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Google Maps Location Link (Mobile Navigation Button)</label>
+              <input type="url" name="map_url" value="{{ invitation.map_url }}" placeholder="https://maps.app.goo.gl/..." class="form-control">
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <h3>Opening Card Prompt Text</h3>
+            <p class="help-text">Exact text displayed on the luxury 3D sealed invitation card before opening.</p>
+            <div class="form-row-3">
+              <div class="form-group">
+                <label>Opening Prompt (Badini Kurdish — RTL)</label>
+                <input type="text" name="opening_card_text_ku" value="{{ invitation.opening_card_text_ku }}" dir="rtl" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Opening Prompt (Arabic — RTL)</label>
+                <input type="text" name="opening_card_text_ar" value="{{ invitation.opening_card_text_ar }}" dir="rtl" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Opening Prompt (English)</label>
+                <input type="text" name="opening_card_text_en" value="{{ invitation.opening_card_text_en }}" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-save-row">
+            <button type="submit" name="save_action" value="save" class="btn btn-gold">Save Invitation Details</button>
+          </div>
+        </section>
+
+        <!-- TAB 3: TEMPLATE SELECTION, COLORS & PERSIAN/KURDISH GOOGLE FONTS -->
+        <section id="tab-templates" class="studio-panel">
+          <div class="panel-card">
+            <h3>Complex / Luxury &amp; Interactive Story Templates ({{ luxury_templates|length }})</h3>
+            <p class="help-text">Includes 9:16 Vertical Cinema Reel, Golden Scratch-Off Reveal, Tap-to-Glow Sky Lanterns, Moonlit Lake, The Wedding Train, Floating Castle, Message in a Bottle, and Magical Butterfly.</p>
+            <div class="template-selector-grid">
+              {% for t in luxury_templates %}
+              <label class="template-choice-card {% if invitation.template_code == t.code %}selected{% endif %}">
+                <input
+                  type="radio"
+                  name="template_code"
+                  value="{{ t.code }}"
+                  {% if invitation.template_code == t.code %}checked{% endif %}
+                  onchange="applyTemplateDefaults('{{ t.default_theme.get('primary_color', '#C8A253') }}', '{{ t.default_theme.get('secondary_color', '#1E1915') }}', '{{ t.default_theme.get('background_color', '#FAF6EE') }}', '{{ t.default_theme.get('text_color', '#241C15') }}', this)"
+                >
+                <div class="tmpl-swatch" style="background: {{ t.preview_style.get('bg', '#FAF6EE') }}; border-color: {{ t.preview_style.get('accent', '#C8A253') }};">
+                  <div class="tmpl-inner-card" style="background: {{ t.preview_style.get('card', '#FFF') }}; color: {{ t.preview_style.get('text', '#222') }}; border: 1px solid {{ t.preview_style.get('accent', '#C8A253') }};">
+                    <span class="tmpl-badge" style="color: {{ t.preview_style.get('accent', '#C8A253') }};">✦ {{ t.preview_style.get('badge', 'Luxury') }}</span>
+                    <strong>I &amp; S</strong>
+                  </div>
+                </div>
+                <div class="tmpl-meta">
+                  <strong>{{ t.name_en }}</strong>
+                  <span dir="rtl">{{ t.name_ku }}</span>
+                  <small>{{ t.description_en }}</small>
+                </div>
+              </label>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <h3>Minimal Templates ({{ minimal_templates|length }})</h3>
+            <p class="help-text">Clean editorial layouts, generous whitespace, and lightweight typography.</p>
+            <div class="template-selector-grid">
+              {% for t in minimal_templates %}
+              <label class="template-choice-card {% if invitation.template_code == t.code %}selected{% endif %}">
+                <input
+                  type="radio"
+                  name="template_code"
+                  value="{{ t.code }}"
+                  {% if invitation.template_code == t.code %}checked{% endif %}
+                  onchange="applyTemplateDefaults('{{ t.default_theme.get('primary_color', '#B89758') }}', '{{ t.default_theme.get('secondary_color', '#2A2421') }}', '{{ t.default_theme.get('background_color', '#FAF7F2') }}', '{{ t.default_theme.get('text_color', '#2A2421') }}', this)"
+                >
+                <div class="tmpl-swatch" style="background: {{ t.preview_style.get('bg', '#FAF7F2') }}; border-color: {{ t.preview_style.get('accent', '#B89758') }};">
+                  <div class="tmpl-inner-card" style="background: {{ t.preview_style.get('card', '#FFF') }}; color: {{ t.preview_style.get('text', '#222') }}; border: 1px solid {{ t.preview_style.get('accent', '#B89758') }};">
+                    <span class="tmpl-badge" style="color: {{ t.preview_style.get('accent', '#B89758') }};">{{ t.preview_style.get('badge', 'Minimal') }}</span>
+                    <strong>I &amp; S</strong>
+                  </div>
+                </div>
+                <div class="tmpl-meta">
+                  <strong>{{ t.name_en }}</strong>
+                  <span dir="rtl">{{ t.name_ku }}</span>
+                  <small>{{ t.description_en }}</small>
+                </div>
+              </label>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <h3>Custom Colors &amp; Best Persian / Kurdish Google Fonts</h3>
+            <div class="form-row-4">
+              <div class="form-group">
+                <label>Primary Gold / Accent</label>
+                <input type="color" name="primary_color" id="color_primary" value="{{ invitation.primary_color }}" class="form-color">
+              </div>
+              <div class="form-group">
+                <label>Secondary / Frame</label>
+                <input type="color" name="secondary_color" id="color_secondary" value="{{ invitation.secondary_color }}" class="form-color">
+              </div>
+              <div class="form-group">
+                <label>Paper / Background</label>
+                <input type="color" name="background_color" id="color_bg" value="{{ invitation.background_color }}" class="form-color">
+              </div>
+              <div class="form-group">
+                <label>Body Text Color</label>
+                <input type="color" name="text_color" id="color_text" value="{{ invitation.text_color }}" class="form-color">
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label>Kurdish Badini &amp; Persian/Arabic Google Font (Direct from Google Fonts)</label>
+                <select name="font_arabic" class="form-control">
+                  {% for pf in persian_fonts %}
+                  <option value="{{ pf.family }}" {% if invitation.font_arabic == pf.family %}selected{% endif %}>
+                    {{ pf.label }}
+                  </option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="form-group">
+                <label>English Names Serif Google Font</label>
+                <select name="font_latin" class="form-control">
+                  {% for lf in latin_fonts %}
+                  <option value="{{ lf.family }}" {% if invitation.font_latin == lf.family %}selected{% endif %}>
+                    {{ lf.label }}
+                  </option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+
+            <input type="hidden" name="music_source_type" value="{{ invitation.music_source_type or 'upload' }}">
+            <input type="hidden" name="music_youtube_url" value="{{ invitation.music_youtube_url or '' }}">
+            <input type="hidden" name="music_title" value="{{ invitation.music_title or '' }}">
+            {% if invitation.music_autoplay_after_open %}
+            <input type="hidden" name="music_autoplay_after_open" value="1">
+            {% endif %}
+          </div>
+
+          <div class="panel-save-row">
+            <button type="submit" name="save_action" value="save" class="btn btn-gold">Save Template &amp; Fonts</button>
+          </div>
+        </section>
+      </form>
+
+      <!-- TAB 2: FLEXIBLE SECTION BUILDER -->
+      <section id="tab-sections" class="studio-panel">
+        <div class="panel-card" id="section-builder">
+          <div class="section-builder-header">
+            <div>
+              <h3>Flexible Section Builder</h3>
+              <p class="help-text">Default Flow: OPENING CARD → COUPLE → COUNTDOWN → WEDDING DETAILS → SCHEDULE → VENUE/MAP → GALLERY → RSVP → CALENDAR → FINAL. Reorder, toggle, edit, or add any section.</p>
+            </div>
+
+            <form action="{{ url_for('admin.add_section', id=invitation.id) }}" method="POST" class="add-section-inline">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <select name="section_type" class="form-control" required>
+                {% for item in section_catalog %}
+                <option value="{{ item.type }}">{{ item.label_en }} — {{ item.label_ku }}</option>
+                {% endfor %}
+              </select>
+              <button type="submit" class="btn btn-gold btn-sm">+ Add Section</button>
+            </form>
+          </div>
+
+          <div id="sections-sortable-list" class="sections-list" data-invitation-id="{{ invitation.id }}" data-csrf="{{ csrf_token() }}">
+            {% for sec in sections %}
+            <div class="section-item-card {% if not sec.is_enabled %}section-disabled{% endif %}" id="sec-{{ sec.id }}" data-section-id="{{ sec.id }}">
+              <div class="section-item-bar">
+                <div class="section-item-title">
+                  <span class="section-order-num">#{{ loop.index }}</span>
+                  <span class="section-type-badge">{{ sec.section_type }}</span>
+                  <strong>{{ sec.title_ku or sec.title_en or sec.section_type }}</strong>
+                  {% if not sec.is_enabled %}
+                  <span class="disabled-pill">Hidden</span>
+                  {% endif %}
+                </div>
+
+                <div class="section-item-controls">
+                  <form action="{{ url_for('admin.reorder_sections', id=invitation.id) }}" method="POST" style="display:inline;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="section_id" value="{{ sec.id }}">
+                    <input type="hidden" name="direction" value="up">
+                    <button type="submit" class="btn-icon" title="Move Up" {% if loop.first %}disabled{% endif %}>↑</button>
+                  </form>
+
+                  <form action="{{ url_for('admin.reorder_sections', id=invitation.id) }}" method="POST" style="display:inline;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="section_id" value="{{ sec.id }}">
+                    <input type="hidden" name="direction" value="down">
+                    <button type="submit" class="btn-icon" title="Move Down" {% if loop.last %}disabled{% endif %}>↓</button>
+                  </form>
+
+                  <form action="{{ url_for('admin.toggle_section', id=invitation.id, section_id=sec.id) }}" method="POST" style="display:inline;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-ghost btn-xs">
+                      {% if sec.is_enabled %}Disable{% else %}Enable{% endif %}
+                    </button>
+                  </form>
+
+                  <form action="{{ url_for('admin.duplicate_section', id=invitation.id, section_id=sec.id) }}" method="POST" style="display:inline;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-ghost btn-xs">Duplicate</button>
+                  </form>
+
+                  <button type="button" class="btn btn-outline btn-xs" onclick="toggleSectionDrawer('drawer-{{ sec.id }}')">
+                    Edit Content ▾
+                  </button>
+
+                  <form
+                    action="{{ url_for('admin.delete_section', id=invitation.id, section_id=sec.id) }}"
+                    method="POST"
+                    style="display:inline;"
+                    onsubmit="return confirm('Remove this section?');"
+                  >
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-danger-ghost btn-xs">×</button>
+                  </form>
+                </div>
+              </div>
+
+              <div id="drawer-{{ sec.id }}" class="section-drawer">
+                <form action="{{ url_for('admin.update_section', id=invitation.id, section_id=sec.id) }}" method="POST">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                  <div class="form-row-3">
+                    <div class="form-group">
+                      <label>Title (Badini Kurdish — RTL)</label>
+                      <input type="text" name="title_ku" value="{{ sec.title_ku }}" dir="rtl" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Title (Arabic — RTL)</label>
+                      <input type="text" name="title_ar" value="{{ sec.title_ar }}" dir="rtl" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Title (English)</label>
+                      <input type="text" name="title_en" value="{{ sec.title_en }}" class="form-control">
+                    </div>
+                  </div>
+
+                  <div class="form-row-3">
+                    <div class="form-group">
+                      <label>Subtitle (Badini Kurdish)</label>
+                      <input type="text" name="subtitle_ku" value="{{ sec.subtitle_ku }}" dir="rtl" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Subtitle (Arabic)</label>
+                      <input type="text" name="subtitle_ar" value="{{ sec.subtitle_ar }}" dir="rtl" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Subtitle (English)</label>
+                      <input type="text" name="subtitle_en" value="{{ sec.subtitle_en }}" class="form-control">
+                    </div>
+                  </div>
+
+                  <div class="form-row-3">
+                    <div class="form-group">
+                      <label>Content / Schedule Lines (Badini Kurdish)</label>
+                      <textarea name="content_ku" rows="4" dir="rtl" class="form-control">{{ sec.content_ku }}</textarea>
+                    </div>
+                    <div class="form-group">
+                      <label>Content / Schedule Lines (Arabic)</label>
+                      <textarea name="content_ar" rows="4" dir="rtl" class="form-control">{{ sec.content_ar }}</textarea>
+                    </div>
+                    <div class="form-group">
+                      <label>Content / Schedule Lines (English)</label>
+                      <textarea name="content_en" rows="4" class="form-control">{{ sec.content_en }}</textarea>
+                    </div>
+                  </div>
+
+                  <div class="drawer-actions">
+                    <button type="submit" class="btn btn-gold btn-sm">Save Section Content</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: MEDIA UPLOADS, 9:16 VERTICAL VIDEO & DUAL MUSIC SYSTEM -->
+      <section id="tab-media" class="studio-panel">
+        <!-- 9:16 Vertical Hero Video Upload Card -->
+        <div class="panel-card" id="media-manager">
+          <h3>🎬 9:16 Vertical Hero Video (First Slide After Opening Card)</h3>
+          <p class="help-text">
+            When the <strong>🎬 9:16 Vertical Cinema Reel</strong> (`vertical_cinema_reel`) template is selected, this vertical 9:16 video appears immediately as the first slide after the guest opens the card, with the Bride &amp; Groom names automatically overlaid at the top-middle of the video.
+          </p>
+
+          <div class="form-row-2" style="align-items:center;">
+            <div>
+              <p class="help-text">Current 9:16 Video: <code>{{ invitation.hero_video_url or '/static/video/demo_vertical_9_16.mp4' }}</code></p>
+              <form action="{{ url_for('admin.upload_media', id=invitation.id) }}" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="media_role" value="video">
+                <div class="form-group">
+                  <label>Upload 9:16 Vertical Video (MP4 / WEBM)</label>
+                  <input type="file" name="file" accept=".mp4,.webm" required class="form-control">
+                </div>
+                <button type="submit" class="btn btn-gold btn-sm">Upload 9:16 Vertical Video</button>
+              </form>
+            </div>
+
+            <div style="display:flex; justify-content:center;">
+              <video
+                src="{{ invitation.hero_video_url or '/static/video/demo_vertical_9_16.mp4' }}"
+                controls
+                muted
+                playsinline
+                style="width:155px; aspect-ratio:9/16; object-fit:cover; border-radius:14px; border:2px solid #B98E38; background:#000;"
+              ></video>
+            </div>
+          </div>
+        </div>
+
+        <!-- Wedding Background Music Manager (Uploaded MP3/WAV OR Custom YouTube Link) -->
+        <div class="panel-card">
+          <h3>Wedding Background Music (Uploaded MP3/WAV or Custom YouTube Link)</h3>
+          <p class="help-text">Choose whether guests hear an uploaded MP3/WAV audio file or audio streamed directly from a YouTube link after they tap to open the invitation card.</p>
+
+          <form action="{{ url_for('admin.save_music_settings', id=invitation.id) }}" method="POST" style="margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid #E4DDD0;">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+            <div class="form-row-3">
+              <div class="form-group">
+                <label>Music Source Mode</label>
+                <select name="music_source_type" class="form-control">
+                  <option value="upload" {% if invitation.music_source_type == 'upload' %}selected{% endif %}>🎵 Uploaded MP3 / WAV Audio File</option>
+                  <option value="youtube" {% if invitation.music_source_type == 'youtube' %}selected{% endif %}>▶ Custom YouTube Video / Music URL</option>
+                  <option value="none" {% if invitation.music_source_type == 'none' %}selected{% endif %}>🔇 Disable Background Music</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Custom YouTube Link (if YouTube mode selected)</label>
+                <input
+                  type="url"
+                  name="music_youtube_url"
+                  value="{{ invitation.music_youtube_url or '' }}"
+                  placeholder="https://www.youtube.com/watch?v=... or https://youtu.be/..."
+                  class="form-control"
+                >
+              </div>
+
+              <div class="form-group">
+                <label>Music Track Title</label>
+                <input
+                  type="text"
+                  name="music_title"
+                  value="{{ invitation.music_title or 'Kurdish Wedding Serenade' }}"
+                  class="form-control"
+                >
+              </div>
+            </div>
+
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-top:8px;">
+              <label style="display:flex; align-items:center; gap:8px; font-size:0.86rem; font-weight:600;">
+                <input type="checkbox" name="music_autoplay_after_open" value="1" {% if invitation.music_autoplay_after_open %}checked{% endif %}>
+                <span>Start music automatically as soon as guest taps the opening card</span>
+              </label>
+              <button type="submit" class="btn btn-gold btn-sm">Save Music Source &amp; YouTube Link</button>
+            </div>
+          </form>
+
+          <div>
+            <h4>Upload Custom MP3 / WAV Audio File</h4>
+            <p class="help-text">Current Uploaded Audio: <code>{{ invitation.music_url or 'None' }}</code></p>
+            {% if invitation.music_url %}
+            <audio controls preload="none" src="{{ invitation.music_url }}" style="width:100%; max-width:420px; margin: 8px 0;"></audio>
+            {% endif %}
+            <form action="{{ url_for('admin.upload_media', id=invitation.id) }}" method="POST" enctype="multipart/form-data">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="media_role" value="music">
+              <input type="file" name="file" accept=".mp3,.wav,.ogg,.m4a" required class="form-control" style="max-width:420px; margin-bottom:8px;">
+              <button type="submit" class="btn btn-outline btn-sm">Upload MP3 / WAV Track &amp; Activate</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="panel-card">
+          <h3>Couple Portraits (Bride, Groom &amp; Couple Image)</h3>
+          <p class="help-text">Images are validated for MIME/magic-bytes and automatically optimized to fast mobile WebP + thumbnails.</p>
+
+          <div class="portraits-upload-grid">
+            <div class="media-upload-box">
+              <img src="{{ invitation.couple_image or '/static/img/demo/couple_ismail_shrin.webp' }}" alt="Couple" class="media-preview-thumb">
+              <h4>Couple Portrait</h4>
+              <form action="{{ url_for('admin.upload_media', id=invitation.id) }}" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="media_role" value="couple">
+                <input type="file" name="file" accept=".jpg,.jpeg,.png,.webp" required class="form-file">
+                <button type="submit" class="btn btn-outline btn-xs">Upload Couple Photo</button>
+              </form>
+            </div>
+
+            <div class="media-upload-box">
+              <img src="{{ invitation.groom_image or '/static/img/demo/groom_ismail.webp' }}" alt="Groom" class="media-preview-thumb">
+              <h4>Groom Portrait</h4>
+              <form action="{{ url_for('admin.upload_media', id=invitation.id) }}" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="media_role" value="groom">
+                <input type="file" name="file" accept=".jpg,.jpeg,.png,.webp" required class="form-file">
+                <button type="submit" class="btn btn-outline btn-xs">Upload Groom Photo</button>
+              </form>
+            </div>
+
+            <div class="media-upload-box">
+              <img src="{{ invitation.bride_image or '/static/img/demo/bride_shrin.webp' }}" alt="Bride" class="media-preview-thumb">
+              <h4>Bride Portrait</h4>
+              <form action="{{ url_for('admin.upload_media', id=invitation.id) }}" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="media_role" value="bride">
+                <input type="file" name="file" accept=".jpg,.jpeg,.png,.webp" required class="form-file">
+                <button type="submit" class="btn btn-outline btn-xs">Upload Bride Photo</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photo Gallery Manager -->
+        <div class="panel-card">
+          <h3>Photo Gallery Uploads</h3>
+          <form action="{{ url_for('admin.upload_media', id=invitation.id) }}" method="POST" enctype="multipart/form-data" class="gallery-upload-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="media_role" value="gallery">
+            <div class="form-row-3">
+              <div class="form-group">
+                <label>Select Image (JPG, PNG, WEBP)</label>
+                <input type="file" name="file" accept=".jpg,.jpeg,.png,.webp" required class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Caption (Badini Kurdish)</label>
+                <input type="text" name="caption_ku" placeholder="دیمەنەک ژ شەهیانێ..." dir="rtl" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Caption (English)</label>
+                <input type="text" name="caption_en" placeholder="Wedding highlight..." class="form-control">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-gold btn-sm">+ Upload to Gallery</button>
+          </form>
+
+          <div class="gallery-admin-grid">
+            {% for item in gallery_media %}
+            <div class="gallery-admin-item">
+              <img src="{{ item.thumb_path or item.file_path }}" alt="{{ item.caption_en or 'Gallery' }}" loading="lazy">
+              <div class="gallery-admin-caption">{{ item.caption_ku or item.caption_en or item.original_filename }}</div>
+              <form action="{{ url_for('admin.delete_media', id=invitation.id, media_id=item.id) }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="btn btn-danger-ghost btn-xs">Remove</button>
+              </form>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- RIGHT COLUMN: LIVE MOBILE (390px) & DESKTOP PREVIEW SIMULATOR -->
+    <aside class="editor-pane-right">
+      <div class="preview-toolbar">
+        <div class="preview-device-toggles">
+          <button type="button" class="btn-device active" id="btn-prev-mobile" onclick="setPreviewDevice('mobile')">
+            📱 Mobile (390px)
+          </button>
+          <button type="button" class="btn-device" id="btn-prev-desktop" onclick="setPreviewDevice('desktop')">
+            🖥 Desktop
+          </button>
+        </div>
+
+        <div class="preview-lang-toggles">
+          <button type="button" class="btn-lang-prev active" onclick="setPreviewLang('ku', this)">بادینی</button>
+          <button type="button" class="btn-lang-prev" onclick="setPreviewLang('ar', this)">عربي</button>
+          <button type="button" class="btn-lang-prev" onclick="setPreviewLang('en', this)">EN</button>
+        </div>
+
+        <button type="button" class="btn-icon" onclick="reloadPreviewIframe()" title="Reload Preview">↻</button>
+      </div>
+
+      <div class="preview-stage">
+        <div id="preview-frame-shell" class="preview-phone-frame">
+          <iframe
+            id="live-preview-iframe"
+            src="{{ url_for('public.view_invitation', slug=invitation.slug, preview_token=invitation.preview_token, lang=invitation.default_language) }}"
+            title="Live Invitation Preview"
+          ></iframe>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+{% endblock %}

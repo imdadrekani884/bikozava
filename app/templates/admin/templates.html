@@ -1,0 +1,107 @@
+{% extends "admin/base.html" %}
+{% block title %}Invitation Templates Gallery{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+  <div class="dashboard-hero">
+    <div>
+      <span class="eyebrow-tag">SIGNATURE COLLECTION</span>
+      <h1>Invitation Templates Gallery</h1>
+      <p class="text-muted">Explore our handcrafted Minimal and Complex / Luxury digital wedding invitations.</p>
+    </div>
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      {% if current_admin %}
+      <a href="{{ url_for('admin.homepage_settings') }}" class="btn btn-gold">✦ Customize Homepage, Logo &amp; Examples</a>
+      <a href="{{ url_for('admin.dashboard') }}" class="btn btn-outline">← Back to Dashboard</a>
+      {% else %}
+      <a href="{{ url_for('public.home') }}" class="btn btn-outline">← زڤرین بو دەستپێکێ / Back to Homepage</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Category 1: Complex / Luxury Templates -->
+  <section class="templates-showcase-section">
+    <div class="section-heading-row">
+      <h2>Complex / Luxury Templates ({{ luxury_templates|length }})</h2>
+      <span class="badge-gold">3D Butterfly • Wax Seal &amp; Veo • Golden Particles • Cinematic Depth</span>
+    </div>
+    <div class="templates-gallery-grid">
+      {% for t in luxury_templates %}
+      <div class="template-showcase-card">
+        <div class="tmpl-swatch-lg" style="background: {{ t.preview_style.get('bg', '#FAF6EE') }};">
+          <div class="tmpl-mock-phone" style="background: {{ t.preview_style.get('card', '#FFF') }}; border: 2px solid {{ t.preview_style.get('accent', '#C8A253') }}; color: {{ t.preview_style.get('text', '#222') }};">
+            <span class="mock-tag" style="color: {{ t.preview_style.get('accent', '#C8A253') }};">{{ t.preview_style.get('badge', 'Luxury') }}</span>
+            <div class="mock-butterfly" style="color: {{ t.preview_style.get('accent', '#C8A253') }};">🦋</div>
+            <strong class="mock-names">Ismail &amp; Shrin</strong>
+            <small class="mock-prompt" dir="rtl">کلیل بکە بو ڤەکرنا داخوازنامێ</small>
+          </div>
+        </div>
+        <div class="tmpl-showcase-body">
+          <div class="tmpl-titles">
+            <h3>{{ t.name_en }}</h3>
+            <span class="tmpl-ku" dir="rtl">{{ t.name_ku }}</span>
+          </div>
+          <p>{{ t.description_en }}</p>
+          <p class="tmpl-desc-ku" dir="rtl">{{ t.description_ku }}</p>
+          <div class="tmpl-code-row" style="display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap;">
+            <code>code: {{ t.code }}</code>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span class="palette-dots">
+                <i style="background: {{ t.default_theme.get('primary_color', '#C8A253') }};"></i>
+                <i style="background: {{ t.default_theme.get('background_color', '#FAF6EE') }};"></i>
+                <i style="background: {{ t.default_theme.get('secondary_color', '#1E1915') }};"></i>
+              </span>
+              <a href="{{ url_for('public.view_invitation', slug=demo_slug or 'ismail_shrin', template=t.code) }}" target="_blank" rel="noopener" class="btn btn-outline btn-xs">
+                Live Preview ↗
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Category 2: Minimal Templates -->
+  <section class="templates-showcase-section" style="margin-top: 40px;">
+    <div class="section-heading-row">
+      <h2>Minimal Templates ({{ minimal_templates|length }})</h2>
+      <span class="badge-outline">Generous Whitespace • Watercolor Florals • Editorial Typography</span>
+    </div>
+    <div class="templates-gallery-grid">
+      {% for t in minimal_templates %}
+      <div class="template-showcase-card">
+        <div class="tmpl-swatch-lg" style="background: {{ t.preview_style.get('bg', '#FAF7F2') }};">
+          <div class="tmpl-mock-phone" style="background: {{ t.preview_style.get('card', '#FFF') }}; border: 1px solid {{ t.preview_style.get('accent', '#B89758') }}; color: {{ t.preview_style.get('text', '#222') }};">
+            <span class="mock-tag" style="color: {{ t.preview_style.get('accent', '#B89758') }};">{{ t.preview_style.get('badge', 'Minimal') }}</span>
+            <strong class="mock-names">Ismail &amp; Shrin</strong>
+            <small class="mock-prompt">21.11.2026 • Crystal Hall</small>
+          </div>
+        </div>
+        <div class="tmpl-showcase-body">
+          <div class="tmpl-titles">
+            <h3>{{ t.name_en }}</h3>
+            <span class="tmpl-ku" dir="rtl">{{ t.name_ku }}</span>
+          </div>
+          <p>{{ t.description_en }}</p>
+          <p class="tmpl-desc-ku" dir="rtl">{{ t.description_ku }}</p>
+          <div class="tmpl-code-row" style="display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap;">
+            <code>code: {{ t.code }}</code>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span class="palette-dots">
+                <i style="background: {{ t.default_theme.get('primary_color', '#B89758') }};"></i>
+                <i style="background: {{ t.default_theme.get('background_color', '#FAF7F2') }};"></i>
+                <i style="background: {{ t.default_theme.get('secondary_color', '#2A2421') }};"></i>
+              </span>
+              <a href="{{ url_for('public.view_invitation', slug=demo_slug or 'ismail_shrin', template=t.code) }}" target="_blank" rel="noopener" class="btn btn-outline btn-xs">
+                Live Preview ↗
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+{% endblock %}

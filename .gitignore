@@ -1,13 +1,18 @@
 # =============================================================================
-# Bikozava — .gitignore
+# Bikozava — .gitignore (Security-Hardened)
 # =============================================================================
 
-# Environment & Secrets (NEVER commit .env!)
+# Environment & Secrets (NEVER commit .env or private keys!)
 .env
-.env.local
-.env.production
+.env.*
+!.env.example
 *.pem
 *.key
+*.p12
+*.pfx
+*.crt
+secrets.json
+service_account*.json
 
 # Python Bytecode & Virtual Environments
 __pycache__/
@@ -29,6 +34,8 @@ instance/
 *.sqlite
 *.sqlite3
 *.db-journal
+*.db-wal
+*.db-shm
 
 # User Uploaded Media (keep directory structure via .gitkeep, ignore uploaded files)
 app/static/uploads/avatars/*
@@ -54,3 +61,5 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+*.bak
+*.log

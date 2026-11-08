@@ -1,6 +1,6 @@
 # Bikozava — Luxury Multilingual Wedding Invitation Platform
 
-**Bikozava** (`bikozava.com`) is a complete, production-ready digital wedding invitation platform built with Python (Flask / WSGI), PostgreSQL / Supabase (with zero-configuration SQLite fallback for local development), a secure mobile-first Admin Studio, a flexible 17-type Section Builder, 24 extensible invitation templates across two categories (**Minimal** and **Complex / Luxury**), and **3-language guest support** (**Pure Badini Kurdish** in Arabic script `RTL`, **Arabic** `RTL`, and **English** `LTR`).
+**Bikozava** (`bikozava.com`) is a complete, production-ready digital wedding invitation platform built with Python (Flask / WSGI), PostgreSQL / Supabase (with zero-configuration SQLite fallback for local development), a secure mobile-first Admin Studio, a flexible 17-type Section Builder, 26 extensible invitation templates across two categories (**Minimal** and **Complex / Luxury**), and **3-language guest support** (**Pure Badini Kurdish** in Arabic script `RTL`, **Arabic** `RTL`, and **English** `LTR`).
 
 Each wedding invitation is stored in the database and served dynamically from a single reusable invitation engine at its own clean public slug URL:
 
@@ -169,7 +169,7 @@ Immediately available upon startup:
 
   * `/admin/invitations/<id>/edit`: Full Studio with 3-language editors, template/color/font pickers, media uploader, and live Mobile (`390px`) & Desktop preview simulator
 
-  * `/admin/templates`: Visual showcase of all 24 templates
+  * `/admin/templates`: Visual showcase of all 26 templates
 
   * `/admin/invitations/<id>/rsvps`: Guest attendance tracker
 
@@ -210,11 +210,11 @@ Immediately available upon startup:
 
   17. `closing` (Closing)
 
-### 4. Two Extensible Template Categories (24 Built-In Templates)
+### 4. Two Extensible Template Categories (26 Built-In Templates)
 
-* **Minimal Templates (5)**: `minimal_ivory`, `minimal_champagne`, `modern_white`, `editorial`, `soft_floral`
+* **Minimal Templates (6)**: `minimalism_purple_soft_lavender` (💜 Minimalism Purple Soft Lavender — Watercolor purple roses & lilac blossoms, purple envelope with admin couple photo, single-card gallery viewer, scratch-to-reveal countdown, blooming flower schedule & admin music), `minimal_ivory`, `minimal_champagne`, `modern_white`, `editorial`, `soft_floral`
 
-* **Complex / Luxury & Interactive Templates (17)**: `champagne_envelope_foil` (✨ Champagne Envelope & Gold Foil — No Photos), `champagne_envelope_photos` (📸 Champagne Envelope & Gold Foil — With Photos), `champagne_envelope_dark` (🌑 Midnight Obsidian & Gold Foil — Dark Mode), `champagne_envelope_dark_photos` (🌙 Midnight Obsidian & Gold Foil — Dark Mode + Photos), `magical_butterfly`, `vertical_cinema_reel` (🎬 9:16 Vertical Cinema Reel), `golden_scratch_reveal` (🪙 Golden Scratch-Off Reveal), `starlight_lantern_glow` (🏮 Tap-to-Glow Sky Lanterns), `moonlit_lake` (🌙 Moonlit Lake), `wedding_train` (🚂 The Wedding Train), `floating_castle` (🏰 Floating Castle), `message_in_a_bottle` (🌊 Message in a Bottle), `royal_luxury`, `golden_palace`, `cinematic_garden`, `luxury_floral`, `traditional_kurdish_luxury`, `black_and_gold`, `romantic_crystal`
+* **Complex / Luxury & Interactive Templates (20)**: `sara_ahmed_wax_seal_veo` (🕯️ Kurdish Badini Wax Seal & Veo Interactive — Split royal curtain doors with pearl & gold monogram wax seal, 60fps Veo cinematic hero engine over admin couple photo/video with soaring birds & sunset rays, 3D ring calendar, polaroid gallery carousel, floating glass dock & admin music), `champagne_envelope_foil` (✨ Champagne Envelope & Gold Foil — No Photos), `champagne_envelope_photos` (📸 Champagne Envelope & Gold Foil — With Photos), `champagne_envelope_dark` (🌑 Midnight Obsidian & Gold Foil — Dark Mode), `champagne_envelope_dark_photos` (🌙 Midnight Obsidian & Gold Foil — Dark Mode + Photos), `magical_butterfly`, `vertical_cinema_reel` (🎬 9:16 Vertical Cinema Reel), `golden_scratch_reveal` (🪙 Golden Scratch-Off Reveal), `starlight_lantern_glow` (🏮 Tap-to-Glow Sky Lanterns), `moonlit_lake` (🌙 Moonlit Lake), `wedding_train` (🚂 The Wedding Train), `floating_castle` (🏰 Floating Castle), `message_in_a_bottle` (🌊 Message in a Bottle), `royal_luxury`, `golden_palace`, `cinematic_garden`, `luxury_floral`, `traditional_kurdish_luxury`, `black_and_gold`, `romantic_crystal`
 
 ## Project Structure
 
@@ -227,7 +227,7 @@ bikozava/
 │   ├── flask_compat.py             # Native Flask + standalone WSGI compatibility engine
 │   ├── i18n.py                     # 3-Language localization (Badini Kurdish, Arabic, English)
 │   ├── security.py                 # Argon2/bcrypt/scrypt hashing, CSRF, rate limiting, upload validation
-│   ├── seed.py                     # Idempotent seeder (Admin, 24 templates, Ismail & Shrin demo, audio/images)
+│   ├── seed.py                     # Idempotent seeder (Admin, 26 templates, Ismail & Shrin demo, audio/images)
 │   ├── routes/
 │   │   ├── admin.py                # Protected admin routes, CRUD, section builder, media uploads
 │   │   └── public.py               # Public /<slug> engine, 3-language switcher, RSVP endpoint
@@ -245,7 +245,9 @@ bikozava/
 │       ├── admin/                  # Admin Jinja2 templates (base, login, dashboard, editor, templates, rsvps)
 │       ├── errors/                 # Safe production HTTP error page
 │       └── public/
-│           └── invitation.html     # Reusable 3-language public wedding invitation template
+│           ├── invitation.html             # Reusable 3-language public wedding invitation template
+│           ├── purple_soft_lavender.html   # Minimalism Purple Soft Lavender interactive template
+│           └── wax_seal_veo_cinema.html    # Kurdish Badini Wax Seal & Veo interactive template
 ├── migrations/
 │   └── 001_initial_schema.sql      # Complete PostgreSQL / Supabase database schema
 ├── tests/
@@ -268,7 +270,7 @@ bikozava/
 
 ### Option A: Local SQLite (Zero-Config Default on Windows)
 
-By default, `.env.example` uses `DATABASE_URL=sqlite:///instance/bikozava.db`. On Windows, Bikozava automatically creates `instance\bikozava.db` and seeds the 24 templates and the **Ismail & Shrin** demo wedding on first launch.
+By default, `.env.example` uses `DATABASE_URL=sqlite:///instance/bikozava.db`. On Windows, Bikozava automatically creates `instance\bikozava.db` and seeds the 26 templates and the **Ismail & Shrin** demo wedding on first launch.
 
 ### Option B: Supabase / PostgreSQL (Cloud Production)
 

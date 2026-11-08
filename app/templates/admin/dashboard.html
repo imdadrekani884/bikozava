@@ -1,0 +1,207 @@
+{% extends "admin/base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+  <!-- Top Header & CTA -->
+  <div class="dashboard-hero">
+    <div>
+      <span class="eyebrow-tag">BIKOZAVA MANAGEMENT</span>
+      <h1>Wedding Invitations</h1>
+      <p class="text-muted">Manage custom URL slugs, 3-language content (Badini Kurdish, Arabic, English), templates, and sections.</p>
+    </div>
+    <button type="button" class="btn btn-gold btn-lg" onclick="document.getElementById('create-modal').classList.add('open')">
+      + Create New Invitation
+    </button>
+  </div>
+
+  <!-- Key Metrics Row -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <span class="stat-label">Total Invitations</span>
+      <strong class="stat-value">{{ stats.total_invitations }}</strong>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Published Live</span>
+      <strong class="stat-value text-success">{{ stats.published_count }}</strong>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Drafts</span>
+      <strong class="stat-value text-warning">{{ stats.draft_count }}</strong>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Guest Views</span>
+      <strong class="stat-value">{{ stats.total_views }}</strong>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">RSVP Responses</span>
+      <strong class="stat-value">{{ stats.total_rsvps }}</strong>
+    </div>
+  </div>
+
+  <!-- Invitations Grid -->
+  <div class="invitations-grid">
+    {% for inv in invitations %}
+    <article class="inv-card">
+      <div class="inv-card-top">
+        <div class="inv-badges">
+          {% if inv.is_published %}
+          <span class="status-pill status-published">● Published</span>
+          {% else %}
+          <span class="status-pill status-draft">○ Draft</span>
+          {% endif %}
+          <span class="template-pill">{{ inv.template_name_en or inv.template_code }}</span>
+        </div>
+        <span class="inv-date-badge">{{ inv.wedding_date }}</span>
+      </div>
+
+      <div class="inv-card-body">
+        <h2 class="inv-couple-title">
+          {{ inv.groom_name_en or inv.groom_name_ku }}
+          <span class="amp">&amp;</span>
+          {{ inv.bride_name_en or inv.bride_name_ku }}
+        </h2>
+        <p class="inv-venue-line">
+          📍 {{ inv.venue_name_en or inv.venue_name_ku or 'Venue TBD' }}
+        </p>
+
+        <div class="inv-slug-box">
+          <code id="slug-url-{{ inv.id }}">{{ public_base_url }}/{{ inv.slug }}</code>
+          <button
+            type="button"
+            class="btn-copy-chip"
+            onclick="copyPublicUrl('{{ url_for('public.view_invitation', slug=inv.slug) }}')"
+            title="Copy Public Invitation URL"
+          >
+            Copy URL
+          </button>
+        </div>
+
+        <div class="inv-meta-row">
+          <span><strong>{{ inv.active_sections_count }}</strong> Active Sections</span>
+          <span>•</span>
+          <span><strong>{{ inv.views_count }}</strong> Views</span>
+          <span>•</span>
+          <a href="{{ url_for('admin.view_rsvps', id=inv.id) }}" class="rsvp-link">
+            <strong>{{ inv.rsvp_count }}</strong> RSVPs
+          </a>
+        </div>
+      </div>
+
+      <div class="inv-card-actions">
+        <a href="{{ url_for('admin.edit_invitation', id=inv.id) }}" class="btn btn-gold btn-sm">
+          Edit &amp; Builder
+        </a>
+        <a href="{{ url_for('public.view_invitation', slug=inv.slug, preview='1') }}" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
+          Preview ↗
+        </a>
+
+        <form action="{{ url_for('admin.toggle_publish', id=inv.id) }}" method="POST" style="display:inline;">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="btn btn-ghost btn-sm">
+            {% if inv.is_published %}Unpublish{% else %}Publish{% endif %}
+          </button>
+        </form>
+
+        <form action="{{ url_for('admin.duplicate_invitation', id=inv.id) }}" method="POST" style="display:inline;">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="btn btn-ghost btn-sm" title="Duplicate Invitation">
+            Duplicate
+          </button>
+        </form>
+
+        <form
+          action="{{ url_for('admin.delete_invitation', id=inv.id) }}"
+          method="POST"
+          style="display:inline;"
+          onsubmit="return confirm('Delete invitation /{{ inv.slug }} permanently?');"
+        >
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="btn btn-danger-ghost btn-sm">
+            Delete
+          </button>
+        </form>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Create New Invitation Modal -->
+<div id="create-modal" class="modal-backdrop">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h2>Create New Wedding Invitation</h2>
+      <button type="button" class="modal-close" onclick="document.getElementById('create-modal').classList.remove('open')">×</button>
+    </div>
+
+    <form action="{{ url_for('admin.create_invitation') }}" method="POST" class="modal-form">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Groom Name (Badini / English)</label>
+          <input type="text" name="groom_name_ku" id="new_groom" required placeholder="e.g. Ahmad" class="form-control" oninput="autoSlug()">
+        </div>
+        <div class="form-group">
+          <label>Bride Name (Badini / English)</label>
+          <input type="text" name="bride_name_ku" id="new_bride" required placeholder="e.g. Lavin" class="form-control" oninput="autoSlug()">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Custom Public URL Slug</label>
+        <div class="slug-input-group">
+          <span class="slug-prefix">bikozava.com/</span>
+          <input type="text" name="slug" id="new_slug" required placeholder="ahmad_lavin" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Wedding Date</label>
+          <input type="date" name="wedding_date" value="2026-11-21" required class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Venue Name</label>
+          <input type="text" name="venue_name_ku" value="Crystal Hall" required class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Google Maps URL</label>
+        <input type="url" name="map_url" value="https://maps.app.goo.gl/LYHw6XCJdNMJyQK48?g_st=ac" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label>Select Initial Template</label>
+        <select name="template_code" class="form-control">
+          <optgroup label="Complex / Luxury Templates">
+            {% for t in templates if t.category == 'luxury' %}
+            <option value="{{ t.code }}" {% if t.code == 'magical_butterfly' %}selected{% endif %}>
+              {{ t.name_en }} — {{ t.name_ku }}
+            </option>
+            {% endfor %}
+          </optgroup>
+          <optgroup label="Minimal Templates">
+            {% for t in templates if t.category == 'minimal' %}
+            <option value="{{ t.code }}">
+              {{ t.name_en }} — {{ t.name_ku }}
+            </option>
+            {% endfor %}
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ghost" onclick="document.getElementById('create-modal').classList.remove('open')">
+          Cancel
+        </button>
+        <button type="submit" class="btn btn-gold">
+          Create Invitation &amp; Open Studio
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

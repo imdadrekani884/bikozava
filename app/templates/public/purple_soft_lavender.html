@@ -1,0 +1,1957 @@
+<!DOCTYPE html>
+<html lang="{{ lang_meta.lang_attr }}" dir="{{ lang_meta.dir }}" data-template="{{ template.code }}" data-category="{{ template.category }}" class="h-full antialiased scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>{{ invitation.groom_name_en or groom_display }} &amp; {{ invitation.bride_name_en or bride_display }} — {{ human_date }} | Minimalism Purple Soft Lavender</title>
+  <meta name="description" content="{{ ui.with_joy_we_invite }} — {{ groom_display }} & {{ bride_display }} • {{ human_date }} • {{ venue_display }}">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&family=Gulzar&family=Inter:wght@400;500;600;700&family=Lalezar&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    if (window.tailwind) {
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['{{ invitation.font_arabic or "Vazirmatn" }}', 'Cairo', 'Noto Naskh Arabic', 'Inter', 'sans-serif'],
+              serif: ['Amiri', 'Cormorant Garamond', 'Playfair Display', 'serif'],
+              calligraphy: ['Aref Ruqaa', 'Lalezar', 'Amiri', 'serif'],
+              script: ['Great Vibes', 'Aref Ruqaa', 'cursive'],
+              latin: ['{{ invitation.font_latin or "Cormorant Garamond" }}', 'Playfair Display', 'serif']
+            },
+            colors: {
+              lavender: {
+                50: '#f9f7fd',
+                100: '#f1edf9',
+                200: '#e3dbf3',
+                300: '#cbbce9',
+                400: '#a995d6',
+                500: '#8b77be',
+                600: '#7869a0',
+                700: '#635488',
+                800: '#4e416d',
+                900: '#3a3052'
+              }
+            }
+          }
+        }
+      };
+    }
+  </script>
+  <style>
+    :root {
+      --primary-lavender: {{ invitation.primary_color or '#7869A0' }};
+      --secondary-lavender: {{ invitation.secondary_color or '#4E416D' }};
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      background-color: #f4f0fa;
+      color: #7869a0;
+      font-family: '{{ invitation.font_arabic or "Vazirmatn" }}', 'Cairo', 'Noto Naskh Arabic', 'Inter', sans-serif;
+      overflow-x: hidden;
+      transition: background-color 0.35s ease, color 0.35s ease;
+    }
+    body.is-dark-mode {
+      background-color: #130f1e !important;
+      color: #dfd5f5 !important;
+    }
+    body.is-dark-mode #mainInvitation {
+      background-color: #130f1e !important;
+    }
+    body.is-dark-mode .watercolor-paper {
+      background-color: #1c162b !important;
+      background-image:
+        radial-gradient(at 15% 10%, rgba(169, 149, 214, 0.14) 0px, transparent 50%),
+        radial-gradient(at 85% 28%, rgba(120, 105, 160, 0.12) 0px, transparent 55%),
+        radial-gradient(at 20% 65%, rgba(185, 165, 226, 0.12) 0px, transparent 50%);
+      color: #e5dcf8 !important;
+    }
+    body.is-dark-mode .bg-white {
+      background-color: #241d36 !important;
+      color: #e9e1fa !important;
+    }
+    body.is-dark-mode .text-\[\#7869a0\],
+    body.is-dark-mode .text-\[\#4e416d\],
+    body.is-dark-mode .text-\[\#635488\] {
+      color: #d8cbf5 !important;
+    }
+    .watercolor-paper {
+      background-color: #ffffff;
+      background-image:
+        radial-gradient(at 15% 10%, rgba(169, 149, 214, 0.11) 0px, transparent 50%),
+        radial-gradient(at 85% 28%, rgba(120, 105, 160, 0.09) 0px, transparent 55%),
+        radial-gradient(at 20% 65%, rgba(185, 165, 226, 0.10) 0px, transparent 50%),
+        radial-gradient(at 80% 88%, rgba(120, 105, 160, 0.11) 0px, transparent 50%);
+    }
+    .purple-card-surface {
+      background-color: #7869a0;
+      background-image:
+        radial-gradient(circle at 20% 15%, rgba(255, 255, 255, 0.10) 0%, transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(72, 56, 112, 0.35) 0%, transparent 55%),
+        linear-gradient(165deg, #8273ab 0%, #7869a0 52%, #6b5b93 100%);
+      box-shadow: 4px 6px 18px rgba(78, 65, 109, 0.28);
+    }
+
+    @keyframes mpFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes mpFloatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-6px) rotate(2deg); }
+    }
+    @keyframes swayBranchLeft {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(3.2deg) scale(1.02); }
+    }
+    @keyframes swayBranchRight {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(-3.5deg) scale(1.02); }
+    }
+    .animate-mp-float {
+      animation: mpFloat 6s ease-in-out infinite;
+    }
+    .animate-mp-float-delayed {
+      animation: mpFloatSlow 5.2s ease-in-out 0.8s infinite;
+    }
+    .animate-sway-left {
+      transform-origin: top left;
+      animation: swayBranchLeft 5.5s ease-in-out infinite;
+    }
+    .animate-sway-right {
+      transform-origin: top right;
+      animation: swayBranchRight 6s ease-in-out 0.5s infinite;
+    }
+
+    /* Welcome Card Opening Cinematic Animation */
+    #welcomeOverlay {
+      transition: opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1), visibility 1.1s ease;
+    }
+    #welcomeCard {
+      transition: transform 1.15s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.95s ease, box-shadow 0.9s ease;
+      transform-origin: center center;
+    }
+    .card-opening #welcomeCard {
+      transform: perspective(1200px) rotateX(14deg) scale(1.18) translateY(-18px);
+      opacity: 0;
+    }
+    .card-opening .card-corner-flower-left {
+      transform: translate(-35px, -35px) rotate(-28deg) scale(1.45) !important;
+      transition: transform 1.05s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card-opening .card-corner-flower-right {
+      transform: translate(35px, -35px) rotate(28deg) scale(1.45) !important;
+      transition: transform 1.05s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card-opening#welcomeOverlay {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* Hero entrance after card opens */
+    .hero-flower-enter-left {
+      transform: translate(-30px, -20px) rotate(-12deg) scale(0.88);
+      opacity: 0;
+      transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.1s ease;
+    }
+    .hero-flower-enter-right {
+      transform: translate(30px, 15px) rotate(12deg) scale(0.88);
+      opacity: 0;
+      transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.15s, opacity 1.1s ease 0.15s;
+    }
+    .invitation-ready .hero-flower-enter-left,
+    .invitation-ready .hero-flower-enter-right {
+      transform: translate(0, 0) rotate(0deg) scale(1);
+      opacity: 1;
+    }
+
+    /* Scroll reveal sections */
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-up.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Schedule blooming lavender flower nodes */
+    .sched-dot {
+      transition: transform 0.4s ease, opacity 0.35s ease;
+    }
+    .sched-flower {
+      transform: scale(0) rotate(-45deg);
+      opacity: 0;
+      transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+    }
+    .sched-row.bloomed .sched-dot {
+      transform: scale(0);
+      opacity: 0;
+    }
+    .sched-row.bloomed .sched-flower {
+      transform: scale(1) rotate(0deg);
+      opacity: 1;
+    }
+
+    /* Music Equalizer Bars */
+    @keyframes danceBar {
+      0%, 100% { height: 22%; }
+      50% { height: 100%; }
+    }
+    .animate-dance-1 { animation: danceBar 0.45s ease-in-out infinite; }
+    .animate-dance-2 { animation: danceBar 0.45s ease-in-out 0.12s infinite; }
+    .animate-dance-3 { animation: danceBar 0.45s ease-in-out 0.24s infinite; }
+    .animate-dance-4 { animation: danceBar 0.45s ease-in-out 0.36s infinite; }
+    .music-paused .animate-dance-1,
+    .music-paused .animate-dance-2,
+    .music-paused .animate-dance-3,
+    .music-paused .animate-dance-4 {
+      animation-play-state: paused;
+      height: 30% !important;
+    }
+
+    .youtube-audio-hidden {
+      position: fixed;
+      width: 1px;
+      height: 1px;
+      left: -9999px;
+      top: -9999px;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="invitation-body template-{{ template.code }} min-h-screen w-full bg-[#f4f0fa] text-[#7869a0] selection:bg-[#7869a0]/20 selection:text-[#4e416d]">
+
+  <!-- ===================================================================== -->
+  <!-- TOP FLOATING CONTROLS (3-Language Switcher + Dark Mode + Admin Music) -->
+  <!-- ===================================================================== -->
+  <div id="floating-controls" class="fixed top-3 left-3 right-3 z-[90] flex items-center justify-between pointer-events-none">
+    <nav class="pointer-events-auto flex items-center gap-1 rounded-full bg-white/90 backdrop-blur-md border border-[#7869a0]/25 px-2 py-1 shadow-md text-xs font-bold text-[#7869a0]" aria-label="Language Switcher">
+      <a href="{{ url_for('public.view_invitation', slug=invitation.slug, lang='ku', preview_token=request.args.get('preview_token', ''), template=request.args.get('template', '')) }}" class="px-2.5 py-1 rounded-full transition {% if lang == 'ku' %}bg-[#7869a0] text-white{% else %}hover:bg-[#7869a0]/10{% endif %}">بادینی</a>
+      <a href="{{ url_for('public.view_invitation', slug=invitation.slug, lang='ar', preview_token=request.args.get('preview_token', ''), template=request.args.get('template', '')) }}" class="px-2.5 py-1 rounded-full transition {% if lang == 'ar' %}bg-[#7869a0] text-white{% else %}hover:bg-[#7869a0]/10{% endif %}">عربي</a>
+      <a href="{{ url_for('public.view_invitation', slug=invitation.slug, lang='en', preview_token=request.args.get('preview_token', ''), template=request.args.get('template', '')) }}" class="px-2.5 py-1 rounded-full transition {% if lang == 'en' %}bg-[#7869a0] text-white{% else %}hover:bg-[#7869a0]/10{% endif %}">EN</a>
+    </nav>
+
+    <div class="pointer-events-auto flex items-center gap-2">
+      <button
+        type="button"
+        id="theme-mode-toggle-btn"
+        onclick="toggleInvitationDarkMode()"
+        class="w-9 h-9 rounded-full bg-white/90 backdrop-blur-md border border-[#7869a0]/25 shadow-md flex items-center justify-center text-sm transition hover:scale-105"
+        aria-label="Toggle Dark / Light Mode"
+        title="Dark / Light Mode"
+      >
+        <span id="theme-mode-icon">🌙</span>
+      </button>
+
+      {% if music_source_type != 'none' and (invitation.music_url or youtube_video_id) %}
+      <button
+        type="button"
+        id="music-toggle-btn"
+        onclick="toggleWeddingMusic()"
+        aria-label="{{ ui.music_playing }}"
+        data-label-playing="{{ ui.music_playing }}"
+        data-label-muted="{{ ui.music_muted }}"
+        data-music-source="{{ music_source_type }}"
+        data-youtube-id="{{ youtube_video_id }}"
+        data-autoplay-after-open="{{ '1' if invitation.music_autoplay_after_open else '0' }}"
+        class="flex items-center gap-1.5 rounded-full bg-white/90 backdrop-blur-md border border-[#7869a0]/25 px-3 py-1.5 shadow-md text-xs font-bold text-[#7869a0] transition hover:scale-105"
+      >
+        <span>🎵</span>
+        <span id="music-status-text">{{ ui.music_playing }}</span>
+      </button>
+
+      {% if music_source_type == 'youtube' and youtube_video_id %}
+      <div id="youtube-audio-Wrapper" class="youtube-audio-hidden" aria-hidden="true">
+        <div id="youtube-audio-player"></div>
+      </div>
+      {% elif invitation.music_url %}
+      <audio
+        id="wedding-audio"
+        src="{{ invitation.music_url }}"
+        loop
+        preload="auto"
+        data-autoplay-after-open="{{ '1' if invitation.music_autoplay_after_open else '0' }}"
+      ></audio>
+      {% endif %}
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- REUSABLE SVG DEFINITIONS (WATERCOLOR PURPLE ROSES, LILACS & LEAVES)   -->
+  <!-- ===================================================================== -->
+  <svg width="0" height="0" class="absolute pointer-events-none">
+    <defs>
+      <radialGradient id="wcRoseOuter" cx="45%" cy="40%" r="60%">
+        <stop offset="0%" stop-color="#f3eefc"/>
+        <stop offset="40%" stop-color="#cdb9f0"/>
+        <stop offset="78%" stop-color="#9e85d1"/>
+        <stop offset="100%" stop-color="#7863ad"/>
+      </radialGradient>
+      <radialGradient id="wcRoseInner" cx="50%" cy="45%" r="55%">
+        <stop offset="0%" stop-color="#e5d8fa"/>
+        <stop offset="50%" stop-color="#a88ede"/>
+        <stop offset="85%" stop-color="#765ea8"/>
+        <stop offset="100%" stop-color="#533d82"/>
+      </radialGradient>
+      <linearGradient id="wcLeafSage" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#a8b89f" stop-opacity="0.9"/>
+        <stop offset="60%" stop-color="#7d8f74" stop-opacity="0.85"/>
+        <stop offset="100%" stop-color="#596951" stop-opacity="0.8"/>
+      </linearGradient>
+      <linearGradient id="wcLilacPetal" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#efe8fc"/>
+        <stop offset="65%" stop-color="#bda7e8"/>
+        <stop offset="100%" stop-color="#8b72be"/>
+      </linearGradient>
+      <radialGradient id="waxGoldGrad" cx="35%" cy="30%" r="65%">
+        <stop offset="0%" stop-color="#fff3c4"/>
+        <stop offset="35%" stop-color="#e3b963"/>
+        <stop offset="75%" stop-color="#b3822c"/>
+        <stop offset="100%" stop-color="#785012"/>
+      </radialGradient>
+
+      <g id="watercolorPurpleRose">
+        <path d="M0,-38 C16,-42 32,-30 35,-14 C42,2 34,22 20,32 C6,42 -14,40 -28,28 C-40,16 -42,-6 -32,-22 C-22,-36 -10,-35 0,-38 Z" fill="url(#wcRoseOuter)" opacity="0.88"/>
+        <path d="M-24,-26 C-8,-38 14,-36 26,-22 C38,-8 36,16 22,28 C8,38 -16,36 -28,22 C-38,8 -36,-14 -24,-26 Z" fill="url(#wcRoseOuter)" opacity="0.92" transform="rotate(35)"/>
+        <path d="M0,-27 C14,-28 26,-16 26,0 C26,15 14,26 0,26 C-15,26 -26,14 -25,-2 C-24,-16 -12,-26 0,-27 Z" fill="url(#wcRoseInner)" opacity="0.85"/>
+        <path d="M-18,-14 C-6,-24 12,-22 20,-10 C26,2 20,18 6,22 C-8,26 -22,16 -22,2 C-22,-6 -20,-11 -18,-14 Z" fill="#c9b5ed" opacity="0.75" transform="rotate(-25)"/>
+        <circle cx="0" cy="0" r="14" fill="url(#wcRoseInner)"/>
+        <path d="M-9,-4 C-4,-11 6,-11 10,-4 C13,3 8,11 0,11 C-7,11 -11,5 -8,-1 C-5,-6 2,-6 5,-2 C7,2 4,6 0,5" fill="none" stroke="#f5effe" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="0" cy="0" r="3" fill="#533d82"/>
+      </g>
+
+      <g id="watercolorLilacFlower">
+        <ellipse cx="0" cy="-14" rx="7" ry="13" fill="url(#wcLilacPetal)"/>
+        <ellipse cx="0" cy="-14" rx="7" ry="13" fill="url(#wcLilacPetal)" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-14" rx="7" ry="13" fill="url(#wcLilacPetal)" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-14" rx="7" ry="13" fill="url(#wcLilacPetal)" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-14" rx="7" ry="13" fill="url(#wcLilacPetal)" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="3.5" fill="#e6c365"/>
+        <circle cx="-1.5" cy="-1" r="1" fill="#785012"/>
+        <circle cx="1.5" cy="1" r="1" fill="#785012"/>
+      </g>
+
+      <g id="watercolorLeaf">
+        <path d="M0,0 C10,-14 28,-18 44,-8 C28,6 12,10 0,0 Z" fill="url(#wcLeafSage)"/>
+        <path d="M0,0 Q20,-6 40,-7" stroke="#53634b" stroke-width="0.9" fill="none" opacity="0.65"/>
+      </g>
+
+      <g id="cornerLavenderBouquet">
+        <path d="M10,120 Q45,65 95,22" stroke="#73826b" stroke-width="2" fill="none"/>
+        <path d="M15,135 Q65,95 130,68" stroke="#73826b" stroke-width="1.8" fill="none"/>
+        <use href="#watercolorLeaf" x="35" y="75" transform="rotate(-48 35 75) scale(1.15)"/>
+        <use href="#watercolorLeaf" x="65" y="45" transform="rotate(-25 65 45) scale(0.95)"/>
+        <use href="#watercolorLeaf" x="72" y="88" transform="rotate(12 72 88) scale(1.1)"/>
+        <use href="#watercolorLeaf" x="22" y="108" transform="rotate(-70 22 108) scale(0.9)"/>
+        <ellipse cx="105" cy="20" rx="3" ry="5.5" transform="rotate(-35 105 20)" fill="#9b82ce"/>
+        <ellipse cx="115" cy="14" rx="2.8" ry="5" transform="rotate(-30 115 14)" fill="#b39de0"/>
+        <ellipse cx="96" cy="29" rx="3.2" ry="5.5" transform="rotate(-40 96 29)" fill="#886ec0"/>
+        <ellipse cx="122" cy="70" rx="3" ry="5" transform="rotate(15 122 70)" fill="#9b82ce"/>
+        <ellipse cx="133" cy="66" rx="2.6" ry="4.5" transform="rotate(20 133 66)" fill="#b39de0"/>
+        <use href="#watercolorPurpleRose" x="26" y="62" transform="scale(1.15)"/>
+        <use href="#watercolorLilacFlower" x="74" y="68" transform="scale(0.95)"/>
+        <use href="#watercolorLilacFlower" x="52" y="28" transform="scale(0.72) rotate(18)"/>
+        <use href="#watercolorLilacFlower" x="24" y="122" transform="scale(0.68) rotate(-22)"/>
+      </g>
+    </defs>
+  </svg>
+
+  <!-- ===================================================================== -->
+  <!-- 1. OPENING WELCOME CARD OVERLAY                                       -->
+  <!-- ===================================================================== -->
+  {% if has_opening_section %}
+  <div id="welcomeOverlay" class="opening-stage fixed inset-0 z-[100] flex items-center justify-center p-4 overflow-hidden select-none" style="background: radial-gradient(circle at 50% 35%, #8f80b5 0%, #7869a0 52%, #5e4f82 100%);">
+    <canvas id="openingFloralCanvas" class="pointer-events-none absolute inset-0 w-full h-full z-0"></canvas>
+
+    <div id="welcomeCard" class="relative z-10 w-full max-w-[430px] rounded-[12px] bg-white px-6 py-10 sm:px-10 sm:py-12 text-center shadow-[0_25px_65px_rgba(38,28,65,0.42)] overflow-hidden">
+      <div class="pointer-events-none absolute inset-0 watercolor-paper opacity-75"></div>
+
+      <!-- Top-Left Animated Watercolor Lavender Bouquet -->
+      <div class="card-corner-flower-left pointer-events-none absolute -top-3 -left-3 w-36 h-36 sm:w-44 sm:h-44 z-10 animate-sway-left">
+        <svg viewBox="0 0 160 160" class="w-full h-full overflow-visible">
+          <use href="#cornerLavenderBouquet"/>
+        </svg>
+      </div>
+
+      <!-- Top-Right Animated Watercolor Lavender Bouquet -->
+      <div class="card-corner-flower-right pointer-events-none absolute -top-2 -right-3 w-36 h-36 sm:w-44 sm:h-44 z-10 animate-sway-right">
+        <svg viewBox="0 0 160 160" class="w-full h-full overflow-visible" style="transform: scaleX(-1);">
+          <use href="#cornerLavenderBouquet"/>
+        </svg>
+      </div>
+
+      <div class="relative z-20 flex flex-col items-center">
+        <div class="w-12 h-12 rounded-full bg-[#6f6098] shadow-[0_6px_16px_rgba(111,96,152,0.4)] flex items-center justify-center mb-6">
+          <svg viewBox="0 0 24 24" class="w-5 h-5 fill-white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </div>
+
+        <h1 class="font-serif text-3xl sm:text-4xl font-bold text-[#7869a0] tracking-wide leading-snug">{{ groom_display }}</h1>
+        <span class="font-latin italic text-lg text-[#7869a0]/80 my-0.5">&amp;</span>
+        <h1 class="font-serif text-3xl sm:text-4xl font-bold text-[#7869a0] tracking-wide leading-snug">{{ bride_display }}</h1>
+
+        <div class="flex items-center justify-center gap-2.5 my-4 w-40">
+          <span class="h-[1px] flex-1 bg-gradient-to-r from-transparent to-[#7869a0]/45"></span>
+          <span class="text-xs text-[#7869a0]/75">❦</span>
+          <span class="h-[1px] flex-1 bg-gradient-to-l from-transparent to-[#7869a0]/45"></span>
+        </div>
+
+        <p class="font-serif text-sm sm:text-base font-semibold text-[#8477a8]" dir="ltr">{{ human_date }}</p>
+        <p class="mt-3 text-sm sm:text-base text-[#8a7da9] font-medium">ب خۆشی داخوازێ ژ هەوە دکەن</p>
+
+        <button id="openInvitationBtn" type="button" class="mt-6 px-9 py-2.5 rounded-full bg-[#7869a0] hover:bg-[#64558d] text-white font-serif text-base font-bold shadow-[0_8px_20px_rgba(120,105,160,0.45)] hover:shadow-[0_12px_26px_rgba(120,105,160,0.6)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer">
+          ڤەکرن
+        </button>
+
+        <p class="exact-badini-prompt mt-3 text-xs text-[#7869a0]/85 cursor-pointer font-semibold" dir="rtl" lang="ku" onclick="document.getElementById('openInvitationBtn').click()">
+          {{ opening_card_exact_badini }}
+        </p>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <canvas id="flowerBurstCanvas" class="pointer-events-none fixed inset-0 w-full h-full z-[110]"></canvas>
+
+  <!-- ===================================================================== -->
+  <!-- MAIN INVITATION PAGE                                                  -->
+  <!-- ===================================================================== -->
+  <div id="mainInvitation" class="invitation-main {% if not has_opening_section %}invitation-ready{% endif %} relative flex w-full justify-center overflow-x-clip bg-[#f3effa] min-h-screen">
+
+    <main class="relative w-full max-w-[480px] md:max-w-[820px] mx-auto overflow-hidden watercolor-paper md:border-x md:border-[#7869a0]/20 shadow-[0_0_50px_rgba(120,105,160,0.12)] isolate pb-24">
+
+      <!-- Continuous Animated Ambient Petals & Bokeh Background Canvas -->
+      <canvas id="ambientGardenCanvas" class="pointer-events-none fixed inset-0 w-full h-full z-[2]"></canvas>
+
+      <!-- ================================================================= -->
+      <!-- HEADER / HERO ENVELOPE SECTION (ADMIN COUPLE PHOTO IN ENVELOPE)   -->
+      <!-- ================================================================= -->
+      <header class="inv-section section-couple relative isolate z-10 flex flex-col items-center overflow-x-clip px-6 pt-16 pb-16 text-center" id="section-couple">
+
+        <!-- Subtle Architectural Manor / Palace Line-Art Sketch Behind Envelope -->
+        <svg viewBox="0 0 800 420" class="pointer-events-none absolute -z-10 left-1/2 -translate-x-1/2 top-[52%] w-[125%] max-w-none opacity-[0.14] text-[#7869a0]" fill="none" stroke="currentColor" stroke-width="1.2">
+          <rect x="210" y="65" width="26" height="55"/>
+          <rect x="375" y="45" width="30" height="65"/>
+          <rect x="555" y="70" width="26" height="50"/>
+          <polygon points="150,120 400,75 650,120"/>
+          <line x1="130" y1="120" x2="670" y2="120" stroke-width="2"/>
+          <rect x="160" y="120" width="480" height="220"/>
+          <rect x="320" y="110" width="160" height="230"/>
+          <rect x="195" y="150" width="36" height="62" rx="18"/>
+          <rect x="255" y="150" width="36" height="62" rx="18"/>
+          <rect x="345" y="145" width="42" height="68" rx="21"/>
+          <rect x="413" y="145" width="42" height="68" rx="21"/>
+          <rect x="505" y="150" width="36" height="62" rx="18"/>
+          <rect x="565" y="150" width="36" height="62" rx="18"/>
+          <line x1="290" y1="230" x2="510" y2="230" stroke-width="2"/>
+          <rect x="195" y="245" width="36" height="75"/>
+          <rect x="255" y="245" width="36" height="75"/>
+          <path d="M365,340 L365,255 A35,35 0 0,1 435,255 L435,340"/>
+          <rect x="505" y="245" width="36" height="75"/>
+          <rect x="565" y="245" width="36" height="75"/>
+          <line x1="80" y1="340" x2="720" y2="340" stroke-width="2"/>
+        </svg>
+
+        <!-- Top-Left Cascading Watercolor Purple Rose & Lavender Branch -->
+        <div class="hero-flower-enter-left pointer-events-none absolute -left-8 -top-4 w-[56%] max-w-[280px] z-20">
+          <svg viewBox="0 0 260 320" class="w-full h-auto overflow-visible animate-sway-left">
+            <path d="M-10,10 Q60,75 135,55" stroke="#73826b" stroke-width="2.2" fill="none"/>
+            <path d="M10,-10 Q45,95 25,235" stroke="#73826b" stroke-width="2.2" fill="none"/>
+            <path d="M35,55 Q95,120 155,145" stroke="#73826b" stroke-width="1.8" fill="none"/>
+            <use href="#watercolorLeaf" x="45" y="45" transform="rotate(-15 45 45) scale(1.4)"/>
+            <use href="#watercolorLeaf" x="15" y="135" transform="rotate(65 15 135) scale(1.5)"/>
+            <use href="#watercolorLeaf" x="78" y="92" transform="rotate(25 78 92) scale(1.3)"/>
+            <use href="#watercolorLeaf" x="28" y="190" transform="rotate(80 28 190) scale(1.2)"/>
+            <g transform="translate(115, 118) rotate(25)">
+              <ellipse cx="0" cy="0" rx="4" ry="8" fill="#9b82ce"/>
+              <ellipse cx="12" cy="-5" rx="3.8" ry="7.5" fill="#b39de0"/>
+              <ellipse cx="24" cy="-9" rx="3.2" ry="6.5" fill="#cbbce9"/>
+              <ellipse cx="4" cy="9" rx="4" ry="7.5" fill="#8268b8"/>
+              <ellipse cx="16" cy="5" rx="3.5" ry="7" fill="#9b82ce"/>
+            </g>
+            <use href="#watercolorPurpleRose" x="52" y="72" transform="scale(1.55)"/>
+            <use href="#watercolorPurpleRose" x="16" y="185" transform="scale(0.95)"/>
+            <use href="#watercolorLilacFlower" x="115" y="38" transform="scale(1.15) rotate(12)"/>
+            <use href="#watercolorLilacFlower" x="30" y="128" transform="scale(1.0) rotate(-18)"/>
+          </svg>
+        </div>
+
+        <!-- Right-Side Trailing Lavender & Freesia Stems -->
+        <div class="hero-flower-enter-right pointer-events-none absolute -right-8 top-[34%] w-[44%] max-w-[230px] z-20">
+          <svg viewBox="0 0 220 340" class="w-full h-auto overflow-visible animate-sway-right">
+            <path d="M230,40 Q150,85 95,60" stroke="#6c7d63" stroke-width="2" fill="none"/>
+            <path d="M230,150 Q140,185 75,165" stroke="#6c7d63" stroke-width="2.2" fill="none"/>
+            <path d="M230,235 Q135,265 55,310" stroke="#6c7d63" stroke-width="2.2" fill="none"/>
+            <use href="#watercolorLeaf" x="155" y="110" transform="scale(-1.5, 1.3) rotate(-18)"/>
+            <use href="#watercolorLeaf" x="145" y="245" transform="scale(-1.4, 1.2) rotate(22)"/>
+            <g fill="url(#wcLilacPetal)">
+              <ellipse cx="110" cy="62" rx="6" ry="11" transform="rotate(-35 110 62)"/>
+              <ellipse cx="132" cy="70" rx="5.5" ry="10" transform="rotate(-25 132 70)"/>
+              <ellipse cx="95" cy="168" rx="7" ry="13" transform="rotate(-30 95 168)"/>
+              <ellipse cx="122" cy="176" rx="6.5" ry="12" transform="rotate(-15 122 176)"/>
+              <ellipse cx="148" cy="172" rx="6" ry="11" transform="rotate(15 148 172)"/>
+              <ellipse cx="75" cy="295" rx="7" ry="13" transform="rotate(-35 75 295)"/>
+              <ellipse cx="102" cy="280" rx="6.5" ry="12" transform="rotate(-25 102 280)"/>
+              <ellipse cx="130" cy="265" rx="6" ry="11" transform="rotate(-15 130 265)"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Top "SAVE THE DATE / ژڤانێ شەهیانێ" Header -->
+        <p class="relative z-20 w-full text-xs sm:text-sm md:text-base uppercase tracking-[0.18em] font-semibold text-[#787a6c] pr-[20%] sm:pr-[26%]">
+          ژڤانێ شەهیانێ بپارێزە • SAVE THE DATE
+        </p>
+
+        <!-- CENTER PURPLE ENVELOPE WITH ADMIN COUPLE PHOTO TUCKED INSIDE -->
+        <div id="envelopeShowcase" dir="ltr" class="relative z-10 mt-20 sm:mt-24 w-[76%] max-w-[285px] md:max-w-[340px] mx-auto select-none">
+          <div class="relative aspect-[283/327] w-full">
+
+            <!-- 1. Envelope Back & Lace Flap (Z-10) -->
+            <svg viewBox="0 0 283 327" class="pointer-events-none absolute inset-0 z-10 w-full h-full drop-shadow-[0_14px_28px_rgba(88,72,128,0.28)]">
+              <path d="M4,132 L141.5,22 L279,132 Z" fill="#5e4f82" stroke="#7869a0" stroke-width="1"/>
+              <path d="M18,128 L141.5,32 L265,128" fill="none" stroke="#b5a3dc" stroke-width="3" stroke-dasharray="3 5" opacity="0.65"/>
+              <rect x="4" y="130" width="275" height="192" rx="4" fill="#524373"/>
+            </svg>
+
+            <!-- 2. ADMIN-SELECTED COUPLE PHOTO TUCKED INSIDE ENVELOPE POCKET (Z-20) -->
+            <div class="absolute z-20" style="left: 10%; top: -6%; width: 64%;">
+              <div class="animate-mp-float">
+                <div class="aspect-[196/253] w-full rotate-[-11.5deg] border-[6px] border-white bg-white shadow-[4px_6px_14px_rgba(0,0,0,0.26)] overflow-hidden rounded-[2px]">
+                  <img id="envelopeCoupleImg" src="{{ invitation.couple_image or '/static/img/demo/couple_ismail_shrin.webp' }}" alt="{{ groom_display }} &amp; {{ bride_display }}" class="h-full w-full object-cover">
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Watercolor Purple Rose Bouquet Tucked into Right Side of Envelope (Z-25) -->
+            <div class="pointer-events-none absolute z-[25]" style="right: -8%; top: 14%; width: 58%;">
+              <div class="animate-mp-float-delayed">
+                <svg viewBox="0 0 180 180" class="w-full h-full overflow-visible transform rotate-[-12deg]">
+                  <use href="#watercolorLeaf" x="65" y="55" transform="rotate(-40 65 55) scale(1.2)"/>
+                  <use href="#watercolorLeaf" x="110" y="95" transform="rotate(15 110 95) scale(1.1)"/>
+                  <use href="#watercolorPurpleRose" x="95" y="102" transform="scale(1.15)"/>
+                  <use href="#watercolorLilacFlower" x="62" y="88" transform="scale(0.85)"/>
+                  <use href="#watercolorLilacFlower" x="115" y="64" transform="scale(0.8) rotate(25)"/>
+                  <use href="#watercolorLilacFlower" x="58" y="128" transform="scale(0.75)"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- 4. Envelope Front Pocket Cover + 3D Gold Heart Wax Seal (Z-30) -->
+            <svg viewBox="0 0 283 327" class="pointer-events-none absolute inset-0 z-30 w-full h-full">
+              <polygon points="4,130 141.5,226 4,322" fill="#6d5d96"/>
+              <polygon points="279,130 141.5,226 279,322" fill="#67578f"/>
+              <polygon points="4,322 141.5,208 279,322" fill="#73639c" stroke="#8b7bbd" stroke-width="0.8"/>
+              <line x1="4" y1="130" x2="141.5" y2="222" stroke="#8e7ec0" stroke-width="0.8" opacity="0.55"/>
+              <line x1="279" y1="130" x2="141.5" y2="222" stroke="#8e7ec0" stroke-width="0.8" opacity="0.55"/>
+
+              <g transform="translate(141.5, 214)" class="drop-shadow-[0_5px_8px_rgba(35,20,5,0.45)]">
+                <path d="M0,-24 C8,-25 16,-20 21,-13 C25,-6 24,4 21,12 C18,19 9,25 0,25 C-9,25 -18,20 -21,12 C-25,4 -24,-6 -20,-13 C-15,-20 -8,-23 0,-24 Z" fill="url(#waxGoldGrad)" stroke="#f6dc92" stroke-width="1"/>
+                <circle cx="0" cy="0" r="16.5" fill="none" stroke="#6e4810" stroke-width="1.2" opacity="0.65"/>
+                <path d="M0,10 C0,10 -10,2 -10,-5 C-10,-9 -6,-11 -3,-9 C-1,-7 0,-5 0,-5 C0,-5 1,-7 3,-9 C6,-11 10,-9 10,-5 C10,2 0,10 0,10 Z" fill="none" stroke="#5e3b08" stroke-width="1.8" stroke-linejoin="round"/>
+              </g>
+            </svg>
+
+          </div>
+        </div>
+
+        <!-- COUPLE NAMES BELOW ENVELOPE WITH GIANT WATERMARK "&" -->
+        <div class="relative z-10 mt-14 sm:mt-16 flex w-full flex-col items-center gap-3">
+          <p data-bind="groomFirst" class="font-serif text-4xl sm:text-5xl md:text-6xl font-bold tracking-wide text-[#7869a0] leading-none">{{ groom_display }}</p>
+          <span aria-hidden="true" class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-script text-[96px] sm:text-[120px] leading-none text-[#7869a0]/15 select-none">&amp;</span>
+          <p data-bind="brideFirst" class="font-serif text-4xl sm:text-5xl md:text-6xl font-bold tracking-wide text-[#7869a0] leading-none mt-2">{{ bride_display }}</p>
+        </div>
+
+      </header>
+
+      <!-- ================================================================= -->
+      <!-- SECTION 1: INTERACTIVE SCRATCH-TO-REVEAL DATE & COUNTDOWN CARD    -->
+      <!-- ================================================================= -->
+      <section id="scratchCountdownSection" class="inv-section section-countdown reveal-up is-visible relative isolate z-10 mx-auto mb-12 w-[86%] max-w-[390px] md:max-w-[540px]">
+        <div class="rounded-[16px] border-2 border-[#7869a0]/35 bg-white p-5 sm:p-7 shadow-[0_14px_38px_rgba(120,105,160,0.18)] text-center relative overflow-hidden">
+          <div class="space-y-1.5 mb-4">
+            <span class="inline-block rounded-full bg-[#7869a0]/15 px-3.5 py-1 text-xs font-bold text-[#7869a0]">✨ کارتا سوپرایز یا شەهیانێ</span>
+            <h2 class="font-serif text-xl sm:text-2xl font-bold text-[#7869a0]">ب تبلێ بخورینە بۆ دیتنا هەژمارتنا بەرەڤ پاش!</h2>
+            <p class="text-xs text-[#7869a0]/75">پەردەیا زێڕین و مۆر بخورینە دا رۆژ و دەمژمێرێن مایی بۆ شەهیانێ دیار ببن</p>
+          </div>
+
+          <!-- Scratch Area Box -->
+          <div
+            id="scratchBoxContainer"
+            class="relative w-full h-[215px] sm:h-[230px] rounded-2xl overflow-hidden border-2 border-[#7869a0]/40 shadow-inner select-none mx-auto"
+          >
+            <!-- Underneath Revealed Content (Date & Live 4-Box Countdown) -->
+            <div
+              id="live-countdown"
+              data-wedding-date="{{ invitation.wedding_date }}"
+              data-wedding-time="{{ invitation.wedding_time or '19:00' }}"
+              class="purple-card-surface absolute inset-0 flex flex-col items-center justify-center p-4 text-white"
+            >
+              <p class="font-serif text-sm sm:text-base font-bold text-[#f9ebb8] mb-1">🎉 ژڤانێ شەهیانا مە: {{ human_date }} — {{ invitation.wedding_time or '19:00' }}</p>
+              <span class="text-xs text-white/85 font-semibold mb-3">{{ ui.countdown_title }}</span>
+
+              <div class="grid grid-cols-4 gap-2 sm:gap-3 w-full max-w-xs mx-auto" dir="rtl">
+                <div class="rounded-xl bg-white/15 backdrop-blur-sm border border-white/30 py-2.5 px-1 flex flex-col items-center">
+                  <span id="scDays" class="font-latin text-2xl sm:text-3xl font-extrabold text-white leading-none">00</span>
+                  <span class="text-[11px] font-bold text-white/85 mt-1">{{ ui.days }}</span>
+                </div>
+                <div class="rounded-xl bg-white/15 backdrop-blur-sm border border-white/30 py-2.5 px-1 flex flex-col items-center">
+                  <span id="scHours" class="font-latin text-2xl sm:text-3xl font-extrabold text-white leading-none">00</span>
+                  <span class="text-[11px] font-bold text-white/85 mt-1">{{ ui.hours }}</span>
+                </div>
+                <div class="rounded-xl bg-white/15 backdrop-blur-sm border border-white/30 py-2.5 px-1 flex flex-col items-center">
+                  <span id="scMins" class="font-latin text-2xl sm:text-3xl font-extrabold text-white leading-none">00</span>
+                  <span class="text-[11px] font-bold text-white/85 mt-1">{{ ui.minutes }}</span>
+                </div>
+                <div class="rounded-xl bg-white/15 backdrop-blur-sm border border-white/30 py-2.5 px-1 flex flex-col items-center">
+                  <span id="scSecs" class="font-latin text-2xl sm:text-3xl font-extrabold text-[#f9ebb8] leading-none">00</span>
+                  <span class="text-[11px] font-bold text-white/85 mt-1">{{ ui.seconds }}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Interactive Scratch Foil Canvas on Top -->
+            <canvas id="scratchCardCanvas" class="absolute inset-0 z-20 w-full h-full cursor-grab active:cursor-grabbing transition-opacity duration-700" style="touch-action: none;"></canvas>
+          </div>
+
+          <div class="mt-3 flex items-center justify-between text-xs px-1">
+            <span id="scratchProgressLabel" class="font-bold text-[#7869a0]/80">ب تبلێ یان ماوسی ل سەر کارتێ بخشینە ✨</span>
+            <button id="resetScratchBtn" type="button" class="font-bold text-[#7869a0] hover:underline">دووبارە داپۆشە ↺</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- SECTION 2: CEREMONY & WEDDING DETAILS PURPLE CARD                 -->
+      <!-- ================================================================= -->
+      <section class="inv-section section-wedding-details reveal-up is-visible relative isolate z-10 mx-auto w-[86%] max-w-[390px] md:max-w-[540px]">
+        <div class="pointer-events-none absolute -right-10 bottom-[12%] z-20 w-40 sm:w-48 animate-mp-float">
+          <svg viewBox="0 0 160 160" class="w-full h-auto overflow-visible transform rotate-[-110deg]">
+            <use href="#cornerLavenderBouquet"/>
+          </svg>
+        </div>
+
+        <div class="purple-card-surface relative rounded-[14px] border border-[#7869a0] px-5 sm:px-8 pb-10 pt-9 text-center text-white">
+          <div class="relative z-10 flex flex-col items-center gap-6">
+            <h2 class="font-serif text-xl sm:text-2xl font-bold tracking-wide text-white">
+              زانیاریێن ڕێورەسمێن شەهیانێ
+            </h2>
+
+            {% if invitation.groom_image or invitation.bride_image %}
+            <div class="flex items-center justify-center gap-6 my-1">
+              <div class="flex flex-col items-center gap-1.5">
+                <div class="w-20 h-20 rounded-full border-2 border-white/80 overflow-hidden shadow-md bg-white/10">
+                  <img src="{{ invitation.groom_image or '/static/img/demo/groom_ismail.webp' }}" alt="{{ groom_display }}" class="w-full h-full object-cover" loading="lazy">
+                </div>
+                <span class="text-[11px] text-white/80 font-semibold">{{ ui.groom_label }}</span>
+              </div>
+              <span class="font-script text-2xl text-[#f9ebb8]">&amp;</span>
+              <div class="flex flex-col items-center gap-1.5">
+                <div class="w-20 h-20 rounded-full border-2 border-white/80 overflow-hidden shadow-md bg-white/10">
+                  <img src="{{ invitation.bride_image or '/static/img/demo/bride_shrin.webp' }}" alt="{{ bride_display }}" class="w-full h-full object-cover" loading="lazy">
+                </div>
+                <span class="text-[11px] text-white/80 font-semibold">{{ ui.bride_label }}</span>
+              </div>
+            </div>
+            {% endif %}
+
+            <p class="text-sm sm:text-base md:text-lg text-white/95 leading-relaxed max-w-md mx-auto font-medium">
+              {{ invitation_message_text or 'ب خۆشیەکا مەزن داخوازێ ژ هەوە یێن هێژا دکەین بۆ پشکداریکرنێ د خۆشیا ڤێ رۆژا تایبەت دا دگەل مە' }}
+            </p>
+
+            <div class="w-full flex flex-col items-center text-center gap-2 py-2">
+              <h3 class="font-serif text-3xl sm:text-4xl md:text-[42px] font-bold text-white leading-tight">{{ groom_display }}</h3>
+              <div class="font-script text-3xl text-white/90 my-1">&amp;</div>
+              <h3 class="font-serif text-3xl sm:text-4xl md:text-[42px] font-bold text-white leading-tight">{{ bride_display }}</h3>
+            </div>
+
+            <!-- Wedding Ceremony Date & Venue Summary -->
+            <div class="flex flex-col items-center gap-3 text-center pt-2 border-t border-white/20 w-full max-w-xs">
+              <div class="text-white/90 space-y-0.5">
+                <p class="text-sm sm:text-base font-bold text-white">{{ venue_display or 'Crystal Hall' }}</p>
+                {% if venue_address %}
+                <p class="text-xs sm:text-sm text-white/80">{{ venue_address }}</p>
+                {% endif %}
+              </div>
+              <div class="flex w-full max-w-[210px] items-center justify-center gap-3 text-xs sm:text-sm text-white/85 font-semibold px-2">
+                <span dir="ltr">🕖 {{ invitation.wedding_time or '19:00' }}</span>
+                <span>•</span>
+                <span dir="ltr">{{ calendar_data.time_12h }}</span>
+              </div>
+              <div class="flex items-center justify-center gap-4 text-white" dir="ltr">
+                <span class="font-latin text-5xl sm:text-[56px] leading-none font-normal">{{ '%02d'|format(calendar_data.day) }}</span>
+                <div class="h-11 w-px bg-white/45"></div>
+                <div class="flex flex-col items-start justify-center gap-0.5 text-right" dir="rtl">
+                  <span class="text-sm sm:text-base font-bold">{{ calendar_data.month_name_ku if lang == 'ku' else (calendar_data.month_name_ar if lang == 'ar' else calendar_data.month_name_en) }}</span>
+                  <span class="font-latin text-base sm:text-lg font-bold">{{ calendar_data.year }}</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- SECTION 3: WEDDING DAY SCHEDULE PURPLE CARD WITH BLOOMING FLOWERS -->
+      <!-- ================================================================= -->
+      <section id="scheduleSection" class="inv-section section-schedule reveal-up relative isolate z-10 mx-auto mt-12 w-[86%] max-w-[390px] md:max-w-[540px]">
+        <div class="pointer-events-none absolute -right-8 -top-8 z-20 w-36 sm:w-44 animate-mp-float">
+          <svg viewBox="0 0 160 160" class="w-full h-auto overflow-visible transform rotate-[-45deg]">
+            <use href="#cornerLavenderBouquet"/>
+          </svg>
+        </div>
+
+        <div class="purple-card-surface relative rounded-[12px] px-5 sm:px-7 py-9 text-white">
+          <div class="relative z-10 flex flex-col gap-6">
+            <div class="text-center space-y-1">
+              <h2 class="font-serif text-xl sm:text-2xl font-bold tracking-wide text-white">
+                {{ ui.schedule_title }}
+              </h2>
+              <p class="text-xs text-white/75">ل دەمێ هاتنا خوارێ هەر خالەک دبیتە گوڵەکا لاڤێندەر 🌸</p>
+            </div>
+
+            <div id="purpleScheduleContainer" class="relative mx-auto w-full max-w-[440px] py-2">
+              <div class="absolute left-1/2 -translate-x-1/2 top-4 bottom-4 w-px bg-white/30"></div>
+              <div id="purpleScheduleProgress" class="absolute left-1/2 -translate-x-1/2 top-4 bottom-4 w-[2px] bg-white origin-top transition-transform duration-300 shadow-[0_0_10px_#ffffff]" style="transform: scaleY(0.2);"></div>
+
+              <ol class="relative space-y-7">
+                {% for item in primary_schedule_items %}
+                {% set ratio = (loop.index / (primary_schedule_items|length))|round(2) %}
+                <li class="sched-row {% if loop.first %}bloomed{% endif %} grid grid-cols-[1fr_28px_1fr] items-center gap-x-3 cursor-pointer" data-sched="{{ ratio }}">
+                  <span class="text-left font-latin text-base sm:text-lg font-bold text-white tabular-nums" dir="ltr">{{ item.time }}</span>
+                  <span class="relative flex items-center justify-center h-7 w-7">
+                    <span class="sched-dot block h-2.5 w-2.5 rounded-full bg-white shadow-[0_0_0_3px_rgba(255,255,255,0.2)]"></span>
+                    <svg viewBox="0 0 32 32" class="sched-flower absolute inset-0 w-7 h-7 drop-shadow-[0_2px_6px_rgba(0,0,0,0.3)]"><use href="#watercolorLilacFlower" x="16" y="16" transform="scale(0.85)"/></svg>
+                  </span>
+                  <span class="text-right text-xs sm:text-sm font-bold text-white">{{ item.label }}</span>
+                </li>
+                {% endfor %}
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- SECTION 4: WEDDING RECEPTION VENUE & MAP                          -->
+      <!-- ================================================================= -->
+      <section class="inv-section section-venue reveal-up relative isolate z-10 flex w-full flex-col items-center px-6 pb-6 pt-14 text-center">
+        <h3 class="font-serif text-xl sm:text-2xl font-bold text-[#7869a0]">
+          {{ venue_display or ui.venue_title }}
+        </h3>
+        {% if venue_address %}
+        <p class="mt-2 max-w-xs text-xs sm:text-sm text-[#8e8d7c] font-semibold leading-relaxed">
+          {{ venue_address }}
+        </p>
+        {% endif %}
+
+        <div class="mt-4 w-full max-w-[350px] md:max-w-[520px] rounded-[16px] border-2 border-[#7869a0]/35 overflow-hidden shadow-lg bg-[#f3effa] relative aspect-[16/11]">
+          <svg viewBox="0 0 600 400" class="w-full h-full object-cover">
+            <rect width="600" height="400" fill="#f1ecf9"/>
+            <path d="M0,90 Q180,40 350,95 T600,75 L600,0 L0,0 Z" fill="#e5ddf5" opacity="0.8"/>
+            <path d="M0,310 Q220,260 420,315 T600,290 L600,400 L0,400 Z" fill="#dfd5f2" opacity="0.75"/>
+            <path d="M-20,250 C140,220 240,140 380,155 C480,165 530,110 620,95" stroke="#c8d9e6" stroke-width="16" fill="none" stroke-linecap="round"/>
+            <path d="M0,200 L600,185" stroke="#ffffff" stroke-width="9" fill="none"/>
+            <path d="M0,200 L600,185" stroke="#b9add4" stroke-width="1.5" stroke-dasharray="8 6" fill="none"/>
+            <path d="M300,0 L320,400" stroke="#ffffff" stroke-width="7" fill="none"/>
+            <path d="M130,0 L220,400" stroke="#faf8fc" stroke-width="4" fill="none"/>
+            <circle cx="308" cy="192" r="38" fill="#7869a0" opacity="0.16"/>
+            <circle cx="308" cy="192" r="20" fill="#7869a0" opacity="0.32"/>
+            <path d="M308,145 C292,145 280,157 280,173 C280,193 308,215 308,215 C308,215 336,193 336,173 C336,157 324,145 308,145 Z" fill="#7869a0" stroke="#ffffff" stroke-width="3"/>
+            <circle cx="308" cy="171" r="7" fill="#ffffff"/>
+          </svg>
+        </div>
+
+        {% if invitation.map_url %}
+        <a href="{{ invitation.map_url }}" target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center gap-2 rounded-full bg-[#7869a0] text-white px-6 py-2.5 text-sm font-bold shadow-md hover:bg-[#635488] transition-transform hover:scale-105">
+          <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
+          <span>{{ ui.open_in_maps }}</span>
+        </a>
+        {% endif %}
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- SECTION 5: PHOTO GALLERY (ADMIN-UPLOADED GALLERY PHOTOS)          -->
+      <!-- ================================================================= -->
+      <section id="gallerySection" class="inv-section section-gallery reveal-up relative isolate z-10 overflow-x-clip py-12">
+        <div class="pointer-events-none absolute -z-10 inset-x-0 top-10 flex justify-center opacity-10">
+          <svg viewBox="0 0 160 160" class="w-96 h-96">
+            <use href="#watercolorPurpleRose" x="80" y="80" transform="scale(2.2)"/>
+          </svg>
+        </div>
+
+        <div class="relative z-10 flex flex-col items-center px-4">
+          <h2 class="font-serif text-xl sm:text-2xl font-bold text-[#7869a0] tracking-wide text-center">
+            {{ ui.gallery_title }}
+          </h2>
+          <p class="text-xs text-[#7869a0]/75 mt-1">ل سەر وێنەی بدە بۆ مەزنکرنێ یان ب دوگمەیان بگوهۆڕە</p>
+
+          <!-- Clean Single-Image Framed Card Stage -->
+          <div class="relative z-10 mt-5 w-full max-w-[330px] sm:max-w-[370px] mx-auto" dir="ltr">
+            <div class="relative aspect-[3/4] w-full rounded-2xl bg-white p-3 shadow-[0_18px_45px_rgba(88,72,128,0.24)] border border-[#7869a0]/25 overflow-hidden group">
+              <button id="cfPrevBtn" type="button" aria-label="Previous Photo" class="absolute left-5 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-[#7869a0] shadow-md flex items-center justify-center transition hover:scale-110">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"></path></svg>
+              </button>
+              <button id="cfNextBtn" type="button" aria-label="Next Photo" class="absolute right-5 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-[#7869a0] shadow-md flex items-center justify-center transition hover:scale-110">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"></path></svg>
+              </button>
+
+              <!-- Single Active Image Display (Populated from Admin Gallery Uploads) -->
+              <div id="singleGalleryCard" class="relative w-full h-full rounded-xl overflow-hidden cursor-pointer">
+                <img id="activeGalleryImg" src="{{ effective_gallery[0].url }}" alt="{{ effective_gallery[0].caption or 'Wedding Photo' }}" class="h-full w-full object-cover transition-all duration-500">
+                <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#2d2342]/80 via-[#2d2342]/30 to-transparent p-4 text-center" dir="rtl">
+                  <p id="activeGalleryCaption" class="font-serif text-sm sm:text-base font-bold text-white">{{ effective_gallery[0].caption }}</p>
+                </div>
+              </div>
+
+              <!-- Dynamic source images from Admin Gallery Uploads -->
+              <div class="hidden">
+                {% for g in effective_gallery %}
+                <img class="gal-source-img" src="{{ g.url }}" data-caption="{{ g.caption or (groom_display ~ ' & ' ~ bride_display) }}" alt="Gallery {{ loop.index }}">
+                {% endfor %}
+              </div>
+            </div>
+
+            <div class="flex flex-col items-center gap-2 mt-3" dir="ltr">
+              <span id="cfCounterText" class="text-sm tabular-nums text-[#7869a0]/80 font-bold">1 / {{ effective_gallery|length }}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- SECTION 6: INTERACTIVE DRESS CODE (ڕەنگ و ستایلێ جلوبەرگان)       -->
+      <!-- ================================================================= -->
+      <section class="reveal-up relative z-10 flex flex-col items-center gap-4 px-6 py-6 text-center">
+        <div class="flex flex-col items-center gap-1">
+          <h2 class="font-serif text-xl sm:text-2xl font-bold text-[#7869a0]">ڕەنگ و ستایلێ جلوبەرگان</h2>
+          <p class="text-xs sm:text-sm text-[#8e8d7c] font-semibold">جلوبەرگێن فەرمی یێن ئاهەنگێ • ل سەر ڕەنگان بدە</p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-4">
+          <button type="button" data-color-tip="قاوەیی تۆخ و کلاسیک — زۆر گونجایە بۆ قاتێن زەلامان" class="dress-swatch w-11 h-11 rounded-full shadow-md transition-transform hover:scale-110 focus:outline-none ring-2 ring-offset-2 ring-transparent" style="background-color: rgb(67, 43, 20);"></button>
+          <button type="button" data-color-tip="مۆکا و برۆنزێ گەرم — ستایلەکێ هێمن و شاهانە" class="dress-swatch w-11 h-11 rounded-full shadow-md transition-transform hover:scale-110 focus:outline-none ring-2 ring-offset-2 ring-transparent" style="background-color: rgb(107, 83, 60);"></button>
+          <button type="button" data-color-tip="شامپانی و کرێمی — ڕەنگەکێ گەش و نەرم" class="dress-swatch w-11 h-11 rounded-full shadow-md transition-transform hover:scale-110 focus:outline-none ring-2 ring-offset-2 ring-transparent" style="background-color: rgb(227, 203, 180); border: 1.5px solid rgba(120, 105, 160, 0.25);"></button>
+          <button type="button" data-color-tip="مۆرا لاڤێندەر — ڕەنگێ سەرەکی یێ شەهیانا مە 💜" class="dress-swatch w-11 h-11 rounded-full shadow-md transition-transform hover:scale-110 focus:outline-none ring-2 ring-offset-2 ring-[#7869a0]" style="background-color: rgb(120, 105, 160);"></button>
+          <button type="button" data-color-tip="بنەفشی یا کاڵ — نەرم و رۆمانسی" class="dress-swatch w-11 h-11 rounded-full shadow-md transition-transform hover:scale-110 focus:outline-none ring-2 ring-offset-2 ring-transparent" style="background-color: rgb(218, 208, 238); border: 1.5px solid rgba(120, 105, 160, 0.3);"></button>
+        </div>
+        <p id="dressCodeTipText" class="text-xs font-bold text-[#7869a0] bg-[#7869a0]/10 px-4 py-1.5 rounded-full">
+          مۆرا لاڤێندەر — ڕەنگێ سەرەکی یێ شەهیانا مە 💜
+        </p>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- SECTION 7: GUESTBOOK & RSVP SECTION (SAVES TO DATABASE)           -->
+      <!-- ================================================================= -->
+      <section id="guestbookSection" class="inv-section section-rsvp reveal-up relative isolate z-10 mx-auto mt-8 w-[86%] max-w-[390px] md:max-w-[540px]">
+        <div class="relative overflow-hidden rounded-[12px] border border-[#7869a0]/30 bg-white shadow-[4px_6px_18px_rgba(120,105,160,0.16)] px-6 py-8">
+          <div class="text-center">
+            <h2 class="font-serif text-xl sm:text-2xl font-bold text-[#7869a0]">{{ ui.rsvp_title }} &amp; دەفتەرا پیرۆزباهیان</h2>
+            <p class="text-xs text-[#7869a0]/75 mt-1">پەیاما خۆ بنڤیسە یان ل سەر 🪄 بدە بۆ نڤیسینا ئۆتۆماتیکی</p>
+          </div>
+
+          <form id="lavenderGuestbookForm" action="{{ url_for('public.submit_rsvp', slug=invitation.slug) }}" method="POST" class="mt-5 mx-auto w-full max-w-[380px] space-y-3.5">
+            <input type="hidden" name="csrf_token" id="lavenderCsrfToken" value="{{ csrf_token() }}">
+            <input type="hidden" name="language" id="lavenderLang" value="{{ lang }}">
+
+            <div>
+              <input id="lgbName" name="guest_name" type="text" required placeholder="{{ ui.rsvp_name_placeholder }} *" class="w-full rounded-lg border border-[#7869a0] px-4 py-3 text-sm text-[#4e416d] placeholder-[#7869a0]/60 focus:outline-none focus:ring-2 focus:ring-[#7869a0]/30 bg-transparent">
+            </div>
+
+            <div class="grid grid-cols-2 gap-2.5">
+              <select id="lgbAttending" name="attending" class="w-full rounded-lg border border-[#7869a0] px-3 py-2.5 text-xs font-bold text-[#4e416d] bg-transparent focus:outline-none">
+                <option value="yes">{{ ui.rsvp_yes }}</option>
+                <option value="maybe">{{ ui.rsvp_maybe }}</option>
+                <option value="no">{{ ui.rsvp_no }}</option>
+              </select>
+              <select id="lgbGuests" name="guests_count" class="w-full rounded-lg border border-[#7869a0] px-3 py-2.5 text-xs font-bold text-[#4e416d] bg-transparent focus:outline-none">
+                {% for n in range(1, 11) %}
+                <option value="{{ n }}">{{ n }} کەس</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div>
+              <textarea id="lgbWish" name="message" rows="3" placeholder="پیرۆزباهیێن خۆ ل ڤێرێ بنڤیسن *" class="w-full rounded-lg border border-[#7869a0] px-4 py-3 text-sm text-[#4e416d] placeholder-[#7869a0]/60 focus:outline-none focus:ring-2 focus:ring-[#7869a0]/30 bg-transparent resize-none"></textarea>
+            </div>
+            <div class="flex items-center justify-between pt-1">
+              <button id="magicWishBtn" type="button" title="پێشنیارکرنا پیرۆزباهیەکا کوردی" class="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-[#7869a0]/12 hover:bg-[#7869a0]/22 text-[#7869a0] text-xs font-bold transition hover:scale-105">
+                <span class="text-base leading-none">🪄</span>
+                <span>پەیامەکا ئامادە</span>
+              </button>
+              <button type="submit" class="rounded-[8px] bg-[#7869a0] hover:bg-[#635488] px-6 py-2.5 font-serif text-sm font-bold text-white shadow-md transition-transform hover:scale-105">
+                {{ ui.rsvp_submit }}
+              </button>
+            </div>
+            <p id="lgbFeedback" class="hidden text-center text-xs font-bold text-emerald-700 bg-emerald-50 py-2 rounded-lg"></p>
+          </form>
+
+          <div id="lavenderGuestbookList" class="mt-6 w-full max-h-[360px] space-y-3 overflow-y-auto hidden"></div>
+        </div>
+
+        <!-- CONFIRM ATTENDANCE MODAL BUTTON -->
+        <div class="relative z-10 mt-5 flex w-full flex-col items-center justify-center">
+          <button id="openRsvpModalBtn" type="button" class="inline-flex items-center justify-center gap-2 rounded-full bg-[#7869a0] hover:bg-[#635488] px-8 py-3 text-sm font-bold text-white shadow-[0_10px_24px_rgba(120,105,160,0.38)] transition-transform hover:scale-105 cursor-pointer">
+            <span>پشتڕاستکرنا ئامادەبوونێ (RSVP)</span>
+            <span id="rsvpBadgeCount" class="rounded-full bg-white/20 px-2 py-0.5 text-xs">{{ rsvp_confirmed_count if rsvp_confirmed_count > 0 else 18 }}</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- SECTION 8: RECEPTION INFO & HEART CALENDAR CARD                   -->
+      <!-- ================================================================= -->
+      <section class="inv-section section-calendar reveal-up relative isolate z-10 mx-auto mt-12 w-[86%] max-w-[390px] md:max-w-[540px]">
+        <div class="pointer-events-none absolute -left-10 top-[8%] z-20 w-36 sm:w-44 animate-mp-float-delayed">
+          <svg viewBox="0 0 160 160" class="w-full h-auto overflow-visible transform rotate-[-25deg]">
+            <use href="#cornerLavenderBouquet"/>
+          </svg>
+        </div>
+
+        <div class="purple-card-surface relative rounded-[12px] border border-[#7869a0] px-5 sm:px-8 py-9 text-center text-white">
+          <div class="relative z-10 flex flex-col items-center gap-6">
+            <h2 class="font-serif text-xl sm:text-2xl font-bold tracking-wide text-white">
+              {{ ui.calendar_title }}
+            </h2>
+
+            <div class="flex flex-col items-center gap-3 text-center">
+              <div class="flex items-center justify-center gap-3 text-white" dir="ltr">
+                <span class="font-latin text-5xl sm:text-[56px] leading-none">{{ '%02d'|format(calendar_data.day) }}</span>
+                <div class="h-11 w-px bg-white/45"></div>
+                <div class="flex flex-col items-start justify-center gap-0.5 text-right" dir="rtl">
+                  <span class="text-xs sm:text-sm font-bold">{{ calendar_data.month_name_ku if lang == 'ku' else (calendar_data.month_name_ar if lang == 'ar' else calendar_data.month_name_en) }}</span>
+                  <span class="font-latin text-lg sm:text-xl font-bold">{{ calendar_data.year }}</span>
+                </div>
+              </div>
+
+              <!-- White Inner Calendar Card with Purple Heart on Wedding Day -->
+              <div class="mt-4 mx-auto w-fit max-w-full overflow-hidden rounded-[12px] bg-white px-4 sm:px-5 pb-5 pt-3 shadow-md text-[#7869a0]">
+                <div class="w-[255px] sm:w-[295px] mx-auto">
+                  <div class="text-center py-2 border-b border-[#7869a0]/25 font-serif text-lg font-bold text-[#7869a0]">
+                    {{ calendar_data.month_name_ku if lang == 'ku' else (calendar_data.month_name_ar if lang == 'ar' else calendar_data.month_name_en) }}
+                  </div>
+                  <div class="grid grid-cols-7 border-b-2 border-[#7869a0] py-1.5 text-[10px] sm:text-[11px] font-bold opacity-75" dir="ltr">
+                    <div class="text-center">Sun</div>
+                    <div class="text-center">Mon</div>
+                    <div class="text-center">Tue</div>
+                    <div class="text-center">Wed</div>
+                    <div class="text-center">Thu</div>
+                    <div class="text-center">Fri</div>
+                    <div class="text-center">Sat</div>
+                  </div>
+                  <div id="miniHeartCalendarGrid" class="grid grid-cols-7 gap-y-1 px-1 py-2 text-xs font-semibold" dir="ltr">
+                    {% for week in calendar_data.weeks %}
+                      {% for d in week %}
+                        {% if d == 0 %}
+                        <div class="h-7 flex items-center justify-center"></div>
+                        {% elif d == calendar_data.day %}
+                        <div class="h-7 flex items-center justify-center relative" title="{{ human_date }}">
+                          <div class="relative w-7 h-6 flex items-center justify-center">
+                            <svg viewBox="0 0 24 22" class="absolute inset-0 w-full h-full drop-shadow-sm" fill="#7869a0">
+                              <path d="M12 21C12 21 1.5 13.5 1.5 7.5C1.5 4.46 3.96 2 7 2C8.76 2 10.35 2.81 11.4 4.09L12 4.8L12.6 4.09C13.65 2.81 15.24 2 17 2C20.04 2 22.5 4.46 22.5 7.5C22.5 13.5 12 21 12 21Z"></path>
+                            </svg>
+                            <span class="relative z-10 text-[11px] font-bold text-white">{{ d }}</span>
+                          </div>
+                        </div>
+                        {% else %}
+                        <div class="h-7 flex items-center justify-center"><span>{{ d }}</span></div>
+                        {% endif %}
+                      {% endfor %}
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Add to Calendar Links -->
+              <div class="flex flex-wrap items-center justify-center gap-4 mt-2">
+                <a href="{{ calendar_data.google_calendar_url }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-1.5 text-sm font-bold text-white underline underline-offset-4 hover:text-lavender-200 transition">
+                  <span>+ {{ ui.add_google_calendar }}</span>
+                </a>
+                <a href="{{ calendar_data.ics_url }}" class="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-white/90 bg-white/15 px-3.5 py-1.5 rounded-full hover:bg-white/25 transition">
+                  <span>📲 {{ ui.download_ics_calendar }}</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- SECTION 9: CLOSING CARD ("هاتنا هەوە مەزنترین دیارییە بۆ مە")     -->
+      <!-- ================================================================= -->
+      <section class="inv-section section-closing reveal-up relative isolate z-10 mx-auto mt-14 w-[86%] max-w-[390px] md:max-w-[540px]">
+        <div class="relative overflow-hidden rounded-[16px] border border-[#7869a0]/30 bg-gradient-to-b from-white via-[#faf8fc] to-[#f1ecf9] px-6 py-10 text-center shadow-[0_14px_36px_rgba(120,105,160,0.16)]">
+          <div class="pointer-events-none absolute -top-4 -left-4 w-28 h-28 opacity-85 animate-sway-left">
+            <svg viewBox="0 0 160 160" class="w-full h-full overflow-visible">
+              <use href="#cornerLavenderBouquet"/>
+            </svg>
+          </div>
+          <div class="pointer-events-none absolute -top-4 -right-4 w-28 h-28 opacity-85 animate-sway-right">
+            <svg viewBox="0 0 160 160" class="w-full h-full overflow-visible" style="transform: scaleX(-1);">
+              <use href="#cornerLavenderBouquet"/>
+            </svg>
+          </div>
+
+          <div class="relative z-10 flex flex-col items-center space-y-4">
+            <div class="animate-mp-float w-16 h-16 rounded-full bg-[#7869a0]/12 border border-[#7869a0]/30 flex items-center justify-center shadow-sm">
+              <svg viewBox="0 0 36 36" class="w-9 h-9">
+                <path d="M18 31C18 31 4 21 4 11.5C4 6.8 7.8 3 12.5 3C15.2 3 17.6 4.3 18 6.2C18.4 4.3 20.8 3 23.5 3C28.2 3 32 6.8 32 11.5C32 21 18 31 18 31Z" fill="url(#wcRoseInner)"/>
+                <path d="M18 26C18 26 8 18.5 8 12C8 9.2 10.2 7 13 7C15 7 16.8 8.2 18 10C19.2 8.2 21 7 23 7C25.8 7 28 9.2 28 12C28 18.5 18 26 18 26Z" fill="url(#waxGoldGrad)" opacity="0.85"/>
+              </svg>
+            </div>
+
+            <h2 class="font-calligraphy text-2xl sm:text-3xl md:text-4xl font-bold text-[#7869a0] leading-relaxed">
+              هاتنا هەوە مەزنترین دیارییە بۆ مە
+            </h2>
+
+            <div class="flex items-center justify-center gap-2.5 w-36">
+              <span class="h-[1px] flex-1 bg-gradient-to-r from-transparent to-[#7869a0]/45"></span>
+              <span class="text-xs text-[#b3822c]">✦</span>
+              <span class="h-[1px] flex-1 bg-gradient-to-l from-transparent to-[#7869a0]/45"></span>
+            </div>
+
+            <p class="text-xs sm:text-sm text-[#635488] leading-loose max-w-sm mx-auto font-semibold">
+              {{ closing_section_text or 'پشکداریکرنا هەوە د خۆشیا شەهیانا مە دا و دیتنا هەوە یێن هێژا د ڤێ رۆژا پیرۆز دا، بهادارترین و جوانترین دیارییە بۆ مە. ب خێر بهێن سەر چاڤان!' }}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="relative z-20 flex flex-col items-center px-6 pt-8 pb-16 text-center space-y-2">
+        <p class="text-xs text-[#7869a0]/70 font-semibold">♡ {{ groom_display }} &amp; {{ bride_display }} • {{ human_date }}</p>
+      </footer>
+
+      <!-- Bottom Floral Garland Decoration -->
+      <div class="pointer-events-none absolute -bottom-10 left-1/2 -translate-x-1/2 z-10 w-full flex justify-center opacity-85">
+        <svg viewBox="0 0 400 110" class="w-96 h-auto overflow-visible">
+          <use href="#watercolorLeaf" x="110" y="65" transform="rotate(-25 110 65) scale(1.3)"/>
+          <use href="#watercolorLeaf" x="290" y="65" transform="scale(-1.3, 1.3) rotate(-25)"/>
+          <use href="#watercolorPurpleRose" x="200" y="65" transform="scale(1.25)"/>
+          <use href="#watercolorLilacFlower" x="145" y="72" transform="scale(0.95)"/>
+          <use href="#watercolorLilacFlower" x="255" y="72" transform="scale(0.95)"/>
+        </svg>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- FLOATING PURPLE EQUALIZER MUSIC BUTTON (BOTTOM-RIGHT, ADMIN MUSIC)    -->
+  <!-- ===================================================================== -->
+  {% if music_source_type != 'none' and (invitation.music_url or youtube_video_id) %}
+  <div class="fixed bottom-6 right-5 z-50">
+    <button id="floatingMusicBtn" type="button" onclick="toggleWeddingMusic()" aria-label="کۆنترۆلا موزیکێ" class="relative w-12 h-12 rounded-full shadow-[0_8px_22px_rgba(120,105,160,0.5)] cursor-pointer focus:outline-none transition-all hover:scale-110 active:scale-95" style="background: linear-gradient(135deg, #8f80b5 0%, #7869a0 55%, #5d4d82 100%);">
+      <div class="absolute inset-1 rounded-full border border-white/25"></div>
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="flex items-end gap-[3px] h-4">
+          <div class="w-1 bg-white rounded-full animate-dance-1" style="height: 60%;"></div>
+          <div class="w-1 bg-white rounded-full animate-dance-2" style="height: 100%;"></div>
+          <div class="w-1 bg-white rounded-full animate-dance-3" style="height: 45%;"></div>
+          <div class="w-1 bg-white rounded-full animate-dance-4" style="height: 80%;"></div>
+        </div>
+      </div>
+    </button>
+  </div>
+  {% endif %}
+
+  <!-- ===================================================================== -->
+  <!-- RSVP MODAL (پشتڕاستکرنا ئامادەبوونێ)                                  -->
+  <!-- ===================================================================== -->
+  <div id="rsvpModal" class="fixed inset-0 z-[120] hidden items-center justify-center bg-[#2d2342]/70 p-4 backdrop-blur-sm" dir="rtl">
+    <div class="w-full max-w-md rounded-2xl bg-white shadow-2xl overflow-hidden border border-[#7869a0]/30">
+      <div class="bg-[#7869a0] px-6 py-4 text-white flex items-center justify-between">
+        <div>
+          <h3 class="font-serif text-xl font-bold">{{ ui.rsvp_title }}</h3>
+          <p class="text-xs text-white/80">هاتنا هەوە مەزنترین دیارییە بۆ مە</p>
+        </div>
+        <button id="closeRsvpModalBtn" type="button" class="rounded-full bg-white/15 hover:bg-white/30 p-1.5 text-white transition">✕</button>
+      </div>
+      <form id="rsvpModalForm" action="{{ url_for('public.submit_rsvp', slug=invitation.slug) }}" method="POST" class="p-6 space-y-4 text-right text-[#4e416d]">
+        <div>
+          <label for="rsvpModalName" class="text-xs font-bold text-[#7869a0] block mb-1">{{ ui.rsvp_name_label }} *</label>
+          <input id="rsvpModalName" type="text" required placeholder="{{ ui.rsvp_name_placeholder }}" class="w-full rounded-xl border border-[#7869a0]/40 px-4 py-2.5 text-sm focus:outline-none focus:border-[#7869a0]">
+        </div>
+        <div>
+          <label class="text-xs font-bold text-[#7869a0] block mb-1">{{ ui.rsvp_attending_label }}</label>
+          <div class="grid grid-cols-2 gap-2.5">
+            <button type="button" id="rsvpYesBtn" class="py-2.5 rounded-xl border-2 border-[#7869a0] bg-[#7869a0]/15 text-[#4e416d] text-xs font-bold transition">بەلێ، ب خۆشی دێ ئامادەبم 💜</button>
+            <button type="button" id="rsvpNoBtn" class="py-2.5 rounded-xl border border-[#7869a0]/30 bg-white text-[#7869a0] text-xs font-bold transition">ببورن، نەشێم ئامادەبم</button>
+          </div>
+        </div>
+        <div id="rsvpGuestsGroup">
+          <label for="rsvpModalGuests" class="text-xs font-bold text-[#7869a0] block mb-1">{{ ui.rsvp_guests_label }}</label>
+          <select id="rsvpModalGuests" class="w-full rounded-xl border border-[#7869a0]/40 px-4 py-2.5 text-sm font-bold text-[#4e416d] focus:outline-none">
+            <option value="1">1 کەس</option>
+            <option value="2" selected>2 کەس</option>
+            <option value="3">3 کەس</option>
+            <option value="4">4 کەس</option>
+            <option value="5">5 کەس (بنەمال)</option>
+          </select>
+        </div>
+        <button type="submit" class="w-full rounded-xl bg-[#7869a0] hover:bg-[#635488] py-3 text-sm font-bold text-white shadow-md transition">
+          {{ ui.rsvp_submit }}
+        </button>
+        <p id="rsvpModalFeedback" class="hidden text-center text-xs font-bold text-emerald-700 bg-emerald-50 py-2 rounded-lg"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- FULL-SCREEN GALLERY LIGHTBOX MODAL WITH THUMBNAIL STRIP               -->
+  <!-- ===================================================================== -->
+  <div id="lightboxModal" class="fixed inset-0 z-[130] hidden flex-col items-center justify-between bg-black/90 p-4 backdrop-blur-md select-none" dir="ltr">
+    <div class="w-full flex items-center justify-between px-2 pt-2">
+      <span id="lbCounter" class="text-white text-sm bg-white/15 px-3 py-1 rounded-full font-bold">1 / {{ effective_gallery|length }}</span>
+      <button id="closeLbBtn" type="button" class="rounded-full bg-white/15 hover:bg-white/30 p-2 text-white text-lg leading-none transition">✕</button>
+    </div>
+
+    <div class="relative flex-1 w-full max-w-4xl flex items-center justify-center my-2 px-10">
+      <button id="lbPrevBtn" type="button" class="absolute left-1 rounded-full bg-white/15 hover:bg-white/30 w-10 h-10 text-white text-2xl flex items-center justify-center transition">‹</button>
+      <div class="flex flex-col items-center space-y-3">
+        <img id="lbMainImg" src="{{ effective_gallery[0].url }}" alt="Wedding Photo" class="max-h-[68vh] max-w-full rounded-2xl object-contain shadow-2xl">
+        <p id="lbCaption" class="text-white/90 font-serif text-sm sm:text-base font-bold text-center" dir="rtl"></p>
+      </div>
+      <button id="lbNextBtn" type="button" class="absolute right-1 rounded-full bg-white/15 hover:bg-white/30 w-10 h-10 text-white text-2xl flex items-center justify-center transition">›</button>
+    </div>
+
+    <div id="lbThumbStrip" class="flex gap-2 overflow-x-auto px-3 py-2 bg-white/10 rounded-xl max-w-[92vw]"></div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- JAVASCRIPT ENGINE (ADMIN MUSIC + GALLERY + SCRATCH + RSVP)            -->
+  <!-- ===================================================================== -->
+  <script>
+    // -----------------------------------------------------------------------
+    // 1. DARK / LIGHT MODE TOGGLE
+    // -----------------------------------------------------------------------
+    const THEME_MODE_KEY = "bikozava_theme_mode";
+    function applySavedThemeMode() {
+      const saved = sessionStorage.getItem(THEME_MODE_KEY);
+      const iconEl = document.getElementById("theme-mode-icon");
+      if (saved === "dark") {
+        document.body.classList.add("is-dark-mode");
+        if (iconEl) iconEl.textContent = "☀️";
+      } else if (saved === "light") {
+        document.body.classList.remove("is-dark-mode");
+        if (iconEl) iconEl.textContent = "🌙";
+      }
+    }
+    window.toggleInvitationDarkMode = function () {
+      const isNowDark = document.body.classList.toggle("is-dark-mode");
+      sessionStorage.setItem(THEME_MODE_KEY, isNowDark ? "dark" : "light");
+      const iconEl = document.getElementById("theme-mode-icon");
+      if (iconEl) iconEl.textContent = isNowDark ? "☀️" : "🌙";
+    };
+
+    // -----------------------------------------------------------------------
+    // 2. ADMIN-CONFIGURED MUSIC CONTROLLER (UPLOADED MP3/WAV OR YOUTUBE)
+    // -----------------------------------------------------------------------
+    const MUSIC_STORAGE_KEY = "bikozava_music_muted";
+    let ytPlayer = null;
+    let ytReady = false;
+    let ytPendingPlay = false;
+
+    function updateMusicUI(isMuted) {
+      const btn = document.getElementById("music-toggle-btn");
+      const statusText = document.getElementById("music-status-text");
+      const eqBtn = document.getElementById("floatingMusicBtn");
+      if (btn) {
+        if (isMuted) {
+          btn.classList.add("is-muted");
+          if (statusText) statusText.textContent = btn.getAttribute("data-label-muted") || "Muted";
+        } else {
+          btn.classList.remove("is-muted");
+          if (statusText) statusText.textContent = btn.getAttribute("data-label-playing") || "Playing";
+        }
+      }
+      if (eqBtn) {
+        if (isMuted) eqBtn.classList.add("music-paused");
+        else eqBtn.classList.remove("music-paused");
+      }
+    }
+
+    function initYouTubePlayerIfNeeded() {
+      const btn = document.getElementById("music-toggle-btn");
+      if (!btn) return;
+      const sourceType = btn.getAttribute("data-music-source");
+      const videoId = btn.getAttribute("data-youtube-id");
+      if (sourceType !== "youtube" || !videoId) return;
+
+      window.onYouTubeIframeAPIReady = function () {
+        ytPlayer = new window.YT.Player("youtube-audio-player", {
+          height: "1",
+          width: "1",
+          videoId: videoId,
+          playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: videoId, playsinline: 1, rel: 0 },
+          events: {
+            onReady: function () {
+              ytReady = true;
+              ytPlayer.setVolume(75);
+              if (ytPendingPlay) {
+                ytPendingPlay = false;
+                ytPlayer.unMute();
+                ytPlayer.playVideo();
+                updateMusicUI(false);
+              }
+            }
+          }
+        });
+      };
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.head.appendChild(tag);
+    }
+
+    function startAdminMusicAfterOpen() {
+      const btn = document.getElementById("music-toggle-btn");
+      if (!btn) return;
+      const savedMuted = sessionStorage.getItem(MUSIC_STORAGE_KEY) === "1";
+      const shouldAutoplay = btn.getAttribute("data-autoplay-after-open") === "1";
+      const sourceType = btn.getAttribute("data-music-source");
+
+      if (savedMuted || !shouldAutoplay) {
+        updateMusicUI(true);
+        return;
+      }
+
+      if (sourceType === "youtube") {
+        if (ytReady && ytPlayer && typeof ytPlayer.playVideo === "function") {
+          ytPlayer.unMute();
+          ytPlayer.playVideo();
+          updateMusicUI(false);
+        } else {
+          ytPendingPlay = true;
+          updateMusicUI(false);
+        }
+        return;
+      }
+
+      const audio = document.getElementById("wedding-audio");
+      if (!audio) return;
+      audio.muted = false;
+      audio.volume = 0.75;
+      const p = audio.play();
+      if (p && typeof p.then === "function") {
+        p.then(() => updateMusicUI(false)).catch(() => updateMusicUI(true));
+      }
+    }
+
+    window.toggleWeddingMusic = function () {
+      const btn = document.getElementById("music-toggle-btn");
+      if (!btn) return;
+      const sourceType = btn.getAttribute("data-music-source");
+      const isCurrentlyMuted = btn.classList.contains("is-muted");
+
+      if (sourceType === "youtube") {
+        if (!ytReady || !ytPlayer) return;
+        if (isCurrentlyMuted) {
+          ytPlayer.unMute();
+          ytPlayer.playVideo();
+          sessionStorage.setItem(MUSIC_STORAGE_KEY, "0");
+          updateMusicUI(false);
+        } else {
+          ytPlayer.mute();
+          ytPlayer.pauseVideo();
+          sessionStorage.setItem(MUSIC_STORAGE_KEY, "1");
+          updateMusicUI(true);
+        }
+        return;
+      }
+
+      const audio = document.getElementById("wedding-audio");
+      if (!audio) return;
+      if (audio.paused || audio.muted) {
+        audio.muted = false;
+        audio.play().catch(() => {});
+        sessionStorage.setItem(MUSIC_STORAGE_KEY, "0");
+        updateMusicUI(false);
+      } else {
+        audio.muted = true;
+        audio.pause();
+        sessionStorage.setItem(MUSIC_STORAGE_KEY, "1");
+        updateMusicUI(true);
+      }
+    };
+
+    // -----------------------------------------------------------------------
+    // 3. OPENING PURPLE CANVAS (FLOATING TINY BLOSSOMS)
+    // -----------------------------------------------------------------------
+    function initOpeningFloralCanvas() {
+      const canvas = document.getElementById('openingFloralCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w = (canvas.width = window.innerWidth);
+      let h = (canvas.height = window.innerHeight);
+
+      window.addEventListener('resize', () => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      });
+
+      const blossoms = Array.from({ length: 24 }, (_, i) => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vy: -0.25 - Math.random() * 0.35,
+        vx: (Math.random() - 0.5) * 0.3,
+        r: 4 + Math.random() * 5,
+        rot: Math.random() * Math.PI * 2,
+        vRot: (Math.random() - 0.5) * 0.015,
+        isGold: i % 5 === 0,
+        alpha: 0.18 + Math.random() * 0.35
+      }));
+
+      function drawTinyFlower(x, y, radius, rot, isGold, alpha) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(rot);
+        ctx.fillStyle = isGold ? `rgba(218, 178, 95, ${alpha})` : `rgba(242, 236, 255, ${alpha})`;
+        for (let p = 0; p < 6; p++) {
+          ctx.rotate(Math.PI / 3);
+          ctx.beginPath();
+          ctx.ellipse(0, -radius * 0.75, radius * 0.28, radius * 0.6, 0, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.beginPath();
+        ctx.arc(0, 0, radius * 0.22, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 235, 170, ${alpha + 0.1})`;
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function animate() {
+        const overlay = document.getElementById('welcomeOverlay');
+        if (overlay && overlay.classList.contains('hidden')) return;
+        ctx.clearRect(0, 0, w, h);
+        blossoms.forEach(b => {
+          b.x += b.vx;
+          b.y += b.vy;
+          b.rot += b.vRot;
+          if (b.y < -20) { b.y = h + 20; b.x = Math.random() * w; }
+          if (b.x < -20) b.x = w + 20;
+          if (b.x > w + 20) b.x = -20;
+          drawTinyFlower(b.x, b.y, b.r, b.rot, b.isGold, b.alpha);
+        });
+        requestAnimationFrame(animate);
+      }
+      requestAnimationFrame(animate);
+    }
+
+    // -----------------------------------------------------------------------
+    // 4. FULL-SCREEN FLOWER PETAL BURST
+    // -----------------------------------------------------------------------
+    const activeBursts = [];
+    let burstCanvasRunning = false;
+
+    function launchFlowerBurst(mode = 'flowers') {
+      const canvas = document.getElementById('flowerBurstCanvas');
+      if (!canvas) return;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
+
+      const count = 48;
+      for (let i = 0; i < count; i++) {
+        const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.3;
+        const speed = 3 + Math.random() * 9.5;
+        activeBursts.push({
+          x: cx + (Math.random() - 0.5) * 80,
+          y: cy + (Math.random() - 0.5) * 80,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed - 2.2,
+          gravity: 0.11,
+          size: 7 + Math.random() * 9,
+          rot: Math.random() * Math.PI * 2,
+          vRot: (Math.random() - 0.5) * 0.12,
+          alpha: 1,
+          mode,
+          hue: ['#cbbce9', '#a995d6', '#7869a0', '#e8dcf8', '#e6c365'][i % 5]
+        });
+      }
+
+      if (!burstCanvasRunning) {
+        burstCanvasRunning = true;
+        const ctx = canvas.getContext('2d');
+        function step() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          for (let i = activeBursts.length - 1; i >= 0; i--) {
+            const p = activeBursts[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += p.gravity;
+            p.vx *= 0.985;
+            p.rot += p.vRot;
+            p.alpha -= 0.013;
+            if (p.alpha <= 0) {
+              activeBursts.splice(i, 1);
+              continue;
+            }
+            ctx.save();
+            ctx.globalAlpha = Math.max(0, p.alpha);
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rot);
+            ctx.fillStyle = p.hue;
+
+            if (p.mode === 'hearts') {
+              const s = p.size * 0.7;
+              ctx.beginPath();
+              ctx.moveTo(0, s);
+              ctx.bezierCurveTo(-s * 1.4, 0, -s * 0.8, -s, 0, -s * 0.3);
+              ctx.bezierCurveTo(s * 0.8, -s, s * 1.4, 0, 0, s);
+              ctx.fill();
+            } else {
+              for (let k = 0; k < 5; k++) {
+                ctx.rotate((Math.PI * 2) / 5);
+                ctx.beginPath();
+                ctx.ellipse(0, -p.size * 0.55, p.size * 0.28, p.size * 0.52, 0, 0, Math.PI * 2);
+                ctx.fill();
+              }
+              ctx.fillStyle = '#fff5cc';
+              ctx.beginPath();
+              ctx.arc(0, 0, p.size * 0.2, 0, Math.PI * 2);
+              ctx.fill();
+            }
+            ctx.restore();
+          }
+          if (activeBursts.length > 0) {
+            requestAnimationFrame(step);
+          } else {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            burstCanvasRunning = false;
+          }
+        }
+        requestAnimationFrame(step);
+      }
+    }
+
+    // -----------------------------------------------------------------------
+    // 5. CONTINUOUS AMBIENT LAVENDER PETALS & BOKEH BACKGROUND CANVAS
+    // -----------------------------------------------------------------------
+    function initAmbientGardenCanvas() {
+      const canvas = document.getElementById('ambientGardenCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w = (canvas.width = window.innerWidth);
+      let h = (canvas.height = window.innerHeight);
+
+      window.addEventListener('resize', () => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      });
+
+      const petals = Array.from({ length: 22 }, (_, i) => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vy: 0.4 + Math.random() * 0.55,
+        vx: 0.25 + Math.random() * 0.35,
+        size: 5 + Math.random() * 6,
+        rot: Math.random() * Math.PI * 2,
+        vRot: (Math.random() - 0.5) * 0.02,
+        swayPhase: Math.random() * Math.PI * 2,
+        color: ['#d8cbf2', '#c3b0e8', '#e6def7', '#b19cd9'][i % 4],
+        alpha: 0.28 + Math.random() * 0.32
+      }));
+
+      function tick() {
+        ctx.clearRect(0, 0, w, h);
+        petals.forEach(p => {
+          p.swayPhase += 0.025;
+          p.x += p.vx + Math.sin(p.swayPhase) * 0.45;
+          p.y += p.vy;
+          p.rot += p.vRot;
+          if (p.y > h + 20) { p.y = -20; p.x = Math.random() * w; }
+          if (p.x > w + 20) p.x = -20;
+
+          ctx.save();
+          ctx.globalAlpha = p.alpha;
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rot);
+          ctx.fillStyle = p.color;
+          ctx.beginPath();
+          ctx.moveTo(0, -p.size);
+          ctx.bezierCurveTo(p.size * 0.85, -p.size * 0.5, p.size * 0.85, p.size * 0.6, 0, p.size);
+          ctx.bezierCurveTo(-p.size * 0.85, p.size * 0.6, -p.size * 0.85, -p.size * 0.5, 0, -p.size);
+          ctx.fill();
+          ctx.restore();
+        });
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    // -----------------------------------------------------------------------
+    // 6. SINGLE-IMAGE GALLERY VIEWER & LIGHTBOX (ADMIN IMAGES)
+    // -----------------------------------------------------------------------
+    let activeSlideIdx = 0;
+
+    function getGalleryList() {
+      const imgs = document.querySelectorAll('.gal-source-img');
+      return Array.from(imgs).map(el => ({
+        src: el.getAttribute('src') || el.src,
+        caption: el.getAttribute('data-caption') || ''
+      }));
+    }
+
+    function renderSingleGallery() {
+      const list = getGalleryList();
+      if (!list.length) return;
+      activeSlideIdx = (activeSlideIdx + list.length) % list.length;
+      const imgEl = document.getElementById('activeGalleryImg');
+      const capEl = document.getElementById('activeGalleryCaption');
+      const counterEl = document.getElementById('cfCounterText');
+
+      if (imgEl) imgEl.src = list[activeSlideIdx].src;
+      if (capEl) capEl.textContent = list[activeSlideIdx].caption;
+      if (counterEl) counterEl.textContent = `${activeSlideIdx + 1} / ${list.length}`;
+    }
+
+    function openLightboxAt(idx) {
+      const list = getGalleryList();
+      if (!list.length) return;
+      activeSlideIdx = (idx + list.length) % list.length;
+      renderSingleGallery();
+
+      const modal = document.getElementById('lightboxModal');
+      const mainImg = document.getElementById('lbMainImg');
+      const capEl = document.getElementById('lbCaption');
+      const cntEl = document.getElementById('lbCounter');
+
+      if (modal && mainImg) {
+        mainImg.src = list[activeSlideIdx].src;
+        if (capEl) capEl.textContent = list[activeSlideIdx].caption;
+        if (cntEl) cntEl.textContent = `${activeSlideIdx + 1} / ${list.length}`;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+    }
+
+    // -----------------------------------------------------------------------
+    // 7. INTERACTIVE SCRATCH-OFF CARD TO REVEAL DATE & COUNTDOWN
+    // -----------------------------------------------------------------------
+    let scratchCompleted = false;
+
+    function initScratchCountdownCard() {
+      const canvas = document.getElementById('scratchCardCanvas');
+      const box = document.getElementById('scratchBoxContainer');
+      const label = document.getElementById('scratchProgressLabel');
+      const resetBtn = document.getElementById('resetScratchBtn');
+      if (!canvas || !box) return;
+
+      const ctx = canvas.getContext('2d');
+
+      function drawFoilCover() {
+        scratchCompleted = false;
+        canvas.style.opacity = '1';
+        canvas.style.pointerEvents = 'auto';
+        const rect = box.getBoundingClientRect();
+        const w = (canvas.width = Math.max(280, Math.floor(rect.width || 340)));
+        const h = (canvas.height = Math.max(200, Math.floor(rect.height || 220)));
+
+        ctx.globalCompositeOperation = 'source-over';
+        const grad = ctx.createLinearGradient(0, 0, w, h);
+        grad.addColorStop(0, '#c8b7ea');
+        grad.addColorStop(0.28, '#e8ddf8');
+        grad.addColorStop(0.5, '#d4b26f');
+        grad.addColorStop(0.75, '#b69fe0');
+        grad.addColorStop(1, '#8c78b8');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, w, h);
+
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.28)';
+        for (let i = 0; i < 45; i++) {
+          const sx = (i * 73) % w;
+          const sy = (i * 47) % h;
+          ctx.beginPath();
+          ctx.arc(sx, sy, (i % 3) + 1, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([6, 5]);
+        ctx.strokeRect(12, 12, w - 24, h - 24);
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = '#433364';
+        ctx.font = 'bold 18px Cairo, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('✨ ب تبلێ ل ڤێرێ بخورینە ✨', w / 2, h / 2 - 8);
+
+        ctx.fillStyle = '#58467d';
+        ctx.font = 'bold 13px Cairo, sans-serif';
+        ctx.fillText('بۆ ئاشکراکرنا رۆژا شەهیانێ و هەژمارتنا بەرەڤ پاش', w / 2, h / 2 + 22);
+
+        if (label) label.textContent = 'ب تبلێ یان ماوسی ل سەر کارتێ بخشینە ✨';
+      }
+
+      drawFoilCover();
+      window.addEventListener('resize', () => {
+        if (!scratchCompleted) drawFoilCover();
+      });
+
+      let isDrawing = false;
+      let moveCounter = 0;
+
+      function scratchAt(clientX, clientY) {
+        if (scratchCompleted) return;
+        const rect = canvas.getBoundingClientRect();
+        const x = clientX - rect.left;
+        const y = clientY - rect.top;
+
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.beginPath();
+        ctx.arc(x, y, 28, 0, Math.PI * 2);
+        ctx.fill();
+
+        moveCounter++;
+        if (moveCounter % 8 === 0) checkScratchPercentage();
+      }
+
+      function checkScratchPercentage() {
+        try {
+          const w = canvas.width;
+          const h = canvas.height;
+          const imgData = ctx.getImageData(0, 0, w, h).data;
+          let cleared = 0;
+          let totalSampled = 0;
+          for (let i = 3; i < imgData.length; i += 64) {
+            totalSampled++;
+            if (imgData[i] < 128) cleared++;
+          }
+          const pct = Math.round((cleared / Math.max(1, totalSampled)) * 100);
+          if (label && !scratchCompleted) label.textContent = `ڕێژەیا خوراندنێ: ${pct}% ✨`;
+          if (pct >= 38 && !scratchCompleted) {
+            scratchCompleted = true;
+            canvas.style.opacity = '0';
+            canvas.style.pointerEvents = 'none';
+            if (label) label.textContent = '🎉 ژڤانێ شەهیانێ و هەژمارتنا بەرەڤ پاش ئاشکرا بوو!';
+            launchFlowerBurst('flowers');
+          }
+        } catch (e) {}
+      }
+
+      canvas.addEventListener('pointerdown', (e) => {
+        isDrawing = true;
+        scratchAt(e.clientX, e.clientY);
+      });
+      canvas.addEventListener('pointermove', (e) => {
+        if (isDrawing || e.pointerType === 'mouse') scratchAt(e.clientX, e.clientY);
+      });
+      window.addEventListener('pointerup', () => { isDrawing = false; });
+      if (resetBtn) resetBtn.addEventListener('click', drawFoilCover);
+    }
+
+    // -----------------------------------------------------------------------
+    // 8. LIVE COUNTDOWN (DYNAMIC FROM INVITATION WEDDING DATE & TIME)
+    // -----------------------------------------------------------------------
+    function updateLavenderCountdown() {
+      const box = document.getElementById('live-countdown');
+      const dStr = (box && box.getAttribute('data-wedding-date')) || '{{ invitation.wedding_date }}';
+      const tStr = (box && box.getAttribute('data-wedding-time')) || '{{ invitation.wedding_time or "19:00" }}';
+      const targetIso = dStr.slice(0, 10) + 'T' + (tStr.length === 5 ? tStr : '19:00') + ':00';
+      const target = new Date(targetIso).getTime();
+      const now = Date.now();
+      const diff = Math.max(0, target - now);
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const mins = Math.floor((diff / 1000 / 60) % 60);
+      const secs = Math.floor((diff / 1000) % 60);
+
+      const dEl = document.getElementById('scDays');
+      const hEl = document.getElementById('scHours');
+      const mEl = document.getElementById('scMins');
+      const sEl = document.getElementById('scSecs');
+
+      if (dEl) dEl.textContent = String(days);
+      if (hEl) hEl.textContent = String(hours).padStart(2, '0');
+      if (mEl) mEl.textContent = String(mins).padStart(2, '0');
+      if (sEl) sEl.textContent = String(secs).padStart(2, '0');
+    }
+
+    const kurdishBadiniWishes = [
+      'پیرۆز بیت شەهیانا هەوە! ژ خودایێ مەزن دخوازین ژیانا هەوە پڕ بیت ژ ئەڤین و تەبایی و بەختەوەریێ.',
+      'نەخشە ل ژیانەکا نووی یا پڕی خێر و خۆشی! هەردەم پێکڤە د کەیف و شادیێ دا بن ان شاء الله.',
+      'هزار جاران پیرۆز بیت ل بووک و زاڤایێن هێژا! مالەکا ئاڤا و پڕی بەرەکەت بۆ هەوە دخوازین.',
+      'ب دلەکێ پڕی خۆشی پیرۆزباهیا شەهیانا هەوە دکەین، هیڤیا تەمەنەکێ درێژ و پڕی کامەرانی بۆ هەوە دخوازین.',
+      'ئەڤینا هەوە هەردەم وەکی گوڵێن بهارێ گەش بیت! پیرۆزە و ب خێر و خۆشی بیت.'
+    ];
+    let wishCycleIdx = 0;
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, m => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[m]));
+    }
+
+    function sendRsvpToBackend(payload) {
+      const csrf = document.getElementById('lavenderCsrfToken') ? document.getElementById('lavenderCsrfToken').value : '';
+      const lang = document.getElementById('lavenderLang') ? document.getElementById('lavenderLang').value : 'ku';
+      return fetch("{{ url_for('public.submit_rsvp', slug=invitation.slug) }}", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': csrf
+        },
+        body: JSON.stringify(Object.assign({ csrf_token: csrf, language: lang }, payload))
+      }).then(r => r.json()).catch(() => ({ ok: true }));
+    }
+
+    // -----------------------------------------------------------------------
+    // 9. INITIALIZE ON DOM READY
+    // -----------------------------------------------------------------------
+    window.addEventListener('DOMContentLoaded', () => {
+      applySavedThemeMode();
+      initYouTubePlayerIfNeeded();
+      initOpeningFloralCanvas();
+      initAmbientGardenCanvas();
+      renderSingleGallery();
+      updateLavenderCountdown();
+      setInterval(updateLavenderCountdown, 1000);
+      initScratchCountdownCard();
+
+      const openBtn = document.getElementById('openInvitationBtn');
+      const welcomeOverlay = document.getElementById('welcomeOverlay');
+      const mainInvitation = document.getElementById('mainInvitation');
+
+      window.triggerInvitationOpening = function () {
+        launchFlowerBurst('flowers');
+        startAdminMusicAfterOpen();
+        if (welcomeOverlay) {
+          welcomeOverlay.classList.add('card-opening');
+          setTimeout(() => {
+            if (mainInvitation) mainInvitation.classList.add('invitation-ready');
+          }, 250);
+          setTimeout(() => {
+            welcomeOverlay.classList.add('hidden');
+          }, 1150);
+        }
+      };
+
+      if (openBtn) {
+        openBtn.addEventListener('click', window.triggerInvitationOpening);
+      }
+
+      // Single-Image Gallery Controls & Lightbox
+      const cfPrevBtn = document.getElementById('cfPrevBtn');
+      const cfNextBtn = document.getElementById('cfNextBtn');
+      const singleGalleryCard = document.getElementById('singleGalleryCard');
+
+      if (cfPrevBtn) cfPrevBtn.addEventListener('click', () => { activeSlideIdx -= 1; renderSingleGallery(); });
+      if (cfNextBtn) cfNextBtn.addEventListener('click', () => { activeSlideIdx += 1; renderSingleGallery(); });
+      if (singleGalleryCard) singleGalleryCard.addEventListener('click', () => openLightboxAt(activeSlideIdx));
+
+      const lbModal = document.getElementById('lightboxModal');
+      const closeLbBtn = document.getElementById('closeLbBtn');
+      const lbPrevBtn = document.getElementById('lbPrevBtn');
+      const lbNextBtn = document.getElementById('lbNextBtn');
+      const lbThumbStrip = document.getElementById('lbThumbStrip');
+
+      if (lbThumbStrip) {
+        const list = getGalleryList();
+        list.forEach((item, i) => {
+          const tBtn = document.createElement('button');
+          tBtn.type = 'button';
+          tBtn.className = 'h-12 w-12 rounded-lg overflow-hidden border-2 border-white/40 hover:border-white shrink-0 transition';
+          tBtn.innerHTML = `<img src="${escapeHtml(item.src)}" alt="Thumb ${i + 1}" class="h-full w-full object-cover">`;
+          tBtn.addEventListener('click', () => openLightboxAt(i));
+          lbThumbStrip.appendChild(tBtn);
+        });
+      }
+      if (closeLbBtn && lbModal) {
+        closeLbBtn.addEventListener('click', () => {
+          lbModal.classList.add('hidden');
+          lbModal.classList.remove('flex');
+        });
+      }
+      if (lbPrevBtn) lbPrevBtn.addEventListener('click', () => openLightboxAt(activeSlideIdx - 1));
+      if (lbNextBtn) lbNextBtn.addEventListener('click', () => openLightboxAt(activeSlideIdx + 1));
+
+      // Dress Code Swatches
+      const tipText = document.getElementById('dressCodeTipText');
+      document.querySelectorAll('.dress-swatch').forEach(sw => {
+        sw.addEventListener('click', () => {
+          document.querySelectorAll('.dress-swatch').forEach(b => b.classList.remove('ring-[#7869a0]'));
+          sw.classList.add('ring-[#7869a0]');
+          if (tipText) tipText.textContent = sw.getAttribute('data-color-tip') || '';
+        });
+      });
+
+      // Schedule Scroll & Click Flower Blooming
+      const schedProgress = document.getElementById('purpleScheduleProgress');
+      function setSchedProgress(val) {
+        const clamped = Math.max(0.12, Math.min(1, val));
+        if (schedProgress) schedProgress.style.transform = `scaleY(${clamped})`;
+        document.querySelectorAll('.sched-row').forEach(row => {
+          const th = parseFloat(row.getAttribute('data-sched') || '0.5');
+          if (clamped >= th - 0.05) row.classList.add('bloomed');
+          else row.classList.remove('bloomed');
+        });
+      }
+      document.querySelectorAll('.sched-row').forEach(row => {
+        row.addEventListener('click', () => setSchedProgress(parseFloat(row.getAttribute('data-sched') || '0.5')));
+        row.addEventListener('mouseenter', () => setSchedProgress(parseFloat(row.getAttribute('data-sched') || '0.5')));
+      });
+      window.addEventListener('scroll', () => {
+        const box = document.getElementById('purpleScheduleContainer');
+        if (!box) return;
+        const rect = box.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const ratio = (vh * 0.72 - rect.top) / Math.max(1, rect.height);
+        if (ratio >= 0.08 && ratio <= 1.2) setSchedProgress(ratio);
+      }, { passive: true });
+
+      // Guestbook Form & 🪄 Magic Wish Button (Submits to Backend RSVP API)
+      const magicWishBtn = document.getElementById('magicWishBtn');
+      const lgbWish = document.getElementById('lgbWish');
+      if (magicWishBtn && lgbWish) {
+        magicWishBtn.addEventListener('click', () => {
+          lgbWish.value = kurdishBadiniWishes[wishCycleIdx];
+          wishCycleIdx = (wishCycleIdx + 1) % kurdishBadiniWishes.length;
+        });
+      }
+
+      const lgbEntries = [];
+      const lgbForm = document.getElementById('lavenderGuestbookForm');
+      const lgbList = document.getElementById('lavenderGuestbookList');
+      const lgbFeedback = document.getElementById('lgbFeedback');
+      let totalRsvp = Number((document.getElementById('rsvpBadgeCount') || {}).textContent || 18);
+
+      if (lgbForm && lgbList) {
+        lgbForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const nameVal = document.getElementById('lgbName').value.trim();
+          const wishVal = (lgbWish && lgbWish.value.trim()) || '';
+          const attVal = (document.getElementById('lgbAttending') || {}).value || 'yes';
+          const guestsVal = Number((document.getElementById('lgbGuests') || {}).value || 1);
+          if (!nameVal) return;
+
+          sendRsvpToBackend({
+            guest_name: nameVal,
+            attending: attVal,
+            guests_count: guestsVal,
+            message: wishVal
+          }).then((res) => {
+            if (lgbFeedback) {
+              lgbFeedback.textContent = (res && res.message) || `زۆر سوپاس بەڕێز ${nameVal}! پەیام و ئامادەبوونا تە هاتە تۆمارکرن 💜`;
+              lgbFeedback.classList.remove('hidden');
+            }
+          });
+
+          if (attVal === 'yes') {
+            totalRsvp += guestsVal;
+            const badge = document.getElementById('rsvpBadgeCount');
+            if (badge) badge.textContent = String(totalRsvp);
+          }
+
+          if (wishVal) {
+            const now = new Date();
+            const dStr = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
+            lgbEntries.unshift({ name: nameVal, wish: wishVal, date: dStr });
+            lgbList.classList.remove('hidden');
+            lgbList.innerHTML = '';
+            lgbEntries.forEach(entry => {
+              const card = document.createElement('div');
+              card.className = 'rounded-[10px] border border-[#7869a0]/35 bg-[#faf8fc] p-4 text-sm text-right';
+              card.innerHTML = `
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="font-bold text-[#7869a0]">${escapeHtml(entry.name)}</span>
+                  <span class="text-[11px] opacity-65" dir="ltr">${escapeHtml(entry.date)}</span>
+                </div>
+                <p class="text-[#4e416d] leading-relaxed">${escapeHtml(entry.wish)}</p>
+              `;
+              lgbList.appendChild(card);
+            });
+          }
+          lgbForm.reset();
+          launchFlowerBurst('hearts');
+        });
+      }
+
+      // RSVP Modal (Also submits to Backend RSVP API)
+      const rsvpModal = document.getElementById('rsvpModal');
+      const openRsvpBtn = document.getElementById('openRsvpModalBtn');
+      const closeRsvpBtn = document.getElementById('closeRsvpModalBtn');
+      const rsvpYesBtn = document.getElementById('rsvpYesBtn');
+      const rsvpNoBtn = document.getElementById('rsvpNoBtn');
+      const rsvpModalForm = document.getElementById('rsvpModalForm');
+      let rsvpAttending = true;
+
+      if (openRsvpBtn && rsvpModal) {
+        openRsvpBtn.addEventListener('click', () => {
+          rsvpModal.classList.remove('hidden');
+          rsvpModal.classList.add('flex');
+        });
+      }
+      if (closeRsvpBtn && rsvpModal) {
+        closeRsvpBtn.addEventListener('click', () => {
+          rsvpModal.classList.add('hidden');
+          rsvpModal.classList.remove('flex');
+        });
+      }
+      if (rsvpYesBtn && rsvpNoBtn) {
+        rsvpYesBtn.addEventListener('click', () => {
+          rsvpAttending = true;
+          rsvpYesBtn.className = 'py-2.5 rounded-xl border-2 border-[#7869a0] bg-[#7869a0]/15 text-[#4e416d] text-xs font-bold transition';
+          rsvpNoBtn.className = 'py-2.5 rounded-xl border border-[#7869a0]/30 bg-white text-[#7869a0] text-xs font-bold transition';
+          document.getElementById('rsvpGuestsGroup').classList.remove('hidden');
+        });
+        rsvpNoBtn.addEventListener('click', () => {
+          rsvpAttending = false;
+          rsvpNoBtn.className = 'py-2.5 rounded-xl border-2 border-[#7869a0] bg-[#7869a0]/15 text-[#4e416d] text-xs font-bold transition';
+          rsvpYesBtn.className = 'py-2.5 rounded-xl border border-[#7869a0]/30 bg-white text-[#7869a0] text-xs font-bold transition';
+          document.getElementById('rsvpGuestsGroup').classList.add('hidden');
+        });
+      }
+      if (rsvpModalForm) {
+        rsvpModalForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const n = document.getElementById('rsvpModalName').value.trim();
+          const g = Number(document.getElementById('rsvpModalGuests').value || 1);
+          const fb = document.getElementById('rsvpModalFeedback');
+          if (!n) return;
+
+          sendRsvpToBackend({
+            guest_name: n,
+            attending: rsvpAttending ? 'yes' : 'no',
+            guests_count: g,
+            message: ''
+          });
+
+          if (rsvpAttending) {
+            totalRsvp += g;
+            document.getElementById('rsvpBadgeCount').textContent = String(totalRsvp);
+          }
+          if (fb) {
+            fb.textContent = `زۆر سوپاس بەڕێز ${n}! بەرسڤا تە ب سەرکەفتیانە هاتە تۆمارکرن 💜`;
+            fb.classList.remove('hidden');
+          }
+          launchFlowerBurst('flowers');
+          rsvpModalForm.reset();
+        });
+      }
+
+      // Scroll Reveal Observer
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('is-visible');
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+    });
+  </script>
+</body>
+</html>

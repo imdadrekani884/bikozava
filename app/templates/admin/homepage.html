@@ -1,0 +1,164 @@
+{% extends "admin/base.html" %}
+{% block title %}Homepage, Brand Logo & Example Names{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+  <div class="dashboard-hero">
+    <div>
+      <span class="eyebrow-tag">HOMEPAGE &amp; BRAND STUDIO</span>
+      <h1>Bikozava Brand Logo, Homepage Templates &amp; Example Names</h1>
+      <p class="text-muted">Upload your custom Bikozava logo, choose which templates appear on the public homepage (`bikozava.com`), and customize the example couple names.</p>
+    </div>
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      <a href="{{ url_for('public.home') }}" target="_blank" rel="noopener" class="btn btn-outline">View Live Homepage ↗</a>
+      <a href="{{ url_for('admin.dashboard') }}" class="btn btn-ghost">← Back to Dashboard</a>
+    </div>
+  </div>
+
+  <!-- 0. BIKOZAVA BRAND LOGO UPLOADER -->
+  <div class="panel-card" style="margin-bottom: 28px;">
+    <h3>1. Bikozava Brand Logo Upload</h3>
+    <p class="help-text">Upload your custom Bikozava logo (PNG, WEBP, or JPG). It will appear in the Homepage header, Footer, Templates page, and Admin Studio.</p>
+
+    <div style="display:flex; align-items:center; gap:24px; flex-wrap:wrap; margin-top:14px;">
+      <div style="min-width:120px; height:72px; padding:10px 18px; border-radius:14px; background:#171310; border:1px solid #C8A253; display:flex; align-items:center; justify-content:center; gap:10px; color:#FAF6F0;">
+        {% if homepage_cfg.logo_url %}
+        <img src="{{ homepage_cfg.logo_url }}" alt="Bikozava Logo" style="max-height:48px; max-width:160px; object-fit:contain;">
+        {% else %}
+        <span style="color:#C8A253; font-size:1.3rem;">✦</span>
+        <strong style="letter-spacing:0.14em;">BIKOZAVA</strong>
+        {% endif %}
+      </div>
+
+      <form action="{{ url_for('admin.upload_site_logo') }}" method="POST" enctype="multipart/form-data" style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="logo_action" value="upload">
+        <input type="file" name="logo_file" accept=".png,.webp,.jpg,.jpeg" required class="form-control" style="max-width:300px;">
+        <button type="submit" class="btn btn-gold btn-sm">Upload Brand Logo</button>
+      </form>
+
+      {% if homepage_cfg.logo_url %}
+      <form action="{{ url_for('admin.upload_site_logo') }}" method="POST" style="display:inline;">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="logo_action" value="reset">
+        <button type="submit" class="btn btn-outline btn-sm">Reset to Default Emblem</button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+
+  <form action="{{ url_for('admin.homepage_settings') }}" method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    <!-- 1. HERO SMARTPHONE SHOWCASE SETTINGS -->
+    <div class="panel-card" style="margin-bottom: 28px;">
+      <h3>2. Cinematic Hero Smartphone Showcase</h3>
+      <p class="help-text">Configure the example couple names, date, venue, and template shown inside the interactive smartphone on the first screen of the homepage.</p>
+
+      <div class="form-row-3">
+        <div class="form-group">
+          <label>Hero Groom Name (English)</label>
+          <input type="text" name="hero_groom_en" value="{{ homepage_cfg.hero_groom_en }}" required class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Hero Bride Name (English)</label>
+          <input type="text" name="hero_bride_en" value="{{ homepage_cfg.hero_bride_en }}" required class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Hero Demo Template</label>
+          <select name="hero_template_code" class="form-control">
+            {% for t in all_templates %}
+            <option value="{{ t.code }}" {% if homepage_cfg.hero_template_code == t.code %}selected{% endif %}>
+              {{ t.name_en }} ({{ t.code }})
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row-4" style="margin-top: 12px;">
+        <div class="form-group">
+          <label>Hero Groom (Badini Kurdish / Arabic)</label>
+          <input type="text" name="hero_groom_ku" value="{{ homepage_cfg.hero_groom_ku }}" dir="rtl" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Hero Bride (Badini Kurdish / Arabic)</label>
+          <input type="text" name="hero_bride_ku" value="{{ homepage_cfg.hero_bride_ku }}" dir="rtl" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Hero Wedding Date Display</label>
+          <input type="text" name="hero_date" value="{{ homepage_cfg.hero_date }}" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Hero Venue Display</label>
+          <input type="text" name="hero_venue" value="{{ homepage_cfg.hero_venue }}" class="form-control">
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. FEATURED HOMEPAGE TEMPLATES & EXAMPLE COUPLE NAMES -->
+    <div class="panel-card">
+      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+        <div>
+          <h3>3. Select Templates &amp; Example Couple Names for Homepage</h3>
+          <p class="help-text">Check <strong>Show on Homepage</strong> for any template you want featured on the homepage, and customize the example Groom &amp; Bride names viewers will see on the homepage and in the live preview.</p>
+        </div>
+        <button type="submit" class="btn btn-gold">Save Homepage &amp; Example Names</button>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        {% for row in template_rows %}
+        {% set t = row.template %}
+        <div style="border: 1px solid {% if row.is_featured %}#C8A253{% else %}#E5DEC9{% endif %}; background: {% if row.is_featured %}#FFFDF8{% else %}#FAF8F4{% endif %}; border-radius: 14px; padding: 16px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:12px;">
+            <label style="display:flex; align-items:center; gap:10px; cursor:pointer; font-weight:700; font-size:1rem;">
+              <input type="checkbox" name="featured_{{ t.code }}" value="1" {% if row.is_featured %}checked{% endif %} style="width:18px; height:18px; accent-color:#B88928;">
+              <span>{{ t.name_en }}</span>
+              <span style="font-weight:500; color:#7A6F5D; font-size:0.88rem;" dir="rtl">({{ t.name_ku }})</span>
+              <code style="font-size:0.75rem; background:#F0EAE0; padding:2px 8px; border-radius:6px;">{{ t.code }}</code>
+            </label>
+            <a href="{{ url_for('public.view_invitation', slug='ismail_shrin', template=t.code, groom_en=row.groom_en, bride_en=row.bride_en, groom_ku=row.groom_ku, bride_ku=row.bride_ku, example_date=row.example_date, example_venue=row.example_venue) }}" target="_blank" rel="noopener" class="btn btn-outline btn-xs">
+              Preview with Example Names ↗
+            </a>
+          </div>
+
+          <div class="form-row-3">
+            <div class="form-group">
+              <label>Example Groom (English)</label>
+              <input type="text" name="groom_en_{{ t.code }}" value="{{ row.groom_en }}" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Example Bride (English)</label>
+              <input type="text" name="bride_en_{{ t.code }}" value="{{ row.bride_en }}" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Example Date</label>
+              <input type="text" name="date_{{ t.code }}" value="{{ row.example_date }}" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-row-3" style="margin-top:8px;">
+            <div class="form-group">
+              <label>Example Groom (Kurdish / Arabic)</label>
+              <input type="text" name="groom_ku_{{ t.code }}" value="{{ row.groom_ku }}" dir="rtl" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Example Bride (Kurdish / Arabic)</label>
+              <input type="text" name="bride_ku_{{ t.code }}" value="{{ row.bride_ku }}" dir="rtl" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Example Venue</label>
+              <input type="text" name="venue_{{ t.code }}" value="{{ row.example_venue }}" class="form-control">
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="panel-save-row" style="margin-top:20px;">
+        <button type="submit" class="btn btn-gold btn-lg">Save Homepage Showcase &amp; Example Names</button>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

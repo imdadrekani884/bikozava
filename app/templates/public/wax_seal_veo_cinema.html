@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="{{ lang_meta.lang_attr }}" dir="{{ lang_meta.dir }}" data-template="{{ template.code }}" data-category="{{ template.category }}" class="h-full antialiased scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>{{ invitation.groom_name_en or groom_display }} &amp; {{ invitation.bride_name_en or bride_display }} — {{ human_date }} | Kurdish Badini Interactive Wedding Invitation</title>
+  <meta name="description" content="{{ ui.with_joy_we_invite }} — {{ groom_display }} & {{ bride_display }} • {{ human_date }} • {{ venue_display }}">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Gulzar&family=Inter:wght@400;500;600;700&family=Lalezar&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    if (window.tailwind) {
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['{{ invitation.font_arabic or "Vazirmatn" }}', 'Cairo', 'Noto Naskh Arabic', 'Inter', 'sans-serif'],
+              serif: ['Amiri', 'Playfair Display', 'Cormorant Garamond', 'serif'],
+              calligraphy: ['Aref Ruqaa', 'Lalezar', 'Amiri', 'serif'],
+              latin: ['{{ invitation.font_latin or "Playfair Display" }}', 'Cormorant Garamond', 'serif']
+            },
+            colors: {
+              gold: {
+                200: '#f9ebb8',
+                300: '#f3d999',
+                400: '#d4a853',
+                500: '#c49746',
+                600: '#9d7e26',
+                700: '#7b4d27'
+              },
+              luxury: {
+                dark: '#3a2a18',
+                umber: '#4f412f',
+                muted: '#8d7255',
+                cream: '#f7f0e6',
+                sage: '#6f8f62'
+              }
+            }
+          }
+        }
+      };
+    }
+  </script>
+  <style>
+    :root {
+      --invitation-latin-name-font: '{{ invitation.font_latin or "Playfair Display" }}', 'Aref Ruqaa', 'Amiri', serif;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      background-color: #f7f0e6;
+      color: #4f412f;
+      font-family: '{{ invitation.font_arabic or "Vazirmatn" }}', 'Cairo', 'Noto Naskh Arabic', 'Inter', sans-serif;
+      overflow-x: hidden;
+      transition: background-color 0.35s ease, color 0.35s ease;
+    }
+    .parchment-bg {
+      background-color: #f7f0e6;
+      background-image:
+        radial-gradient(circle at 20% 15%, rgba(212, 168, 83, 0.14) 0%, transparent 45%),
+        radial-gradient(circle at 80% 50%, rgba(157, 126, 38, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 30% 85%, rgba(212, 168, 83, 0.15) 0%, transparent 45%),
+        linear-gradient(180deg, rgba(74, 53, 27, 0.08) 0%, rgba(247, 240, 230, 0.92) 18%, rgba(247, 240, 230, 0.95) 82%, rgba(74, 53, 27, 0.12) 100%);
+    }
+    body.is-dark-mode {
+      background-color: #120d08 !important;
+      color: #f4ead8 !important;
+    }
+    body.is-dark-mode.parchment-bg {
+      background-color: #120d08 !important;
+      background-image:
+        radial-gradient(circle at 20% 15%, rgba(212, 168, 83, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 80% 50%, rgba(157, 126, 38, 0.1) 0%, transparent 50%);
+    }
+    body.is-dark-mode .bg-\[\#fbffff\]\/95,
+    body.is-dark-mode .bg-\[\#fbffff\]\/65,
+    body.is-dark-mode .bg-\[\#fbffff\]\/70,
+    body.is-dark-mode .bg-\[\#fbffff\]\/75,
+    body.is-dark-mode .bg-\[\#fbffff\]\/80 {
+      background-color: rgba(32, 24, 16, 0.92) !important;
+      border-color: rgba(212, 168, 83, 0.3) !important;
+      color: #f5ebd6 !important;
+    }
+    body.is-dark-mode .text-\[\#4f412f\],
+    body.is-dark-mode .text-amber-950,
+    body.is-dark-mode .text-amber-900\/95,
+    body.is-dark-mode .text-\[\#62472b\] {
+      color: #f5ebd6 !important;
+    }
+    .gold-gradient-btn {
+      background: linear-gradient(135deg, #f7e3b5 0%, #d4a853 50%, #9d7e26 100%);
+      box-shadow: 0 10px 28px rgba(157, 126, 38, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.75);
+    }
+    .gold-gradient-btn:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+    .gold-text-shimmer {
+      background: linear-gradient(180deg, #fff6d6 0%, #f1cc75 45%, #c59237 85%, #8f6219 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 4px 12px rgba(28, 16, 5, 0.55));
+    }
+    .seal-gold-text {
+      background: linear-gradient(180deg, #d7a94f 0%, #b8842d 55%, #875b17 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 6px rgba(135, 91, 23, 0.22));
+    }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Seal split curtain doors */
+    .gate-door-right,
+    .gate-door-left {
+      transition: transform 1.45s cubic-bezier(0.77, 0, 0.175, 1), opacity 1.2s ease;
+    }
+    .seal-opened .gate-door-right {
+      transform: translateX(105%);
+    }
+    .seal-opened .gate-door-left {
+      transform: translateX(-105%);
+    }
+    .seal-opened .seal-center-wrap {
+      transform: translate(-50%, -50%) scale(1.35);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .seal-opened .seal-header-wrap {
+      transform: translateY(-40px);
+      opacity: 0;
+    }
+    /* Hero Names & Date cinematic reveal */
+    .hero-reveal-item {
+      opacity: 0;
+      filter: blur(10px);
+      transform: translateY(24px) scale(0.96);
+      transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 1.3s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hero-active .hero-reveal-item {
+      opacity: 1;
+      filter: blur(0px);
+      transform: translateY(0) scale(1);
+    }
+    .delay-200 { transition-delay: 0.25s; }
+    .delay-500 { transition-delay: 0.55s; }
+    .delay-800 { transition-delay: 0.85s; }
+    .delay-1100 { transition-delay: 1.15s; }
+
+    /* Scroll reveal sections */
+    .reveal-section {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes pulseGentle {
+      0%, 100% { transform: scale(1); box-shadow: 0 14px 40px rgba(180, 138, 62, 0.28), 0 0 0 0 rgba(212, 168, 83, 0.35); }
+      50% { transform: scale(1.035); box-shadow: 0 20px 50px rgba(180, 138, 62, 0.42), 0 0 0 14px rgba(212, 168, 83, 0); }
+    }
+    .wax-seal-btn {
+      animation: pulseGentle 3s infinite ease-in-out;
+    }
+    @keyframes bounceDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
+    .animate-bounce-slow {
+      animation: bounceDown 2s infinite ease-in-out;
+    }
+    @keyframes soundWave {
+      0%, 100% { height: 4px; }
+      50% { height: 14px; }
+    }
+    .wave-bar-1 { animation: soundWave 0.7s infinite ease-in-out 0.1s; }
+    .wave-bar-2 { animation: soundWave 0.7s infinite ease-in-out 0.3s; }
+    .wave-bar-3 { animation: soundWave 0.7s infinite ease-in-out 0.2s; }
+
+    .youtube-audio-hidden {
+      position: fixed;
+      width: 1px;
+      height: 1px;
+      left: -9999px;
+      top: -9999px;
+      opacity: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="invitation-body template-{{ template.code }} min-h-full flex flex-col parchment-bg text-luxury-umber selection:bg-gold-400/30 selection:text-luxury-dark">
+
+  <!-- ===================================================================== -->
+  <!-- TOP QUICK CONTROLS (3-LANGUAGE SWITCHER + REPLAY SEAL + ADMIN MUSIC)  -->
+  <!-- ===================================================================== -->
+  <div id="floating-controls" class="fixed top-4 left-4 right-4 z-[85] flex items-center justify-between pointer-events-none">
+    <div class="flex items-center gap-2 pointer-events-auto">
+      <nav class="flex items-center gap-1 rounded-full bg-[#1b1209]/80 text-[#f9ebb8] border border-[#d4a853]/45 px-2 py-1 text-xs font-bold shadow-lg backdrop-blur-md" aria-label="Language Switcher">
+        <a href="{{ url_for('public.view_invitation', slug=invitation.slug, lang='ku', preview_token=request.args.get('preview_token', ''), template=request.args.get('template', '')) }}" class="px-2.5 py-1 rounded-full transition {% if lang == 'ku' %}bg-[#d4a853] text-[#1b1209]{% else %}hover:bg-white/10{% endif %}">بادینی</a>
+        <a href="{{ url_for('public.view_invitation', slug=invitation.slug, lang='ar', preview_token=request.args.get('preview_token', ''), template=request.args.get('template', '')) }}" class="px-2.5 py-1 rounded-full transition {% if lang == 'ar' %}bg-[#d4a853] text-[#1b1209]{% else %}hover:bg-white/10{% endif %}">عربي</a>
+        <a href="{{ url_for('public.view_invitation', slug=invitation.slug, lang='en', preview_token=request.args.get('preview_token', ''), template=request.args.get('template', '')) }}" class="px-2.5 py-1 rounded-full transition {% if lang == 'en' %}bg-[#d4a853] text-[#1b1209]{% else %}hover:bg-white/10{% endif %}">EN</a>
+      </nav>
+
+      <button id="replaySealBtn" type="button" class="hidden items-center gap-1.5 rounded-full bg-white/90 hover:bg-white text-[#7b4d27] border border-[#d4a853]/40 px-3 py-1.5 text-xs font-bold shadow-md backdrop-blur-md transition duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+        <span>مۆرا دەستپێکێ</span>
+      </button>
+    </div>
+
+    <div class="pointer-events-auto flex items-center gap-2">
+      <button
+        type="button"
+        id="theme-mode-toggle-btn"
+        onclick="toggleInvitationDarkMode()"
+        class="w-9 h-9 rounded-full bg-[#1b1209]/80 text-[#f9ebb8] border border-[#d4a853]/45 shadow-lg backdrop-blur-md flex items-center justify-center text-sm transition hover:scale-105"
+        aria-label="Toggle Dark / Light Mode"
+        title="Dark / Light Mode"
+      >
+        <span id="theme-mode-icon">🌙</span>
+      </button>
+
+      {% if music_source_type != 'none' and (invitation.music_url or youtube_video_id) %}
+      <button
+        type="button"
+        id="music-toggle-btn"
+        onclick="toggleWeddingMusic()"
+        aria-label="{{ ui.music_playing }}"
+        data-label-playing="{{ ui.music_playing }}"
+        data-label-muted="{{ ui.music_muted }}"
+        data-music-source="{{ music_source_type }}"
+        data-youtube-id="{{ youtube_video_id }}"
+        data-autoplay-after-open="{{ '1' if invitation.music_autoplay_after_open else '0' }}"
+        class="flex items-center gap-1.5 rounded-full bg-[#1b1209]/80 text-[#f9ebb8] border border-[#d4a853]/45 px-3 py-1.5 text-xs font-bold shadow-lg backdrop-blur-md transition hover:scale-105"
+      >
+        <span>🎵</span>
+        <span id="music-status-text">{{ ui.music_playing }}</span>
+      </button>
+
+      {% if music_source_type == 'youtube' and youtube_video_id %}
+      <div id="youtube-audio-Wrapper" class="youtube-audio-hidden" aria-hidden="true">
+        <div id="youtube-audio-player"></div>
+      </div>
+      {% elif invitation.music_url %}
+      <audio
+        id="wedding-audio"
+        src="{{ invitation.music_url }}"
+        loop
+        preload="auto"
+        data-autoplay-after-open="{{ '1' if invitation.music_autoplay_after_open else '0' }}"
+      ></audio>
+      {% endif %}
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 1. SEAL / OPEN OVERLAY (مۆرا شەهیانێ)                                 -->
+  <!-- ===================================================================== -->
+  {% if has_opening_section %}
+  <div id="sealOverlay" class="opening-stage fixed inset-0 z-[70] flex items-center justify-center overflow-hidden select-none">
+    <!-- Right Split Door (Uses Admin-Selected Couple Image) -->
+    <div id="gateRight" class="gate-door-right absolute top-0 bottom-0 right-0 w-1/2 bg-[#fcfaf5] border-l border-[#3898d4]/30 overflow-hidden shadow-2xl">
+      <div class="absolute inset-x-0 bottom-0 h-[42%] opacity-25 pointer-events-none" style="background-image: url('{{ invitation.couple_image or '/static/img/demo/couple_ismail_shrin.webp' }}'); background-size: cover; background-position: center 35%; filter: sepia(0.35) brightness(1.15) contrast(0.85);"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-[#ffffff] via-[#fcfaf5]/90 to-transparent"></div>
+    </div>
+
+    <!-- Left Split Door (Uses Admin-Selected Couple Image) -->
+    <div id="gateLeft" class="gate-door-left absolute top-0 bottom-0 left-0 w-1/2 bg-[#fcfaf5] border-r border-[#3898d4]/30 overflow-hidden shadow-2xl">
+      <div class="absolute inset-x-0 bottom-0 h-[42%] opacity-25 pointer-events-none" style="background-image: url('{{ invitation.couple_image or '/static/img/demo/couple_ismail_shrin.webp' }}'); background-size: cover; background-position: center 35%; filter: sepia(0.35) brightness(1.15) contrast(0.85); transform: scaleX(-1);"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-[#ffffff] via-[#fcfaf5]/90 to-transparent"></div>
+    </div>
+
+    <!-- Center Vertical Seam Line -->
+    <div id="sealSeamLine" class="pointer-events-none absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[1.5px] bg-gradient-to-b from-[#6ab0df]/60 via-[#6ab0df]/80 to-[#d4a853]/40 transition-opacity duration-700"></div>
+
+    <!-- Top Golden Calligraphy & Instruction -->
+    <div class="seal-header-wrap absolute top-[7vh] sm:top-[8vh] inset-x-0 z-20 flex flex-col items-center text-center px-4 transition-all duration-700 pointer-events-none">
+      <div class="relative mb-3">
+        <h2 data-bind="calligraphyTitle" class="font-calligraphy text-5xl sm:text-6xl md:text-7xl seal-gold-text leading-relaxed py-2 px-4">داخوازناما شەهیانێ</h2>
+      </div>
+      <div class="mt-6 flex flex-col items-center gap-1.5 text-[#2b7bb9]">
+        <span class="text-sm sm:text-base font-bold tracking-wide">ل سەر مۆرێ بدە بۆ ڤەکرنێ</span>
+        <span class="exact-badini-prompt text-xs text-[#2b7bb9]/85 font-semibold" dir="rtl" lang="ku">{{ opening_card_exact_badini }}</span>
+        <svg class="w-5 h-5 animate-bounce-slow text-[#2b7bb9]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Center Pearl & Gold Wax Monogram Seal Button -->
+    <div class="seal-center-wrap absolute left-1/2 top-[52%] -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-1000">
+      <button id="openSealBtn" type="button" aria-label="{{ opening_card_exact_badini }}" class="wax-seal-btn group relative w-48 h-48 sm:w-56 sm:h-56 rounded-full flex flex-col items-center justify-center p-4 cursor-pointer focus:outline-none" style="background: radial-gradient(circle at 32% 28%, #ffffff 0%, #fdf8ee 48%, #f3e4c6 82%, #e5cca0 100%); border: 3px solid rgba(255, 255, 255, 0.95);">
+        <div class="absolute -inset-3 rounded-full bg-gradient-to-tr from-[#d4a853]/25 via-transparent to-[#f3d999]/30 blur-md -z-10 group-hover:scale-105 transition duration-500"></div>
+        <div class="absolute inset-3.5 rounded-full border border-[#7bb5dc]/45 pointer-events-none"></div>
+        <div class="absolute inset-5 rounded-full border border-[#d4a853]/30 pointer-events-none"></div>
+        <div class="absolute inset-x-4 bottom-3 h-12 rounded-b-full bg-gradient-to-t from-[#d9be91]/35 to-transparent pointer-events-none"></div>
+
+        <!-- Dynamic Monogram & Couple Names on Seal -->
+        <div class="relative z-10 flex flex-col items-center justify-center text-center space-y-1" dir="ltr">
+          <div class="font-latin text-2xl sm:text-3xl font-bold tracking-wider text-[#2678b2] flex items-center gap-1.5">
+            <span data-bind="groomInitial">{{ (invitation.groom_name_en or groom_display or 'I')[:1] }}</span>
+            <span class="font-serif italic text-xl sm:text-2xl text-[#3b8bc4]">&amp;</span>
+            <span data-bind="brideInitial">{{ (invitation.bride_name_en or bride_display or 'S')[:1] }}</span>
+          </div>
+          <div class="h-px w-12 bg-[#d4a853]/40 my-1"></div>
+          <span data-bind="sealGroomName" class="text-sm sm:text-base font-extrabold tracking-[0.14em] text-[#2678b2] uppercase">{{ (invitation.groom_name_en or groom_display)|upper }}</span>
+          <span class="text-xs sm:text-sm font-bold text-[#2678b2]">&amp;</span>
+          <span data-bind="sealBrideName" class="text-sm sm:text-base font-extrabold tracking-[0.14em] text-[#2678b2] uppercase">{{ (invitation.bride_name_en or bride_display)|upper }}</span>
+        </div>
+      </button>
+    </div>
+
+    <canvas id="transitionBurstCanvas" class="pointer-events-none absolute inset-0 z-40 w-full h-full"></canvas>
+  </div>
+  {% endif %}
+
+  <!-- ===================================================================== -->
+  <!-- MAIN INVITATION WRAPPER                                               -->
+  <!-- ===================================================================== -->
+  <main id="invitationMain" class="invitation-main relative w-full flex flex-col items-stretch overflow-x-hidden">
+
+    <!-- =================================================================== -->
+    <!-- 2. COUPLE VIDEO / VEO CINEMATIC BACKGROUND + DYNAMIC HTML OVERLAY   -->
+    <!-- =================================================================== -->
+    <section id="heroSection" class="inv-section section-couple hero-active relative h-[100vh] min-h-[640px] w-full flex flex-col justify-between items-center text-center p-6 select-none overflow-hidden bg-[#1b1008]">
+
+      <!-- Layer A: HTML5 Video Element (If Admin Uploaded Custom Hero Video) -->
+      <video
+        id="veoVideoBg"
+        {% if invitation.hero_video_url and '/uploads/video/' in invitation.hero_video_url %}
+        src="{{ invitation.hero_video_url }}"
+        {% endif %}
+        muted
+        loop
+        playsinline
+        preload="auto"
+        class="referral-video absolute inset-0 z-0 h-full w-full object-cover opacity-0 transition-opacity duration-1000 pointer-events-none"
+      ></video>
+
+      <!-- Layer B: Built-in 60fps Veo Cinematic Canvas Engine (Uses Admin's Couple Photo!) -->
+      <canvas id="veoCanvasBg" class="absolute inset-0 z-[1] h-full w-full object-cover pointer-events-none"></canvas>
+      <img id="veoSourceImg" src="{{ invitation.couple_image or '/static/img/demo/couple_ismail_shrin.webp' }}" alt="{{ groom_display }} &amp; {{ bride_display }}" class="hidden">
+
+      <!-- Layer C: Cinematic Vignette & Top/Bottom Gradients -->
+      <div class="pointer-events-none absolute inset-0 z-[3] bg-gradient-to-b from-[#1b1008]/65 via-transparent to-[#0c0a09]/85"></div>
+      <div class="pointer-events-none absolute inset-x-0 top-0 z-[4] h-36 bg-gradient-to-b from-[#1b1008]/80 to-transparent"></div>
+
+      <!-- Layer D: Top Botanical Olive/Laurel Foliage Silhouettes -->
+      <svg class="pointer-events-none absolute top-0 left-0 w-44 sm:w-64 h-44 sm:h-64 z-[6] text-[#2a1d0c]/75 opacity-85" viewBox="0 0 200 200" fill="currentColor">
+        <path d="M0,0 L120,0 C105,25 90,55 82,95 C75,65 65,40 48,18 C52,55 44,95 28,135 C22,95 15,60 0,35 Z" opacity="0.35"/>
+        <path d="M22,0 C28,32 38,65 55,105 C42,88 30,68 22,45 C18,72 20,102 28,132 C15,108 8,82 5,52" stroke="#4a3519" stroke-width="1.5" fill="none"/>
+        <ellipse cx="42" cy="52" rx="5" ry="12" transform="rotate(-25 42 52)" fill="#3d2c14" opacity="0.75"/>
+        <ellipse cx="52" cy="78" rx="5" ry="12" transform="rotate(-18 52 78)" fill="#3d2c14" opacity="0.75"/>
+        <ellipse cx="28" cy="88" rx="5" ry="13" transform="rotate(15 28 88)" fill="#3d2c14" opacity="0.75"/>
+        <ellipse cx="32" cy="115" rx="4.5" ry="11" transform="rotate(8 32 115)" fill="#3d2c14" opacity="0.75"/>
+      </svg>
+      <svg class="pointer-events-none absolute top-0 right-0 w-44 sm:w-64 h-44 sm:h-64 z-[6] text-[#2a1d0c]/75 opacity-85 transform -scale-x-100" viewBox="0 0 200 200" fill="currentColor">
+        <path d="M0,0 L120,0 C105,25 90,55 82,95 C75,65 65,40 48,18 C52,55 44,95 28,135 C22,95 15,60 0,35 Z" opacity="0.35"/>
+        <path d="M22,0 C28,32 38,65 55,105 C42,88 30,68 22,45 C18,72 20,102 28,132 C15,108 8,82 5,52" stroke="#4a3519" stroke-width="1.5" fill="none"/>
+        <ellipse cx="42" cy="52" rx="5" ry="12" transform="rotate(-25 42 52)" fill="#3d2c14" opacity="0.75"/>
+        <ellipse cx="52" cy="78" rx="5" ry="12" transform="rotate(-18 52 78)" fill="#3d2c14" opacity="0.75"/>
+        <ellipse cx="28" cy="88" rx="5" ry="13" transform="rotate(15 28 88)" fill="#3d2c14" opacity="0.75"/>
+        <ellipse cx="32" cy="115" rx="4.5" ry="11" transform="rotate(8 32 115)" fill="#3d2c14" opacity="0.75"/>
+      </svg>
+
+      <!-- Layer E: Top Golden Kurdish Badini Calligraphy + Dynamic Date/Time Overlay -->
+      <div class="relative z-20 pt-[6vh] sm:pt-[7vh] flex flex-col items-center gap-3">
+        <div class="hero-reveal-item delay-200">
+          <h2 data-bind="calligraphyTitle" class="font-calligraphy text-4xl sm:text-6xl md:text-7xl gold-text-shimmer leading-normal px-4 py-1 select-none">داخوازناما شەهیانێ</h2>
+        </div>
+        <div class="hero-reveal-item delay-500 flex items-center gap-3 px-4 py-1 rounded-full bg-black/20 backdrop-blur-[2px]">
+          <span data-bind="heroDateTimeText" class="font-serif text-base sm:text-lg md:text-xl font-bold tracking-[0.12em] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]" dir="rtl">{{ human_date }} - {{ invitation.wedding_time or '19:00' }}</span>
+        </div>
+      </div>
+
+      <!-- Layer F: DYNAMIC HTML COUPLE NAMES OVER VIDEO -->
+      <div class="relative z-20 mx-auto my-auto pb-12 sm:pb-20 flex w-full max-w-4xl flex-col items-center px-4 text-center">
+        <div id="heroNamesContainer" dir="ltr" class="hero-reveal-item delay-800 flex items-center justify-center text-center gap-x-4 sm:gap-x-7 md:gap-x-9 flex-wrap">
+          <h1 data-bind="heroBrideName" class="break-words text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white drop-shadow-[0_4px_22px_rgba(25,10,2,0.95)] font-bold tracking-tight leading-[1.15] py-1" style="font-family: var(--invitation-latin-name-font);">{{ invitation.bride_name_en or bride_display }}</h1>
+          <span class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold italic tracking-widest text-[#f3d999] drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)]">&amp;</span>
+          <h1 data-bind="heroGroomName" class="break-words text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white drop-shadow-[0_4px_22px_rgba(25,10,2,0.95)] font-bold tracking-tight leading-[1.15] py-1" style="font-family: var(--invitation-latin-name-font);">{{ invitation.groom_name_en or groom_display }}</h1>
+        </div>
+        <p data-bind="heroKurdishSubtitle" class="hero-reveal-item delay-1100 mt-3 text-sm sm:text-base font-medium text-[#f9ebb8]/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] tracking-wide">{{ groom_display }} &amp; {{ bride_display }} • ب خێرهاتنا هەوە دکەن</p>
+      </div>
+
+      <!-- Layer G: Scroll Down Indicator -->
+      <div class="relative z-20 w-full pb-20 flex flex-col items-center gap-2">
+        <a href="#countdown" class="group flex flex-col items-center gap-1.5 text-white/80 hover:text-white transition">
+          <span class="text-[11px] font-semibold tracking-wider text-[#f3d999]/90">خوارێ ببینە</span>
+          <div class="mx-auto h-12 w-px bg-gradient-to-b from-white/90 to-transparent group-hover:h-14 transition-all duration-300"></div>
+        </a>
+      </div>
+
+      <div class="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-32 bg-gradient-to-b from-transparent via-[#1c140b]/70 to-[#2c1f11]"></div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- INTERACTIVE INVITATION SECTIONS CONTAINER                           -->
+    <!-- =================================================================== -->
+    <div class="relative z-10 flex w-full flex-col items-stretch px-4 pb-36 pt-16 sm:pt-24">
+      <div class="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#2c1f11] to-transparent opacity-85"></div>
+
+      <div class="relative z-10 max-w-2xl mx-auto w-full flex flex-col items-stretch space-y-20 sm:space-y-24">
+
+        <!-- =============================================================== -->
+        <!-- 3. COUNTDOWN SECTION (هەژمارتنا بەرەڤ پاش)                      -->
+        <!-- =============================================================== -->
+        <section id="countdown" class="inv-section section-countdown reveal-section is-visible text-center px-2 sm:px-4">
+          <div
+            id="live-countdown"
+            data-wedding-date="{{ invitation.wedding_date }}"
+            data-wedding-time="{{ invitation.wedding_time or '19:00' }}"
+            class="bg-[#fbffff]/65 backdrop-blur-xl border border-white/70 rounded-[2.4rem] p-8 md:p-10 shadow-[0_18px_55px_rgba(78,67,45,0.16)] mx-auto max-w-xl space-y-6 relative overflow-hidden"
+          >
+            <span class="text-sm tracking-[0.12em] text-[#8d7255] font-bold block">{{ ui.countdown_title }}</span>
+            <div class="grid grid-cols-4 gap-2.5 md:gap-4 w-full max-w-md mx-auto select-none" dir="rtl">
+              <div class="flex flex-col items-center justify-center py-3 px-2 md:p-4 rounded-[1.7rem] bg-[#fbffff]/75 border border-white/80 shadow-[0_10px_28px_rgba(78,67,45,0.1)] backdrop-blur-md relative overflow-hidden group hover:border-gold-400/50 transition duration-300">
+                <div class="absolute inset-x-2 top-0 h-[1px] bg-gradient-to-r from-transparent via-gold-400/50 to-transparent"></div>
+                <span id="cdDays" class="font-serif text-2xl md:text-3xl font-extrabold text-[#6f8f62] tracking-tight leading-none">00</span>
+                <span class="text-[11px] md:text-xs text-[#8d7255] font-bold mt-2 text-center">{{ ui.days }}</span>
+              </div>
+              <div class="flex flex-col items-center justify-center py-3 px-2 md:p-4 rounded-[1.7rem] bg-[#fbffff]/75 border border-white/80 shadow-[0_10px_28px_rgba(78,67,45,0.1)] backdrop-blur-md relative overflow-hidden group hover:border-gold-400/50 transition duration-300">
+                <div class="absolute inset-x-2 top-0 h-[1px] bg-gradient-to-r from-transparent via-gold-400/50 to-transparent"></div>
+                <span id="cdHours" class="font-serif text-2xl md:text-3xl font-extrabold text-[#6f8f62] tracking-tight leading-none">00</span>
+                <span class="text-[11px] md:text-xs text-[#8d7255] font-bold mt-2 text-center">{{ ui.hours }}</span>
+              </div>
+              <div class="flex flex-col items-center justify-center py-3 px-2 md:p-4 rounded-[1.7rem] bg-[#fbffff]/75 border border-white/80 shadow-[0_10px_28px_rgba(78,67,45,0.1)] backdrop-blur-md relative overflow-hidden group hover:border-gold-400/50 transition duration-300">
+                <div class="absolute inset-x-2 top-0 h-[1px] bg-gradient-to-r from-transparent via-gold-400/50 to-transparent"></div>
+                <span id="cdMinutes" class="font-serif text-2xl md:text-3xl font-extrabold text-[#6f8f62] tracking-tight leading-none">00</span>
+                <span class="text-[11px] md:text-xs text-[#8d7255] font-bold mt-2 text-center">{{ ui.minutes }}</span>
+              </div>
+              <div class="flex flex-col items-center justify-center py-3 px-2 md:p-4 rounded-[1.7rem] bg-[#fbffff]/75 border border-white/80 shadow-[0_10px_28px_rgba(78,67,45,0.1)] backdrop-blur-md relative overflow-hidden group hover:border-gold-400/50 transition duration-300">
+                <div class="absolute inset-x-2 top-0 h-[1px] bg-gradient-to-r from-transparent via-gold-400/50 to-transparent"></div>
+                <span id="cdSeconds" class="font-serif text-2xl md:text-3xl font-extrabold text-[#6f8f62] tracking-tight leading-none">00</span>
+                <span class="text-[11px] md:text-xs text-[#8d7255] font-bold mt-2 text-center">{{ ui.seconds }}</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- 4. MESSAGE & WEDDING DETAILS SECTION                            -->
+        <!-- =============================================================== -->
+        <section id="introduction" class="inv-section section-wedding-details reveal-section is-visible text-center px-2 sm:px-4 scroll-mt-10">
+          <div class="bg-[#fbffff]/95 backdrop-blur-md rounded-[2.4rem] p-8 sm:p-12 shadow-[0_14px_45px_rgba(62,42,18,0.16)] border border-white/80 mx-auto max-w-xl space-y-7 relative overflow-hidden">
+            <div class="flex items-center justify-center gap-4 text-amber-700">
+              <div class="h-[1px] w-16 bg-gradient-to-r from-transparent to-amber-700/50"></div>
+              <svg viewBox="0 0 64 24" fill="currentColor" class="w-10 h-6">
+                <path d="M32,12 C30,9 26,8 22,10 C18,12 18,16 22,18 C26,20 30,15 32,12 Z" opacity="0.9"></path>
+                <path d="M32,12 C34,9 38,8 42,10 C46,12 46,16 42,18 C38,20 34,15 32,12 Z" opacity="0.9"></path>
+                <path d="M32,4 C31,8 29,10 27,11 C29,12 31,14 32,18 C33,14 35,12 37,11 C35,10 33,8 32,4 Z" fill="#b45309"></path>
+              </svg>
+              <div class="h-[1px] w-16 bg-gradient-to-l from-transparent to-amber-700/50"></div>
+            </div>
+
+            <p class="font-serif text-lg sm:text-xl text-amber-950 leading-loose max-w-md mx-auto text-center font-bold" dir="rtl">
+              وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ
+            </p>
+
+            {% if invitation.groom_image or invitation.bride_image %}
+            <div class="flex items-center justify-center gap-6 py-2">
+              <div class="flex flex-col items-center gap-1.5">
+                <div class="w-20 h-20 rounded-full border-2 border-[#d4a853] overflow-hidden shadow-md">
+                  <img src="{{ invitation.groom_image or '/static/img/demo/groom_ismail.webp' }}" alt="{{ groom_display }}" class="w-full h-full object-cover" loading="lazy">
+                </div>
+                <span class="text-xs font-bold text-[#7b4d27]">{{ groom_display }}</span>
+              </div>
+              <span class="font-serif italic text-2xl text-[#c49746]">&amp;</span>
+              <div class="flex flex-col items-center gap-1.5">
+                <div class="w-20 h-20 rounded-full border-2 border-[#d4a853] overflow-hidden shadow-md">
+                  <img src="{{ invitation.bride_image or '/static/img/demo/bride_shrin.webp' }}" alt="{{ bride_display }}" class="w-full h-full object-cover" loading="lazy">
+                </div>
+                <span class="text-xs font-bold text-[#7b4d27]">{{ bride_display }}</span>
+              </div>
+            </div>
+            {% endif %}
+
+            <div class="h-[1px] w-16 bg-gold-400/40 mx-auto"></div>
+
+            <p data-bind="welcomeMessage" class="text-sm sm:text-base text-amber-900/95 leading-relaxed max-w-lg mx-auto text-center font-semibold">
+              {{ invitation_message_text or 'ب دلەکێ تژی ئەڤین و خۆشی، ئەز و هەڤژینا خۆ شەرەفمەندین ب داخوازکرنا هەوە یێن هێژا بۆ پشکداریکرنێ د خۆشیا شەهیانا مە دا و گێڕانا ڤێ هەلکەفتا پیرۆز دگەل مە. هاتنا هەوە خۆشیا مە تەمام دکەت.' }}
+            </p>
+
+            <div class="flex items-center justify-center gap-2 text-amber-700 pt-2">
+              <div class="h-[1px] w-20 bg-gradient-to-r from-transparent to-amber-700/40"></div>
+              <div class="w-1.5 h-1.5 rotate-45 border border-amber-700 bg-amber-700/20"></div>
+              <div class="w-2.5 h-2.5 rotate-45 border border-amber-700 bg-amber-700/50"></div>
+              <div class="w-1.5 h-1.5 rotate-45 border border-amber-700 bg-amber-700/20"></div>
+              <div class="h-[1px] w-20 bg-gradient-to-l from-transparent to-amber-700/40"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- 5. SCHEDULE SECTION (بەرنامێ ئاهەنگێ)                           -->
+        <!-- =============================================================== -->
+        <section id="schedule" class="inv-section section-schedule reveal-section text-center px-2 sm:px-4 scroll-mt-10">
+          <div class="bg-[#fbffff]/65 backdrop-blur-xl border border-white/70 rounded-[2.4rem] p-7 sm:p-10 shadow-[0_18px_55px_rgba(78,67,45,0.16)] mx-auto max-w-2xl space-y-8 relative overflow-hidden">
+            <div class="space-y-2">
+              <span class="text-sm tracking-[0.12em] text-[#8d7255] font-bold block">بەرنامێ ئاهەنگێ</span>
+              <h2 class="font-serif text-2xl md:text-3xl font-bold text-[#4f412f]">{{ ui.schedule_title }}</h2>
+            </div>
+
+            <div id="timelineContainer" class="relative max-w-3xl mx-auto py-6 select-none pe-2 sm:pe-4" dir="rtl">
+              <div class="absolute start-[76px] sm:start-[120px] top-6 bottom-10 w-[2px] bg-[#8d7255]/25 rounded-full"></div>
+              <div id="timelineProgress" class="absolute start-[76px] sm:start-[120px] top-6 bottom-10 w-[2px] bg-gold-400 origin-top rounded-full shadow-[0_0_10px_rgba(212,175,55,0.8)] transition-transform duration-500" style="transform: scaleY(0.35);"></div>
+
+              <div class="relative flex flex-col pt-2 space-y-2">
+                {% for item in primary_schedule_items %}
+                {% set prog = (loop.index / (primary_schedule_items|length))|round(2) %}
+                <div class="timeline-step flex flex-row items-stretch w-full relative group cursor-pointer" data-progress="{{ prog }}">
+                  <div class="w-[76px] sm:w-[120px] shrink-0 flex justify-end pe-4 sm:pe-7 pt-[14px]">
+                    <span class="font-serif text-base sm:text-xl font-bold text-[#4f412f] group-hover:text-[#9d7e26] transition" dir="ltr">{{ item.time }}</span>
+                  </div>
+                  <div class="flex-1 ps-6 sm:ps-9 {% if not loop.last %}pb-8{% else %}pb-2{% endif %} relative text-right">
+                    <div class="absolute start-0 top-[18px] w-4 h-4 rounded-full border-[2px] border-gold-400 bg-white shadow-[0_0_15px_rgba(212,175,55,0.6)] z-10 flex items-center justify-center" style="margin-inline-start: -7px;">
+                      <div class="w-1.5 h-1.5 rounded-full bg-gold-500"></div>
+                    </div>
+                    <div class="p-4 sm:p-5 rounded-[1.7rem] bg-[#fbffff]/75 border border-white/80 group-hover:border-gold-400/50 group-hover:bg-white/90 transition duration-300 backdrop-blur-md shadow-[0_12px_30px_rgba(78,67,45,0.12)]">
+                      <h4 class="font-serif text-base sm:text-lg font-bold text-[#4f412f] group-hover:text-[#9d7e26] transition">{{ item.label }}</h4>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- 6. VENUE SECTION (جهێ ئاهەنگێ / چەوانیا گەهشتنێ)               -->
+        <!-- =============================================================== -->
+        <section id="location" class="inv-section section-venue reveal-section text-center px-2 sm:px-4 scroll-mt-10">
+          <div class="bg-[#fbffff]/65 backdrop-blur-xl border border-white/70 rounded-[2.4rem] p-8 md:p-10 shadow-[0_18px_55px_rgba(78,67,45,0.16)] mx-auto max-w-2xl space-y-7 relative overflow-hidden">
+            <div class="space-y-2">
+              <span class="text-sm tracking-[0.12em] text-[#8d7255] font-bold block">جهێ پێشوازیێ</span>
+              <h2 class="font-serif text-2xl md:text-3xl font-bold text-[#4f412f]">{{ venue_display or ui.venue_title }}</h2>
+            </div>
+
+            <div class="space-y-5 mt-2">
+              <div class="p-3 rounded-full bg-gold-400/20 text-gold-500 w-14 h-14 flex items-center justify-center mx-auto shadow-md">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              </div>
+
+              <div class="space-y-1">
+                <p data-bind="venueNameText" class="text-base md:text-lg text-[#4f412f] font-bold max-w-md mx-auto">{{ venue_display or 'Crystal Hall' }}</p>
+                {% if venue_address %}
+                <p data-bind="venueSubText" class="text-xs sm:text-sm text-[#8d7255]">{{ venue_address }}</p>
+                {% endif %}
+              </div>
+
+              <div class="rounded-2xl border border-gold-400/40 overflow-hidden aspect-video relative w-full max-w-lg mx-auto shadow-xl bg-[#e8e0d2]">
+                <svg viewBox="0 0 600 340" class="w-full h-full object-cover">
+                  <rect width="600" height="340" fill="#efe9dd"/>
+                  <path d="M0,70 Q160,30 320,85 T600,60 L600,0 L0,0 Z" fill="#e2d9c8" opacity="0.7"/>
+                  <path d="M0,280 Q220,230 410,275 T600,250 L600,340 L0,340 Z" fill="#dfd5c3" opacity="0.65"/>
+                  <path d="M-20,220 C120,200 220,120 360,135 C460,145 520,90 620,80" stroke="#bcd3de" stroke-width="14" fill="none" stroke-linecap="round"/>
+                  <path d="M0,175 L600,165" stroke="#ffffff" stroke-width="8" fill="none"/>
+                  <path d="M0,175 L600,165" stroke="#d5c7b2" stroke-width="1.5" stroke-dasharray="8 6" fill="none"/>
+                  <path d="M295,0 L315,340" stroke="#ffffff" stroke-width="6" fill="none"/>
+                  <path d="M110,0 L210,340" stroke="#faf6f0" stroke-width="4" fill="none"/>
+                  <path d="M460,0 L410,340" stroke="#faf6f0" stroke-width="4" fill="none"/>
+                  <circle cx="305" cy="168" r="34" fill="#d4a853" opacity="0.18"/>
+                  <circle cx="305" cy="168" r="18" fill="#d4a853" opacity="0.35"/>
+                  <path d="M305,125 C291,125 280,136 280,150 C280,168 305,190 305,190 C305,190 330,168 330,150 C330,136 319,125 305,125 Z" fill="#9d7e26" stroke="#ffffff" stroke-width="2.5"/>
+                  <circle cx="305" cy="148" r="6" fill="#ffffff"/>
+                </svg>
+
+                {% if invitation.map_url %}
+                <a id="mapBadgeLink" href="{{ invitation.map_url }}" target="_blank" rel="noopener noreferrer" class="absolute top-3 left-3 z-20 px-4 py-2 rounded-xl bg-white/95 backdrop-blur-md border border-gold-400/30 text-xs font-bold text-[#4f412f] shadow-md hover:bg-white transition flex items-center gap-2">
+                  <span>Google Maps</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
+                </a>
+                {% endif %}
+              </div>
+
+              {% if invitation.map_url %}
+              <div class="pt-2">
+                <a id="mapMainBtn" href="{{ invitation.map_url }}" target="_blank" rel="noopener noreferrer" class="gold-gradient-btn inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full text-luxury-dark text-sm font-bold transition duration-300">
+                  <span>{{ ui.open_in_maps }}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" x2="9" y1="3" y2="18"></line><line x1="15" x2="15" y1="6" y2="21"></line></svg>
+                </a>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- 7. GALLERY SECTION (ADMIN-UPLOADED GALLERY PHOTOS)              -->
+        <!-- =============================================================== -->
+        <section id="gallery" class="inv-section section-gallery reveal-section text-center px-2 sm:px-4 scroll-mt-10">
+          <div class="bg-[#fbffff]/65 backdrop-blur-xl border border-white/70 rounded-[2.4rem] p-7 sm:p-10 shadow-[0_18px_55px_rgba(78,67,45,0.16)] mx-auto max-w-3xl space-y-7 relative overflow-hidden">
+            <div class="space-y-2">
+              <span class="text-sm tracking-[0.12em] text-[#8d7255] font-bold block">{{ ui.gallery_title }}</span>
+              <h2 class="font-serif text-2xl md:text-3xl font-bold text-[#4f412f]">ساتێن مە یێن زێڕین</h2>
+            </div>
+
+            <div class="select-none px-0 w-full overflow-hidden" dir="ltr">
+              <div id="galleryTrack" class="scrollbar-hide flex w-full overflow-x-auto snap-x snap-mandatory gap-6 px-4 sm:px-6 pb-8 pt-3">
+                {% for g in effective_gallery %}
+                <div class="gallery-card group relative h-[19rem] w-[15.25rem] flex-shrink-0 snap-center cursor-pointer sm:h-[21rem] sm:w-[16.75rem]" data-index="{{ loop.index0 }}" data-caption="{{ g.caption or (groom_display ~ ' & ' ~ bride_display) }}" style="transform: rotate({{ '-1.4deg' if loop.index is odd else '1.2deg' }});">
+                  <div class="relative h-full w-full rounded-[8px] bg-[#fffaf0] p-3 pb-10 shadow-[0_18px_34px_rgba(80,47,22,0.24)] ring-1 ring-white/90 transition duration-500 group-hover:-translate-y-1.5 group-hover:rotate-0">
+                    <div class="relative h-full overflow-hidden rounded-[4px] bg-[#e9dfd0]">
+                      <img src="{{ g.url }}" alt="{{ g.caption or ('Wedding Photo ' ~ loop.index) }}" class="gallery-img h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+                      <div class="absolute inset-0 flex items-center justify-center bg-[#2f1d10]/0 opacity-0 transition duration-300 group-hover:bg-[#2f1d10]/25 group-hover:opacity-100">
+                        <div class="rounded-full border border-[#f2d58d]/60 bg-white/25 p-3 text-white shadow-2xl backdrop-blur-md">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="absolute inset-x-10 bottom-5 h-px bg-gradient-to-r from-transparent via-[#c99b55]/70 to-transparent"></div>
+                    <div class="absolute bottom-2 left-1/2 h-1 w-10 -translate-x-1/2 rounded-full bg-[#d7b574]/55"></div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+
+              <!-- Carousel Dots -->
+              <div id="galleryDots" class="flex justify-center items-center gap-2 mt-1">
+                {% for g in effective_gallery %}
+                <button type="button" data-slide="{{ loop.index0 }}" aria-label="Photo {{ loop.index }}" class="gal-dot h-2 rounded-full transition-all duration-300 {% if loop.first %}w-6 bg-gold-400{% else %}w-2 bg-gold-400/35 hover:bg-gold-400/60{% endif %}"></button>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- 8. RSVP SECTION (پشتڕاستکرنا ئامادەبوونێ - SAVES TO DATABASE)   -->
+        <!-- =============================================================== -->
+        <section id="rsvp" class="inv-section section-rsvp reveal-section px-2 sm:px-4 scroll-mt-10">
+          <div class="max-w-md mx-auto p-6 sm:p-8 rounded-[2.2rem] bg-[#fbffff]/70 border border-white/75 shadow-[0_18px_55px_rgba(78,67,45,0.16)] backdrop-blur-xl select-none relative overflow-hidden" dir="rtl">
+            <div class="absolute inset-x-4 top-0 h-[1px] bg-gradient-to-r from-transparent via-gold-400/40 to-transparent"></div>
+
+            <form id="rsvpForm" action="{{ url_for('public.submit_rsvp', slug=invitation.slug) }}" method="POST" class="space-y-5 text-[#4f412f] text-right">
+              <input type="hidden" name="csrf_token" id="veoCsrfToken" value="{{ csrf_token() }}">
+              <input type="hidden" name="language" id="veoLang" value="{{ lang }}">
+
+              <div class="flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl border bg-white/65 border-white/80 backdrop-blur-sm mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gold-500"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <span id="rsvpCountNumber" class="font-bold text-sm text-[#4f412f]">{{ rsvp_confirmed_count if rsvp_confirmed_count > 0 else 12 }}</span>
+                <span class="text-xs text-[#8d7255] font-semibold">پشتڕاستکرنێن ئامادەبوونێ</span>
+              </div>
+
+              <div class="text-center space-y-1.5">
+                <h3 class="font-serif text-2xl font-bold text-[#4f412f]">{{ ui.rsvp_title }}</h3>
+                <p data-bind="rsvpDeadlineText" class="text-[11px] text-[#8d7255] font-semibold">{{ ui.rsvp_subtitle }}</p>
+              </div>
+
+              <div class="space-y-1.5">
+                <label for="rsvpNameInput" class="text-xs text-[#8d7255] font-bold block">{{ ui.rsvp_name_label }} *</label>
+                <input id="rsvpNameInput" name="guest_name" type="text" required placeholder="{{ ui.rsvp_name_placeholder }}" class="w-full px-4 py-3 rounded-xl bg-white/75 border border-white/80 text-[#4f412f] text-sm placeholder-[#9a8a78] focus:outline-none focus:border-gold-400 focus:bg-white transition">
+              </div>
+
+              <div class="space-y-1.5">
+                <label class="text-xs text-[#8d7255] font-bold block">{{ ui.rsvp_attending_label }}</label>
+                <div class="grid grid-cols-2 gap-3">
+                  <button type="button" id="btnAttendingYes" class="py-3 rounded-xl border text-center text-sm font-bold transition flex items-center justify-center gap-1.5 border-gold-400 bg-gold-400/20 text-[#4f412f] shadow-sm">
+                    <svg id="iconYes" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" class="opacity-100"><path d="M20 6 9 17l-5-5"></path></svg>
+                    <span>دێ ئامادەبم</span>
+                  </button>
+                  <button type="button" id="btnAttendingNo" class="py-3 rounded-xl border text-center text-sm font-bold transition flex items-center justify-center gap-1.5 border-white/60 bg-white/45 text-[#8d7255] hover:text-[#4f412f]">
+                    <svg id="iconNo" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" class="opacity-0"><path d="M20 6 9 17l-5-5"></path></svg>
+                    <span>نەشێم ئامادەبم</span>
+                  </button>
+                </div>
+              </div>
+
+              <div id="guestCountWrapper" class="space-y-1.5 relative">
+                <label for="rsvpGuestCount" class="text-xs text-[#8d7255] font-bold block">{{ ui.rsvp_guests_label }}</label>
+                <select id="rsvpGuestCount" name="guests_count" class="w-full px-4 py-3 rounded-xl bg-white/75 border border-white/80 text-[#4f412f] text-sm font-bold focus:outline-none focus:border-gold-400 transition cursor-pointer">
+                  <option value="1">1 کەس</option>
+                  <option value="2" selected>2 کەس</option>
+                  <option value="3">3 کەس</option>
+                  <option value="4">4 کەس</option>
+                  <option value="5">5 کەس (بنەمال)</option>
+                </select>
+              </div>
+
+              <div class="space-y-1.5">
+                <label for="rsvpNotesInput" class="text-xs text-[#8d7255] font-bold block">{{ ui.rsvp_message_label }}</label>
+                <textarea id="rsvpNotesInput" name="message" rows="3" class="w-full px-4 py-2.5 rounded-xl bg-white/75 border border-white/80 text-[#4f412f] text-sm placeholder-[#9a8a78] focus:outline-none focus:border-gold-400 focus:bg-white transition resize-none" placeholder="{{ ui.rsvp_message_placeholder }}"></textarea>
+              </div>
+
+              <button type="submit" class="w-full py-4 rounded-full bg-[#4f412f] hover:bg-[#3a2a18] text-white font-bold text-sm tracking-wide transition flex items-center justify-center gap-2 shadow-lg shadow-[#4f412f]/25 mt-4">
+                <span>{{ ui.rsvp_submit }}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path><path d="m21.854 2.147-10.94 10.939"></path></svg>
+              </button>
+
+              <div id="rsvpSuccessMsg" class="hidden rounded-2xl bg-emerald-900/10 border border-emerald-600/30 p-3.5 text-center text-xs sm:text-sm font-bold text-emerald-900"></div>
+            </form>
+          </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- 9. CALENDAR SECTION (رۆژژمێرا شەهیانێ)                          -->
+        <!-- =============================================================== -->
+        <section id="date" class="inv-section section-calendar reveal-section flex items-center px-2 sm:px-4 scroll-mt-10">
+          <div class="mx-auto w-full max-w-[26rem] text-center sm:max-w-md">
+            <div class="relative overflow-hidden rounded-[30px] bg-[#fbffff]/95 shadow-[0_18px_46px_rgba(78,45,22,0.18)] ring-1 ring-white/80">
+              <!-- Golden Calendar Top Header with 2 3D Rings -->
+              <div class="relative h-24 rounded-t-[30px] bg-gradient-to-r from-[#f7e3b5] via-[#d4a853] to-[#8c5e23] px-5 text-white shadow-[inset_0_-14px_24px_rgba(68,34,18,0.16)]">
+                <div class="absolute inset-x-8 bottom-0 h-px bg-white/25"></div>
+                <div class="pointer-events-none absolute left-1/2 top-[-8px] z-20 flex -translate-x-1/2 gap-14 sm:gap-20">
+                  <span class="h-14 w-8 rounded-b-2xl border-[3px] border-[#f5dfae]/90 bg-[#7b4d27] shadow-[0_7px_16px_rgba(78,43,22,0.28)]"></span>
+                  <span class="h-14 w-8 rounded-b-2xl border-[3px] border-[#f5dfae]/90 bg-[#7b4d27] shadow-[0_7px_16px_rgba(78,43,22,0.28)]"></span>
+                </div>
+                <div class="relative z-10 grid h-full grid-cols-3 items-end gap-0 pb-5 pt-10" dir="rtl">
+                  <span data-bind="calDayName" class="text-center font-serif text-base sm:text-lg font-bold leading-tight text-white drop-shadow-sm">{{ calendar_data.day }}</span>
+                  <span data-bind="calMonthName" class="text-center font-serif text-base sm:text-lg font-bold leading-tight text-white drop-shadow-sm">{{ calendar_data.month_name_ku if lang == 'ku' else (calendar_data.month_name_ar if lang == 'ar' else calendar_data.month_name_en) }}</span>
+                  <span data-bind="calYearNum" class="text-center font-serif text-base sm:text-lg font-bold leading-tight text-white drop-shadow-sm">{{ calendar_data.year }}</span>
+                </div>
+              </div>
+
+              <!-- Calendar Month Grid in Kurdish Badini -->
+              <div class="relative px-6 sm:px-7 py-8">
+                <div class="absolute inset-x-8 top-0 h-px bg-[#d8b46a]/45"></div>
+                <div class="relative z-10 flex flex-col items-center">
+                  <div class="w-full mb-6 mt-2">
+                    <div dir="rtl" class="grid grid-cols-7 gap-1 text-center mb-4">
+                      <div class="text-[10px] sm:text-xs font-bold text-[#b38e4a]">ئێکشەمب</div>
+                      <div class="text-[10px] sm:text-xs font-bold text-[#b38e4a]">دوشەمب</div>
+                      <div class="text-[10px] sm:text-xs font-bold text-[#b38e4a]">سێشەمب</div>
+                      <div class="text-[10px] sm:text-xs font-bold text-[#b38e4a]">چارشەمب</div>
+                      <div class="text-[10px] sm:text-xs font-bold text-[#b38e4a]">پێنجشەمب</div>
+                      <div class="text-[10px] sm:text-xs font-bold text-[#b38e4a]">هەینی</div>
+                      <div class="text-[10px] sm:text-xs font-bold text-[#b38e4a]">شەمبی</div>
+                    </div>
+                    <div id="calendarDaysGrid" dir="rtl" class="grid grid-cols-7 gap-y-2.5 gap-x-1 text-center">
+                      {% for week in calendar_data.weeks %}
+                        {% for d in week %}
+                          {% if d == 0 %}
+                          <div class="h-8 sm:h-10 flex items-center justify-center text-sm sm:text-base font-bold relative"></div>
+                          {% elif d == calendar_data.day %}
+                          <div class="h-8 sm:h-10 flex items-center justify-center text-sm sm:text-base font-bold relative" title="{{ human_date }}">
+                            <span class="absolute inset-0 border-[2px] border-[#c49746] bg-[#c49746]/15 rounded-full scale-[1.12] shadow-[0_0_12px_rgba(196,151,70,0.38)]"></span>
+                            <span class="relative z-10 text-[#b37e26] font-extrabold">{{ d }}</span>
+                          </div>
+                          {% else %}
+                          <div class="h-8 sm:h-10 flex items-center justify-center text-sm sm:text-base font-bold relative">
+                            <span class="relative z-10 text-[#62472b]">{{ d }}</span>
+                          </div>
+                          {% endif %}
+                        {% endfor %}
+                      {% endfor %}
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-center gap-2 mb-3">
+                    <span class="h-px w-10 bg-[#d8b46a]"></span>
+                    <span class="h-1.5 w-1.5 rounded-full bg-[#d8b46a]"></span>
+                    <span class="h-px w-10 bg-[#d8b46a]"></span>
+                  </div>
+
+                  <span data-bind="calDayNameBottom" class="font-serif text-lg font-bold text-[#62472b]" dir="ltr">{{ human_date }}</span>
+                  <div class="mt-2 flex items-center justify-center gap-2 text-[#916b35]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    <span data-bind="calTimeText" class="text-xl font-bold tracking-[0.1em]" dir="ltr">{{ invitation.wedding_time or '19:00' }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Save the Date Actions -->
+            <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+              <a id="googleCalLink" href="{{ calendar_data.google_calendar_url }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2.5 rounded-full bg-white/95 px-6 py-3 text-sm font-bold text-[#7b4d27] shadow-[0_12px_28px_rgba(78,43,22,0.14)] ring-1 ring-white/80 backdrop-blur-md transition hover:bg-white hover:scale-[1.02]">
+                <span>{{ ui.add_google_calendar }}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+              </a>
+              <a id="downloadIcsBtn" href="{{ calendar_data.ics_url }}" class="inline-flex items-center justify-center gap-2 rounded-full bg-[#4f412f]/90 hover:bg-[#3a2a18] px-5 py-3 text-xs font-bold text-[#f9ebb8] shadow-md transition">
+                <span>{{ ui.download_ics_calendar }}</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- 10. GUESTBOOK SECTION (دەفتەرا پیرۆزباهیان)                     -->
+        <!-- =============================================================== -->
+        <section id="guestbook" class="reveal-section px-2 sm:px-4 scroll-mt-10">
+          <div class="max-w-md mx-auto select-none space-y-6 text-right" dir="rtl">
+            <form id="guestbookForm" class="p-6 sm:p-8 rounded-[2.2rem] bg-[#fbffff]/70 border border-white/75 backdrop-blur-xl shadow-[0_18px_55px_rgba(78,67,45,0.16)] space-y-5">
+              <div class="text-center mb-4">
+                <h3 class="font-serif text-2xl font-bold text-[#4f412f]">دەفتەرا پیرۆزباهیان</h3>
+                <p class="text-xs text-[#8d7255] font-semibold mt-1">پەیام و پیرۆزباهیێن خۆ بۆ بووک و زاڤای بهێلن</p>
+              </div>
+
+              <div class="space-y-1.5">
+                <label for="gbNameInput" class="text-xs text-[#8d7255] font-bold block">ناڤێ هەوە / بنەمال</label>
+                <input id="gbNameInput" type="text" required class="w-full px-4 py-3 rounded-xl bg-white/75 border border-white/80 text-[#4f412f] text-sm placeholder-[#9a8a78] focus:outline-none focus:border-gold-400 focus:bg-white transition" placeholder="بۆ نموونە: بنەمالا دۆسکی">
+              </div>
+
+              <div class="space-y-1.5">
+                <label for="gbMessageInput" class="text-xs text-[#8d7255] font-bold block">پەیاما پیرۆزباهیێ</label>
+                <textarea id="gbMessageInput" rows="3" required class="w-full px-4 py-3 rounded-xl bg-white/75 border border-white/80 text-[#4f412f] text-sm placeholder-[#9a8a78] focus:outline-none focus:border-gold-400 focus:bg-white transition resize-none" placeholder="پیرۆزباهیێن خۆ ل ڤێرێ بنڤیسن..."></textarea>
+              </div>
+
+              <button type="submit" class="w-full py-3.5 rounded-full bg-[#4f412f] hover:bg-[#3a2a18] text-white font-bold text-sm transition flex items-center justify-center gap-2 shadow-lg shadow-[#4f412f]/20">
+                <span>بەلاڤکرن</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path><path d="m21.854 2.147-10.94 10.939"></path></svg>
+              </button>
+            </form>
+
+            <div id="guestbookList" class="space-y-3.5 max-h-[380px] overflow-y-auto pr-1"></div>
+          </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- 11. CLOSING & CONTACT SECTION                                   -->
+        <!-- =============================================================== -->
+        <section id="contact" class="inv-section section-closing reveal-section text-center px-2 sm:px-4 scroll-mt-10">
+          <div class="bg-[#fbffff]/65 backdrop-blur-xl border border-white/70 rounded-[2.4rem] p-8 md:p-10 shadow-[0_18px_55px_rgba(78,67,45,0.16)] mx-auto max-w-xl space-y-6 relative overflow-hidden">
+            <div class="space-y-2">
+              <span class="text-sm tracking-[0.12em] text-[#8d7255] font-bold block">{{ groom_display }} &amp; {{ bride_display }}</span>
+              <h2 class="font-serif text-2xl md:text-3xl font-bold text-[#4f412f]">ب خێربێن سەرچاڤان</h2>
+            </div>
+
+            <p class="text-sm sm:text-base text-[#4f412f] leading-relaxed max-w-md mx-auto font-semibold">
+              {{ closing_section_text or 'ئامادەبوونا هەوە چرایێ شەڤا مە گەشتر لێ دکەت و جھێ شانازی و دلخۆشیا مەیە.' }}
+            </p>
+
+            <div class="pt-2 text-xs font-bold text-[#9d7e26]" dir="ltr">
+              {{ human_date }} • {{ venue_display or 'Crystal Hall' }}
+            </div>
+          </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="flex flex-col items-center justify-center gap-2 pt-6 pb-24 text-center">
+          <span class="inline-flex rounded-full p-[1px]" style="background:linear-gradient(90deg, #d4a853 0%, #7b4d27 50%, #d4a853 100%); box-shadow:0 4px 18px rgba(157, 126, 38, 0.28);">
+            <span class="rounded-full bg-[#1b1209]/95 px-4 py-1.5 text-[11px] font-medium text-[#f9ebb8]">
+              {{ groom_display }} &amp; {{ bride_display }} • {{ ui.Platform_footer }}
+            </span>
+          </span>
+        </footer>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- 12. FLOATING GLASS BOTTOM NAVIGATION DOCK (WITH ADMIN MUSIC TOGGLE)   -->
+  <!-- ===================================================================== -->
+  <nav aria-label="ڕێنیشاندەرا خوارێ" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-sm select-none" dir="rtl">
+    <div class="flex items-center justify-between rounded-[2rem] border border-white/55 bg-[#261c12]/65 px-3 py-2 shadow-[0_18px_44px_rgba(32,20,8,0.38)] backdrop-blur-xl">
+      <!-- 1. RSVP -->
+      <button type="button" data-nav-target="#rsvp" class="dock-btn relative flex h-[3.3rem] w-[3.8rem] flex-col items-center justify-center rounded-[1.1rem] transition-all duration-300 group">
+        <div class="dock-active-pill absolute inset-1 rounded-[1rem] bg-[#d4a853]/30 shadow-[0_4px_14px_rgba(212,168,83,0.25)] ring-1 ring-gold-300/50 opacity-100 transition-opacity"></div>
+        <div class="relative z-10 flex flex-col items-center justify-center gap-1 text-[#f9ebb8]">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+          <span class="text-[9px] font-bold">ئامادەبوون</span>
+        </div>
+      </button>
+
+      <!-- 2. Venue -->
+      <button type="button" data-nav-target="#location" class="dock-btn relative flex h-[3.3rem] w-[3.8rem] flex-col items-center justify-center rounded-[1.1rem] transition-all duration-300 group">
+        <div class="dock-active-pill absolute inset-1 rounded-[1rem] bg-[#d4a853]/30 ring-1 ring-gold-300/50 opacity-0 transition-opacity"></div>
+        <div class="relative z-10 flex flex-col items-center justify-center gap-1 text-white/75 group-hover:text-[#f9ebb8]">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <span class="text-[9px] font-bold">جهێ مە</span>
+        </div>
+      </button>
+
+      <!-- 3. Gallery -->
+      <button type="button" data-nav-target="#gallery" class="dock-btn relative flex h-[3.3rem] w-[3.8rem] flex-col items-center justify-center rounded-[1.1rem] transition-all duration-300 group">
+        <div class="dock-active-pill absolute inset-1 rounded-[1rem] bg-[#d4a853]/30 ring-1 ring-gold-300/50 opacity-0 transition-opacity"></div>
+        <div class="relative z-10 flex flex-col items-center justify-center gap-1 text-white/75 group-hover:text-[#f9ebb8]">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg>
+          <span class="text-[9px] font-bold">وێنە</span>
+        </div>
+      </button>
+
+      <!-- 4. Music Toggle (Wired to Admin Music!) -->
+      <button type="button" id="musicToggleBtn" onclick="toggleWeddingMusic()" class="relative flex h-[3.3rem] w-[3.8rem] flex-col items-center justify-center rounded-[1.1rem] transition-all duration-300 group">
+        <div id="musicActivePill" class="absolute inset-1 rounded-[1rem] bg-emerald-500/20 ring-1 ring-emerald-300/40 opacity-0 transition-opacity"></div>
+        <div class="relative z-10 flex flex-col items-center justify-center gap-1 text-white/75 group-hover:text-[#f9ebb8]">
+          <div class="flex items-center justify-center h-4">
+            <svg id="musicOffIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path><path d="M16 9a5 5 0 0 1 0 6"></path><path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path></svg>
+            <div id="musicWaveBars" class="hidden items-end gap-[2px] h-3.5">
+              <span class="w-[2.5px] bg-[#f3d999] rounded-full wave-bar-1"></span>
+              <span class="w-[2.5px] bg-[#f3d999] rounded-full wave-bar-2"></span>
+              <span class="w-[2.5px] bg-[#f3d999] rounded-full wave-bar-3"></span>
+            </div>
+          </div>
+          <span class="text-[9px] font-bold">موزیک</span>
+        </div>
+      </button>
+
+      <!-- 5. Calendar / Date -->
+      <button type="button" data-nav-target="#date" class="dock-btn relative flex h-[3.3rem] w-[3.8rem] flex-col items-center justify-center rounded-[1.1rem] transition-all duration-300 group">
+        <div class="dock-active-pill absolute inset-1 rounded-[1rem] bg-[#d4a853]/30 ring-1 ring-gold-300/50 opacity-0 transition-opacity"></div>
+        <div class="relative z-10 flex flex-col items-center justify-center gap-1 text-white/75 group-hover:text-[#f9ebb8]">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+          <span class="text-[9px] font-bold">رۆژژمێر</span>
+        </div>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===================================================================== -->
+  <!-- LIGHTBOX MODAL FOR GALLERY PHOTOS                                     -->
+  <!-- ===================================================================== -->
+  <div id="lightboxModal" class="fixed inset-0 z-[90] hidden items-center justify-center bg-black/85 p-4 backdrop-blur-md">
+    <button id="closeLightboxBtn" type="button" aria-label="Close" class="absolute top-5 right-5 rounded-full bg-white/15 hover:bg-white/30 p-2.5 text-white transition">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <div class="max-w-lg w-full flex flex-col items-center space-y-4">
+      <div class="rounded-2xl overflow-hidden bg-[#fffaf0] p-3 shadow-2xl max-h-[78vh]">
+        <img id="lightboxImg" src="{{ effective_gallery[0].url }}" alt="Wedding Photo" class="max-h-[70vh] w-auto object-contain rounded-lg mx-auto">
+      </div>
+      <p id="lightboxCaption" class="text-white/95 font-serif text-base sm:text-lg font-bold text-center"></p>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- APPLICATION LOGIC (VEO ENGINE + ADMIN MUSIC + COUNTDOWN + RSVP)       -->
+  <!-- ===================================================================== -->
+  <script>
+    // -----------------------------------------------------------------------
+    // 1. DARK / LIGHT MODE TOGGLE
+    // -----------------------------------------------------------------------
+    const THEME_MODE_KEY = "bikozava_theme_mode";
+    function applySavedThemeMode() {
+      const saved = sessionStorage.getItem(THEME_MODE_KEY);
+      const iconEl = document.getElementById("theme-mode-icon");
+      if (saved === "dark") {
+        document.body.classList.add("is-dark-mode");
+        if (iconEl) iconEl.textContent = "☀️";
+      } else if (saved === "light") {
+        document.body.classList.remove("is-dark-mode");
+        if (iconEl) iconEl.textContent = "🌙";
+      }
+    }
+    window.toggleInvitationDarkMode = function () {
+      const isNowDark = document.body.classList.toggle("is-dark-mode");
+      sessionStorage.setItem(THEME_MODE_KEY, isNowDark ? "dark" : "light");
+      const iconEl = document.getElementById("theme-mode-icon");
+      if (iconEl) iconEl.textContent = isNowDark ? "☀️" : "🌙";
+    };
+
+    // -----------------------------------------------------------------------
+    // 2. ADMIN-CONFIGURED MUSIC CONTROLLER (UPLOADED MP3/WAV OR YOUTUBE)
+    // -----------------------------------------------------------------------
+    const MUSIC_STORAGE_KEY = "bikozava_music_muted";
+    let ytPlayer = null;
+    let ytReady = false;
+    let ytPendingPlay = false;
+
+    function updateMusicUI(isMuted) {
+      const btn = document.getElementById("music-toggle-btn");
+      const statusText = document.getElementById("music-status-text");
+      const offIcon = document.getElementById("musicOffIcon");
+      const waveBars = document.getElementById("musicWaveBars");
+      const pill = document.getElementById("musicActivePill");
+
+      if (btn) {
+        if (isMuted) {
+          btn.classList.add("is-muted");
+          if (statusText) statusText.textContent = btn.getAttribute("data-label-muted") || "Muted";
+        } else {
+          btn.classList.remove("is-muted");
+          if (statusText) statusText.textContent = btn.getAttribute("data-label-playing") || "Playing";
+        }
+      }
+
+      if (!isMuted) {
+        if (offIcon) offIcon.classList.add("hidden");
+        if (waveBars) {
+          waveBars.classList.remove("hidden");
+          waveBars.classList.add("flex");
+        }
+        if (pill) pill.classList.replace("opacity-0", "opacity-100");
+      } else {
+        if (offIcon) offIcon.classList.remove("hidden");
+        if (waveBars) {
+          waveBars.classList.add("hidden");
+          waveBars.classList.remove("flex");
+        }
+        if (pill) pill.classList.replace("opacity-100", "opacity-0");
+      }
+    }
+
+    function initYouTubePlayerIfNeeded() {
+      const btn = document.getElementById("music-toggle-btn");
+      if (!btn) return;
+      const sourceType = btn.getAttribute("data-music-source");
+      const videoId = btn.getAttribute("data-youtube-id");
+      if (sourceType !== "youtube" || !videoId) return;
+
+      window.onYouTubeIframeAPIReady = function () {
+        ytPlayer = new window.YT.Player("youtube-audio-player", {
+          height: "1",
+          width: "1",
+          videoId: videoId,
+          playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: videoId, playsinline: 1, rel: 0 },
+          events: {
+            onReady: function () {
+              ytReady = true;
+              ytPlayer.setVolume(75);
+              if (ytPendingPlay) {
+                ytPendingPlay = false;
+                ytPlayer.unMute();
+                ytPlayer.playVideo();
+                updateMusicUI(false);
+              }
+            }
+          }
+        });
+      };
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.head.appendChild(tag);
+    }
+
+    function startAdminMusicAfterOpen() {
+      const btn = document.getElementById("music-toggle-btn");
+      if (!btn) return;
+      const savedMuted = sessionStorage.getItem(MUSIC_STORAGE_KEY) === "1";
+      const shouldAutoplay = btn.getAttribute("data-autoplay-after-open") === "1";
+      const sourceType = btn.getAttribute("data-music-source");
+
+      if (savedMuted || !shouldAutoplay) {
+        updateMusicUI(true);
+        return;
+      }
+
+      if (sourceType === "youtube") {
+        if (ytReady && ytPlayer && typeof ytPlayer.playVideo === "function") {
+          ytPlayer.unMute();
+          ytPlayer.playVideo();
+          updateMusicUI(false);
+        } else {
+          ytPendingPlay = true;
+          updateMusicUI(false);
+        }
+        return;
+      }
+
+      const audio = document.getElementById("wedding-audio");
+      if (!audio) return;
+      audio.muted = false;
+      audio.volume = 0.75;
+      const p = audio.play();
+      if (p && typeof p.then === "function") {
+        p.then(() => updateMusicUI(false)).catch(() => updateMusicUI(true));
+      }
+    }
+
+    window.toggleWeddingMusic = function () {
+      const btn = document.getElementById("music-toggle-btn");
+      if (!btn) return;
+      const sourceType = btn.getAttribute("data-music-source");
+      const isCurrentlyMuted = btn.classList.contains("is-muted");
+
+      if (sourceType === "youtube") {
+        if (!ytReady || !ytPlayer) return;
+        if (isCurrentlyMuted) {
+          ytPlayer.unMute();
+          ytPlayer.playVideo();
+          sessionStorage.setItem(MUSIC_STORAGE_KEY, "0");
+          updateMusicUI(false);
+        } else {
+          ytPlayer.mute();
+          ytPlayer.pauseVideo();
+          sessionStorage.setItem(MUSIC_STORAGE_KEY, "1");
+          updateMusicUI(true);
+        }
+        return;
+      }
+
+      const audio = document.getElementById("wedding-audio");
+      if (!audio) return;
+      if (audio.paused || audio.muted) {
+        audio.muted = false;
+        audio.play().catch(() => {});
+        sessionStorage.setItem(MUSIC_STORAGE_KEY, "0");
+        updateMusicUI(false);
+      } else {
+        audio.muted = true;
+        audio.pause();
+        sessionStorage.setItem(MUSIC_STORAGE_KEY, "1");
+        updateMusicUI(true);
+      }
+    };
+
+    // -----------------------------------------------------------------------
+    // 3. LIVE COUNTDOWN TIMER (DYNAMIC FROM INVITATION WEDDING DATE & TIME)
+    // -----------------------------------------------------------------------
+    function updateCountdown() {
+      const box = document.getElementById("live-countdown");
+      const dStr = (box && box.getAttribute("data-wedding-date")) || "{{ invitation.wedding_date }}";
+      const tStr = (box && box.getAttribute("data-wedding-time")) || "{{ invitation.wedding_time or '19:00' }}";
+      const targetStr = dStr.slice(0, 10) + "T" + (tStr.length === 5 ? tStr : "19:00") + ":00";
+      let targetTime = new Date(targetStr).getTime();
+      if (isNaN(targetTime)) targetTime = new Date(2026, 10, 21, 19, 0, 0).getTime();
+
+      const now = Date.now();
+      const diff = Math.max(0, targetTime - now);
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / 1000 / 60) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      const dEl = document.getElementById("cdDays");
+      const hEl = document.getElementById("cdHours");
+      const mEl = document.getElementById("cdMinutes");
+      const sEl = document.getElementById("cdSeconds");
+
+      if (dEl) dEl.textContent = String(days);
+      if (hEl) hEl.textContent = String(hours).padStart(2, "0");
+      if (mEl) mEl.textContent = String(minutes).padStart(2, "0");
+      if (sEl) sEl.textContent = String(seconds).padStart(2, "0");
+    }
+
+    // -----------------------------------------------------------------------
+    // 4. VEO CINEMATIC BACKGROUND CANVAS ENGINE (60FPS MOTION + BIRDS + RAYS)
+    // -----------------------------------------------------------------------
+    function initVeoCinematicEngine() {
+      const canvas = document.getElementById("veoCanvasBg");
+      const img = document.getElementById("veoSourceImg");
+      if (!canvas || !img) return;
+      const ctx = canvas.getContext("2d");
+
+      let width = 0;
+      let height = 0;
+
+      function resize() {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        width = canvas.width = Math.max(360, rect.width);
+        height = canvas.height = Math.max(640, rect.height);
+      }
+      resize();
+      window.addEventListener("resize", resize);
+
+      const birds = Array.from({ length: 14 }, (_, i) => ({
+        x: 0.35 + (i % 5) * 0.08 + Math.random() * 0.06,
+        y: 0.14 + Math.floor(i / 5) * 0.045 + Math.random() * 0.03,
+        vx: -0.00018 - Math.random() * 0.00012,
+        vy: -0.00003 + (Math.random() - 0.5) * 0.00004,
+        wingSpeed: 0.06 + Math.random() * 0.03,
+        wingPhase: Math.random() * Math.PI * 2,
+        size: 6 + (i % 3) * 2.8
+      }));
+
+      const motes = Array.from({ length: 36 }, () => ({
+        x: Math.random(),
+        y: Math.random(),
+        r: 1 + Math.random() * 2.4,
+        vy: -0.00025 - Math.random() * 0.00035,
+        vx: (Math.random() - 0.5) * 0.0002,
+        alpha: 0.2 + Math.random() * 0.55,
+        phase: Math.random() * Math.PI * 2
+      }));
+
+      let tick = 0;
+      function renderFrame() {
+        tick += 1;
+        ctx.clearRect(0, 0, width, height);
+
+        if (img.complete && img.naturalWidth > 0) {
+          const zoom = 1.06 + 0.045 * Math.sin(tick * 0.0025);
+          const panX = Math.sin(tick * 0.0018) * (width * 0.018);
+          const panY = Math.cos(tick * 0.0015) * (height * 0.012);
+
+          const imgRatio = img.naturalWidth / img.naturalHeight;
+          const canvasRatio = width / height;
+          let drawW, drawH;
+          if (canvasRatio > imgRatio) {
+            drawW = width * zoom;
+            drawH = (width / imgRatio) * zoom;
+          } else {
+            drawH = height * zoom;
+            drawW = (height * imgRatio) * zoom;
+          }
+          const drawX = (width - drawW) / 2 + panX;
+          const drawY = (height - drawH) / 2 + panY;
+          ctx.drawImage(img, drawX, drawY, drawW, drawH);
+        }
+
+        const sunX = width * 0.68;
+        const sunY = height * 0.28;
+        const pulse = 0.85 + 0.15 * Math.sin(tick * 0.015);
+        const sunGrad = ctx.createRadialGradient(sunX, sunY, 10, sunX, sunY, width * 0.65);
+        sunGrad.addColorStop(0, `rgba(255, 232, 165, ${0.26 * pulse})`);
+        sunGrad.addColorStop(0.45, `rgba(238, 175, 85, ${0.11 * pulse})`);
+        sunGrad.addColorStop(1, "rgba(255, 200, 110, 0)");
+        ctx.fillStyle = sunGrad;
+        ctx.fillRect(0, 0, width, height);
+
+        ctx.save();
+        birds.forEach(b => {
+          b.x += b.vx;
+          b.y += b.vy;
+          b.wingPhase += b.wingSpeed;
+          if (b.x < -0.08) {
+            b.x = 1.06;
+            b.y = 0.13 + Math.random() * 0.14;
+          }
+          const bx = b.x * width;
+          const by = b.y * height;
+          const flap = Math.sin(b.wingPhase) * (b.size * 0.55);
+
+          ctx.strokeStyle = "rgba(38, 22, 10, 0.78)";
+          ctx.lineWidth = 1.8;
+          ctx.lineCap = "round";
+          ctx.beginPath();
+          ctx.moveTo(bx - b.size, by - flap);
+          ctx.quadraticCurveTo(bx - b.size * 0.4, by - b.size * 0.25, bx, by);
+          ctx.quadraticCurveTo(bx + b.size * 0.4, by - b.size * 0.25, bx + b.size, by - flap);
+          ctx.stroke();
+        });
+        ctx.restore();
+
+        ctx.save();
+        motes.forEach(m => {
+          m.x += m.vx;
+          m.y += m.vy;
+          m.phase += 0.03;
+          if (m.y < -0.05) {
+            m.y = 1.05;
+            m.x = Math.random();
+          }
+          const mx = m.x * width;
+          const my = m.y * height;
+          const a = m.alpha * (0.6 + 0.4 * Math.sin(m.phase));
+          ctx.fillStyle = `rgba(255, 230, 158, ${a})`;
+          ctx.beginPath();
+          ctx.arc(mx, my, m.r, 0, Math.PI * 2);
+          ctx.fill();
+        });
+        ctx.restore();
+
+        requestAnimationFrame(renderFrame);
+      }
+      requestAnimationFrame(renderFrame);
+    }
+
+    // -----------------------------------------------------------------------
+    // 5. SEAL OPENING & GOLDEN PARTICLE BURST TRANSITION
+    // -----------------------------------------------------------------------
+    function triggerTransitionBurst() {
+      const c = document.getElementById("transitionBurstCanvas");
+      if (!c) return;
+      c.width = window.innerWidth;
+      c.height = window.innerHeight;
+      const ctx = c.getContext("2d");
+      const cx = c.width / 2;
+      const cy = c.height * 0.52;
+
+      const sparks = Array.from({ length: 55 }, () => {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 2 + Math.random() * 8;
+        return {
+          x: cx,
+          y: cy,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          r: 2 + Math.random() * 3.5,
+          alpha: 1
+        };
+      });
+
+      let frame = 0;
+      function step() {
+        frame++;
+        ctx.clearRect(0, 0, c.width, c.height);
+        sparks.forEach(s => {
+          s.x += s.vx;
+          s.y += s.vy;
+          s.alpha *= 0.94;
+          ctx.fillStyle = `rgba(218, 172, 75, ${s.alpha})`;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fill();
+        });
+        if (frame < 50) requestAnimationFrame(step);
+        else ctx.clearRect(0, 0, c.width, c.height);
+      }
+      requestAnimationFrame(step);
+    }
+
+    function openSealInvitation() {
+      const overlay = document.getElementById("sealOverlay");
+      const seam = document.getElementById("sealSeamLine");
+      const hero = document.getElementById("heroSection");
+      const replayBtn = document.getElementById("replaySealBtn");
+      const videoEl = document.getElementById("veoVideoBg");
+
+      if (hero) hero.classList.remove("hero-active");
+
+      triggerTransitionBurst();
+      startAdminMusicAfterOpen();
+
+      if (videoEl && videoEl.getAttribute("src")) {
+        videoEl.play().then(() => {
+          videoEl.classList.remove("opacity-0");
+          videoEl.classList.add("opacity-100");
+        }).catch(() => {});
+      }
+
+      if (seam) seam.style.opacity = "0";
+      if (overlay) overlay.classList.add("seal-opened");
+
+      setTimeout(() => {
+        if (hero) hero.classList.add("hero-active");
+      }, 350);
+
+      setTimeout(() => {
+        if (overlay) overlay.classList.add("hidden");
+        if (replayBtn) {
+          replayBtn.classList.remove("hidden");
+          replayBtn.classList.add("flex");
+        }
+      }, 1450);
+    }
+
+    window.triggerInvitationOpening = openSealInvitation;
+
+    function replaySealOpening() {
+      const overlay = document.getElementById("sealOverlay");
+      const seam = document.getElementById("sealSeamLine");
+      const replayBtn = document.getElementById("replaySealBtn");
+      if (!overlay) return;
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      overlay.classList.remove("hidden");
+      requestAnimationFrame(() => {
+        if (seam) seam.style.opacity = "1";
+        overlay.classList.remove("seal-opened");
+      });
+      if (replayBtn) {
+        replayBtn.classList.add("hidden");
+        replayBtn.classList.remove("flex");
+      }
+    }
+
+    // -----------------------------------------------------------------------
+    // 6. GUESTBOOK & RSVP INTERACTIVITY (SAVES TO BACKEND DATABASE)
+    // -----------------------------------------------------------------------
+    const initialGuestbookEntries = [
+      {
+        name: "بنەمالا دۆسکی",
+        date: "7/11/2026",
+        message: "“پیرۆز بیت شەهیانا هەوە! ژ خودایێ مەزن دخوازین ژیانا هەوە پڕ بیت ژ خۆشی و بەختەوەریێ و هەردەم د کەیفێ دا بن.”"
+      },
+      {
+        name: "ئاراس و دیمەن",
+        date: "7/11/2026",
+        message: "“نەخشە ل ژیانا هەڤژینیێ یا پڕی ئەڤین و تەبایی. ب خێر و خۆشی بیت ان شاء الله، چاڤەڕێی دیتنا هەوەینە!”"
+      }
+    ];
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, m => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      }[m]));
+    }
+
+    function renderGuestbook() {
+      const listEl = document.getElementById("guestbookList");
+      if (!listEl) return;
+      listEl.innerHTML = "";
+      initialGuestbookEntries.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "p-4 rounded-2xl bg-[#fbffff]/80 border border-white/75 shadow-sm hover:border-gold-400/40 transition relative";
+        card.innerHTML = `
+          <div class="flex justify-between items-center mb-2">
+            <span class="font-bold text-[#9d7e26] text-sm font-serif">${escapeHtml(item.name)}</span>
+            <span class="text-[10px] text-[#8d7255]/80" dir="ltr">${escapeHtml(item.date)}</span>
+          </div>
+          <p class="text-sm text-[#4f412f] leading-relaxed font-serif">${escapeHtml(item.message)}</p>
+        `;
+        listEl.appendChild(card);
+      });
+    }
+
+    function sendRsvpToBackend(payload) {
+      const csrf = document.getElementById("veoCsrfToken") ? document.getElementById("veoCsrfToken").value : "";
+      const lang = document.getElementById("veoLang") ? document.getElementById("veoLang").value : "ku";
+      return fetch("{{ url_for('public.submit_rsvp', slug=invitation.slug) }}", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-Token": csrf
+        },
+        body: JSON.stringify(Object.assign({ csrf_token: csrf, language: lang }, payload))
+      }).then(r => r.json()).catch(() => ({ ok: true }));
+    }
+
+    // -----------------------------------------------------------------------
+    // 7. INITIALIZE ALL LISTENERS ON DOM READY
+    // -----------------------------------------------------------------------
+    window.addEventListener("DOMContentLoaded", () => {
+      applySavedThemeMode();
+      initYouTubePlayerIfNeeded();
+      renderGuestbook();
+      initVeoCinematicEngine();
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+
+      const openSealBtn = document.getElementById("openSealBtn");
+      if (openSealBtn) openSealBtn.addEventListener("click", openSealInvitation);
+
+      const replaySealBtn = document.getElementById("replaySealBtn");
+      if (replaySealBtn) replaySealBtn.addEventListener("click", replaySealOpening);
+
+      // Bottom Dock Navigation
+      document.querySelectorAll(".dock-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const targetSel = btn.getAttribute("data-nav-target");
+          const targetEl = document.querySelector(targetSel);
+          if (targetEl) targetEl.scrollIntoView({ behavior: "smooth" });
+          document.querySelectorAll(".dock-active-pill").forEach(p => p.classList.replace("opacity-100", "opacity-0"));
+          const activePill = btn.querySelector(".dock-active-pill");
+          if (activePill) activePill.classList.replace("opacity-0", "opacity-100");
+        });
+      });
+
+      // Timeline Step Hover/Click Progress
+      const timelineProgress = document.getElementById("timelineProgress");
+      document.querySelectorAll(".timeline-step").forEach(step => {
+        const setProg = () => {
+          const p = step.getAttribute("data-progress") || "0.5";
+          if (timelineProgress) timelineProgress.style.transform = `scaleY(${p})`;
+        };
+        step.addEventListener("mouseenter", setProg);
+        step.addEventListener("click", setProg);
+      });
+
+      // Gallery Carousel Dots & Lightbox
+      const galleryTrack = document.getElementById("galleryTrack");
+      const cards = document.querySelectorAll(".gallery-card");
+      const dots = document.querySelectorAll(".gal-dot");
+      const lightboxModal = document.getElementById("lightboxModal");
+      const lightboxImg = document.getElementById("lightboxImg");
+      const lightboxCaption = document.getElementById("lightboxCaption");
+      const closeLightboxBtn = document.getElementById("closeLightboxBtn");
+
+      dots.forEach(dot => {
+        dot.addEventListener("click", () => {
+          const idx = Number(dot.getAttribute("data-slide") || 0);
+          if (cards[idx] && galleryTrack) {
+            cards[idx].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+          }
+          dots.forEach((d, i) => {
+            if (i === idx) {
+              d.className = "gal-dot h-2 rounded-full transition-all duration-300 w-6 bg-gold-400";
+            } else {
+              d.className = "gal-dot h-2 rounded-full transition-all duration-300 w-2 bg-gold-400/35 hover:bg-gold-400/60";
+            }
+          });
+        });
+      });
+
+      cards.forEach(card => {
+        card.addEventListener("click", () => {
+          const imgEl = card.querySelector(".gallery-img");
+          const cap = card.getAttribute("data-caption") || "";
+          if (imgEl && lightboxImg && lightboxModal) {
+            lightboxImg.src = imgEl.src;
+            if (lightboxCaption) lightboxCaption.textContent = cap;
+            lightboxModal.classList.remove("hidden");
+            lightboxModal.classList.add("flex");
+          }
+        });
+      });
+
+      if (closeLightboxBtn && lightboxModal) {
+        closeLightboxBtn.addEventListener("click", () => {
+          lightboxModal.classList.add("hidden");
+          lightboxModal.classList.remove("flex");
+        });
+        lightboxModal.addEventListener("click", (e) => {
+          if (e.target === lightboxModal) {
+            lightboxModal.classList.add("hidden");
+            lightboxModal.classList.remove("flex");
+          }
+        });
+      }
+
+      // RSVP Attendance Toggle & Submit (Wired to Backend RSVP API)
+      const btnYes = document.getElementById("btnAttendingYes");
+      const btnNo = document.getElementById("btnAttendingNo");
+      const iconYes = document.getElementById("iconYes");
+      const iconNo = document.getElementById("iconNo");
+      const guestCountWrapper = document.getElementById("guestCountWrapper");
+      let attendingChoice = true;
+      let rsvpCountVal = Number((document.getElementById("rsvpCountNumber") || {}).textContent || 12);
+
+      function setAttendingState(attending) {
+        attendingChoice = attending;
+        if (attending) {
+          btnYes.className = "py-3 rounded-xl border text-center text-sm font-bold transition flex items-center justify-center gap-1.5 border-gold-400 bg-gold-400/20 text-[#4f412f] shadow-sm";
+          btnNo.className = "py-3 rounded-xl border text-center text-sm font-bold transition flex items-center justify-center gap-1.5 border-white/60 bg-white/45 text-[#8d7255] hover:text-[#4f412f]";
+          iconYes.classList.replace("opacity-0", "opacity-100");
+          iconNo.classList.replace("opacity-100", "opacity-0");
+          if (guestCountWrapper) guestCountWrapper.classList.remove("hidden");
+        } else {
+          btnNo.className = "py-3 rounded-xl border text-center text-sm font-bold transition flex items-center justify-center gap-1.5 border-gold-400 bg-gold-400/20 text-[#4f412f] shadow-sm";
+          btnYes.className = "py-3 rounded-xl border text-center text-sm font-bold transition flex items-center justify-center gap-1.5 border-white/60 bg-white/45 text-[#8d7255] hover:text-[#4f412f]";
+          iconNo.classList.replace("opacity-0", "opacity-100");
+          iconYes.classList.replace("opacity-100", "opacity-0");
+          if (guestCountWrapper) guestCountWrapper.classList.add("hidden");
+        }
+      }
+
+      if (btnYes) btnYes.addEventListener("click", () => setAttendingState(true));
+      if (btnNo) btnNo.addEventListener("click", () => setAttendingState(false));
+
+      const rsvpForm = document.getElementById("rsvpForm");
+      if (rsvpForm) {
+        rsvpForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const nameVal = document.getElementById("rsvpNameInput").value.trim();
+          const guestCount = Number(document.getElementById("rsvpGuestCount").value || 1);
+          const notesVal = (document.getElementById("rsvpNotesInput") || {}).value || "";
+          const successEl = document.getElementById("rsvpSuccessMsg");
+          const countEl = document.getElementById("rsvpCountNumber");
+
+          if (!nameVal) return;
+
+          sendRsvpToBackend({
+            guest_name: nameVal,
+            attending: attendingChoice ? "yes" : "no",
+            guests_count: guestCount,
+            message: notesVal
+          });
+
+          if (attendingChoice) {
+            rsvpCountVal += guestCount;
+            if (countEl) countEl.textContent = String(rsvpCountVal);
+            if (successEl) {
+              successEl.textContent = `زۆر سوپاس بەڕێز ${nameVal}! ئامادەبوونا تە ب خۆشی هاتە تۆمارکرن.`;
+              successEl.classList.remove("hidden");
+            }
+          } else {
+            if (successEl) {
+              successEl.textContent = `سوپاس بۆ پەیاما تە بەڕێز ${nameVal}، هیڤیا دەمەکێ خۆش بۆ تە دخوازین.`;
+              successEl.classList.remove("hidden");
+            }
+          }
+          rsvpForm.reset();
+        });
+      }
+
+      // Guestbook Form Submit (Also saves to Backend RSVP API)
+      const guestbookForm = document.getElementById("guestbookForm");
+      if (guestbookForm) {
+        guestbookForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const nameInput = document.getElementById("gbNameInput");
+          const msgInput = document.getElementById("gbMessageInput");
+          const nameVal = nameInput.value.trim();
+          const msgVal = msgInput.value.trim();
+          if (!nameVal || !msgVal) return;
+
+          sendRsvpToBackend({
+            guest_name: nameVal,
+            attending: "yes",
+            guests_count: 1,
+            message: msgVal
+          });
+
+          const now = new Date();
+          const dateStr = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
+          initialGuestbookEntries.unshift({
+            name: nameVal,
+            date: dateStr,
+            message: `“${msgVal}”`
+          });
+          renderGuestbook();
+          guestbookForm.reset();
+        });
+      }
+
+      // Scroll Reveal Observer
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add("is-visible");
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll(".reveal-section").forEach(sec => observer.observe(sec));
+    });
+  </script>
+</body>
+</html>
